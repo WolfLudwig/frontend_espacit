@@ -1,0 +1,10 @@
+html body {
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  padding: .75rem 2rem;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  background: #03989e;
+}
