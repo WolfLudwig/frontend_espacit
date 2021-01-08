@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
 /* -------------------------------------------------------------- */
 /* Table of Contents
  -----------------------------------------------------------------
@@ -87,9 +88,6 @@ html {
 }
 html body {-webkit-font-smoothing: antialiased;overflow-x: hidden;padding: .75rem 2rem;background-repeat: no-repeat;background-attachment: fixed;padding-top: 1.25rem;padding-bottom: 1.25rem;background: #03989e;}
 
-.wrapper{
-  background-color: #f1f5f
-}
 
 /* @import url('https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&subset=latin-ext');
 

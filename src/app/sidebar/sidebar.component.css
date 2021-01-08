@@ -1,0 +1,17 @@
+.blanc {
+    color: #ffffff;
+}
+.more {
+    color: #ffffff;
+    margin:10px;
+    background-color: lightseagreen;
+}
+.more:hover {
+    background-color: lightskyblue;
+}
+.mat-list-item:hover {
+    background-color: lightskyblue;
+    cursor:pointer;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+}

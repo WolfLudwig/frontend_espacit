@@ -1684,7 +1684,6 @@
 
   .icon-feather-bookmark:before {
     content: "\e924";
-    color:;
   }
 
   .icon-feather-box:before {
@@ -3075,9 +3074,6 @@
     content: "\e968";
   }
 
-  .icon-material-outline-message-(1):before {
-    content: "\e969";
-  }
 
   .icon-material-outline-monetization-on:before {
     content: "\e96a";
@@ -5919,23 +5915,6 @@
  * Follow Icon8 on
  *    Twitter [ https://twitter.com/icons_8 ]
  */
-
-
-
-  @font-face {
-    font-family: 'Material Icons';
-    font-style: normal;
-    font-weight: 400;
-    src: url(../fonts/MaterialIcons-Regular.eot);
-    /* For IE6-8 */
-    src: local('Material Icons'),
-      local('MaterialIcons-Regular'),
-      url(../fonts/MaterialIcons-Regular.woff2) format('woff2'),
-      url(../fonts/MaterialIcons-Regular.woff) format('woff'),
-      url(../fonts/MaterialIcons-Regular.ttf) format('truetype');
-  }
-
-
 
   .material-icons {
     font-family: 'Material Icons';
