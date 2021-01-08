@@ -7,6 +7,7 @@ import { MainContentComponent } from './main-content/main-content.component';
 import { MainContentInnerComponent } from './main-content-inner/main-content-inner.component';
 import { ChatSidebarComponent } from './chat-sidebar/chat-sidebar.component';
 import { RessourceComponent } from './ressource/ressource.component';
+import { PostComponent } from './post/post.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { RessourceComponent } from './ressource/ressource.component';
     MainContentComponent,
     MainContentInnerComponent,
     ChatSidebarComponent,
-    RessourceComponent
+    RessourceComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule

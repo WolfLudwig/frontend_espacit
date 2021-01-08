@@ -98,8 +98,8 @@ html body {-webkit-font-smoothing: antialiased;overflow-x: hidden;padding: .75re
    Component: Container
  ========================================================================== */
 /*
- * 1. Box sizing has to be `content-box` so the max-width is always the same and
- *    unaffected by the padding on different breakpoints. It's important for the size modifiers.
+ * 1. Le dimensionnement de la boîte doit être `content-box` pour que la largeur maximale soit toujours la même et
+ * non affecté par le remplissage sur différents points d'arrêt. C'est important pour les modificateurs de taille.
  */
 .container {
   /* 1 */
@@ -123,21 +123,21 @@ html body {-webkit-font-smoothing: antialiased;overflow-x: hidden;padding: .75re
 }
 
 /*
-   * Remove margin from the last-child
+   * Supprimer la marge du dernier enfant
    */
 .container> :last-child {
   margin-bottom: 0;
 }
 
 /*
-   * Remove padding from nested containers
+   * Supprimer le remplissage des conteneurs imbriqués
    */
 .container .container {
   padding-left: 0;
   padding-right: 0;
 }
 
-/* Size modifier
+/* Modificateur de taille
    ========================================================================== */
 .container-xsmall {
   max-width: 750px;
@@ -164,10 +164,10 @@ html body {-webkit-font-smoothing: antialiased;overflow-x: hidden;padding: .75re
 }
 
 
-/* Expand modifier
+/* Développer le modificateur
  ========================================================================== */
 /*
-* Expand one side only
+* Développer un seul côté
 */
 .container-expand-left {
   margin-left: 0;
@@ -177,7 +177,7 @@ html body {-webkit-font-smoothing: antialiased;overflow-x: hidden;padding: .75re
   margin-right: 0;
 }
 
-/* Phone landscape and bigger */
+/* Paysage de téléphone et plus grand */
 @media (min-width: 640px) {
 
   .container-expand-left.container-xsmall,
@@ -191,7 +191,7 @@ html body {-webkit-font-smoothing: antialiased;overflow-x: hidden;padding: .75re
   }
 }
 
-/* Tablet landscape and bigger */
+/* Paysage de tablette et plus grand */
 @media (min-width: 960px) {
 
   .container-expand-left,
@@ -227,7 +227,7 @@ html body {-webkit-font-smoothing: antialiased;overflow-x: hidden;padding: .75re
   padding-bottom: 40px;
 }
 
-/* Desktop and bigger */
+/* Ordinateurureau et plus grand */
 @media (min-width: 960px) {
   .section {
     padding-top: 70px;
@@ -249,18 +249,18 @@ html body {-webkit-font-smoothing: antialiased;overflow-x: hidden;padding: .75re
 }
 
 /*
- * Remove margin from the last-child
+ * Supprimer la marge du dernier enfant
  */
 .section> :last-child {
   margin-bottom: 0;
 }
 
 
-/* Size modifiers
+/* Modificateurs de taille
  ========================================================================== */
 
 /*
-* Small
+* Petit
 */
 .section-small {
   padding-top: 15px;
@@ -269,7 +269,7 @@ html body {-webkit-font-smoothing: antialiased;overflow-x: hidden;padding: .75re
 }
 
 /*
-* Large
+* Grand
 */
 .section-large {
   padding-top: 50px;
@@ -278,14 +278,14 @@ html body {-webkit-font-smoothing: antialiased;overflow-x: hidden;padding: .75re
 }
 
 /*
-* XLarge
+* Extra large
 */
 .section-xlarge {
   padding-top: 140px;
   padding-bottom: 140px;
 }
 
-/* Tablet landscape and bigger */
+/* Paysage de tablette et plus grand */
 @media (min-width: 960px) {
   .section-small {
     padding-top: 25px;
@@ -366,7 +366,7 @@ html body {-webkit-font-smoothing: antialiased;overflow-x: hidden;padding: .75re
 
 
 
-/* Tablet landscape and smaller */
+/* Tablette paysage et plus petit */
 @media (max-width: 768px) {
   .section-header {
     /* display:block; */
@@ -629,7 +629,7 @@ html body {-webkit-font-smoothing: antialiased;overflow-x: hidden;padding: .75re
 
 
 /* ---------------------------------- */
-/* button
+/* boutton
 ------------------------------------- */
 
 .button {
@@ -718,7 +718,7 @@ fieldset:disabled a.button {
 
 
 /* ---------------------------------- */
-/* Button size
+/* Taille de boutton
 ------------------------------------- */
 .button.small {
   font-size: 13px;
@@ -754,7 +754,7 @@ fieldset:disabled a.button {
 }
 
 /* ---------------------------------- */
-/* Button components
+/* Composants du bouton
 ------------------------------------- */
 
 .button.default {
@@ -1153,7 +1153,7 @@ fieldset:disabled a.button {
 }
 
 /* ========================================================================
-  Outline Button Styles
+  Styles de bouton de contour
 ========================================================================== */
 
 .button.outline-primary {
@@ -1276,7 +1276,7 @@ fieldset:disabled a.button {
 
 
 /*------------------------------------
- Social Button Styles
+Styles de bouton social
 ------------------------------------*/
 
 .button.soft-facebook {
@@ -1377,7 +1377,7 @@ fieldset:disabled a.button {
   margin-right: .75em
 }
 
-/* Button animation  */
+/* Animation de bouton  */
 
 .button.animated-x,
 .button.animated-y {
@@ -1438,7 +1438,7 @@ fieldset:disabled a.button {
   align-items: center;
 }
 
-/* button groupss  */
+/* groupes de boutons  */
 .buttons {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -1467,7 +1467,7 @@ fieldset:disabled a.button {
   border-bottom-right-radius: .28571429rem;
 }
 
-/* button conditions */
+/* conditions des boutons */
 .buttons .or {
   position: relative;
   width: .3em;
@@ -1500,7 +1500,7 @@ fieldset:disabled a.button {
   content: attr(data-text);
 }
 
-/* button groups icon */
+/* icône de groupes de boutons */
 .button-group-icon {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -1529,7 +1529,7 @@ fieldset:disabled a.button {
 }
 
 
-/* buttun Switch styles */
+/* Buttun Switch styles */
 
 .btn-switch {
   display: inline-block;
@@ -1634,7 +1634,7 @@ input:checked+.btn-switch-slider:before {
 }
 
 /* ---------------------------------- */
-/*  Spacing
+/*  Espace
 ------------------------------------- */
 
 .m-1 {
@@ -4394,7 +4394,7 @@ a.text-indigo:focus {
   background-image: none;
 }
 
-/* Custom Scrollbar for -wekbit */
+/* Barre de défilement personnalisée pour -wekbit */
 .dropdown-menu.inner::-webkit-scrollbar {
   width: 5px;
 }
@@ -5075,7 +5075,7 @@ a.text-indigo:focus {
   content: "\e930";
 }
 
-/* if they are inside the card */
+/* s'ils sont à l'intérieur de la carte */
 .uk-position-center-left.slidenav-prev,
 .uk-position-center-right.slidenav-next {
   background-color: white;
@@ -5115,7 +5115,7 @@ a.text-indigo:focus {
 
 
 /* ---------------------------------- */
-/* Header Dropdown Notification box
+/* Boîte de notification de liste déroulante d'en-tête
 ------------------------------------- */
 
 .dropdown-notifications {
@@ -5389,7 +5389,7 @@ button.mark-as-read:hover {
   top: 24px !important;
 }
 
-/* dropdown-search Nav */
+/* navigation de recherche déroulante */
 ul.dropdown-search-list .list-title {
   transition: 0.3s;
   font-size: 14px;
@@ -5491,7 +5491,7 @@ ul.dropdown-search-list .menu-divider {
   border: .1px solid rgb(239 236 236 / 45%);
 }
 
-/* User Menu Small Nav */
+/* Menu utilisateur Small Nav */
  ul.dropdown-user-menu {
   list-style: none;
   padding: 0;
@@ -5561,7 +5561,7 @@ ul.dropdown-user-menu .menu-divider {
 }
 
 
-/* dropdown User Details */
+/* Détails de l'utilisateur déroulant */
 .dropdown-user-details {
   text-align: center;
   padding-top: 18px;
@@ -5613,7 +5613,7 @@ ul.dropdown-user-menu .menu-divider {
 
 
 /* ---------------------------------- */
-/* button option menu
+/* menu d'options du bouton
 ------------------------------------- */
 .btn-option {
   position: absolute !important;
@@ -5628,7 +5628,7 @@ ul.dropdown-user-menu .menu-divider {
   color: white
 }
 
-/* dropdown option menu */
+/* menu d'options déroulant */
 .dropdown-option-nav {
   z-index: 10000 !important;
   border-radius: 6px;
