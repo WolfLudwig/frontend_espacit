@@ -8,6 +8,7 @@ import { MainContentInnerComponent } from './main-content-inner/main-content-inn
 import { ChatSidebarComponent } from './chat-sidebar/chat-sidebar.component';
 import { RessourceComponent } from './ressource/ressource.component';
 import { PostComponent } from './post/post.component';
+import { CreatePostComponent } from './create-post/create-post.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { PostComponent } from './post/post.component';
     MainContentInnerComponent,
     ChatSidebarComponent,
     RessourceComponent,
-    PostComponent
+    PostComponent,
+    CreatePostComponent
   ],
   imports: [
     BrowserModule
