@@ -7,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RessourceComponent implements OnInit {
 
-
   constructor() { }
 
   ngOnInit(): void {

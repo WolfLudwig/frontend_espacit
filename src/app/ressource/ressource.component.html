@@ -1,184 +1,75 @@
-<div class="main_content_inner">
-  <div uk-grid>
-      <div class="uk-width-2-3@m fead-area">
-          <div class="uk-position-relative" uk-slider="finite: true">
-              <div class="uk-slider-container pb-3">
-                  <div class="uk-visible@m">
-                      <a class="uk-position-center-left-out slidenav-prev" href="#"
-                          uk-slider-item="previous"></a>
-                      <a class="uk-position-center-right-out slidenav-next" href="#"
-                          uk-slider-item="next"></a>
-                  </div>
-                  <div class="uk-hidden@m">
-                      <a class="uk-position-center-left slidenav-prev" href="#"
-                          uk-slider-item="previous"></a>
-                      <a class="uk-position-center-right slidenav-next" href="#"
-                          uk-slider-item="next"></a>
-                  </div>
-              </div>
-          </div>
-          <div class="post-newer mt-lg-2">
-
-              <div class="post-new" uk-toggle="target: body ; cls: post-focus">
-                  <div class="post-new-media">
-                      <div class="post-new-media-user">
-                          <img src="assets/images/avatars/avatar-2.jpg" alt="">
-                      </div>
-                      <div class="post-new-media-input">
-                          <input type="text" class="uk-input" placeholder="Quel est ton avis ? La Crème!">
-                      </div>
-                  </div>
-                  <hr>
-                  <div class="post-new-type">
-                      <a href="#">
-                          <img src="assets/images/icons/photo.png" alt="">
-                          Ressource
-                      </a>
-                      <a href="#" class="uk-visible@s">
-                          <img src="assets/images/icons/tag-friend.png" alt="">
-                          Tag un ami
-                      </a>
-                      <a href="#"><img src="assets/images/icons/reactions_wow.png" alt="">
-                          Humeur/activité
-                      </a>
-                  </div>
-              </div>
-              <div class="post-pop">
-                  <div class="post-new-overyly" uk-toggle="target: body ; cls: post-focus"></div>
-                  <div class="post-new uk-animation-slide-top-small">
-               <app-create-post></app-create-post>
-              </div>
-            </div>
-          </div>
-          <app-post></app-post>
-
+<div class="post">
+  <div class="post-heading">
+      <div class="post-avature">
+          <img src="assets/images/avatars/avatar-6.jpg" alt="">
       </div>
-      <div class="uk-width-expand">
-
-          <div class="sl_sidebar_sugs_title border-0">Tendance !
-              <i class="icon-feather-rotate-cw"></i>
-          </div>
-          <div class="list-group-item sl_htag">
-              <a href="#">
-                  <span class="htag_top"> #test</span>
-              </a>
-          </div>
-          <div class="list-group-item sl_htag">
-              <a href="#">
-                  <span class="htag_top"> #test</span>
-              </a>
-          </div>
-          <div class="list-group-item sl_htag">
-              <a href="#">
-                  <span class="htag_top"> #test</span>
-              </a>
-          </div>
-          <div class="list-group-item sl_htag">
-              <a href="#">
-                  <span class="htag_top"> #test</span>
-              </a>
-          </div>
-          <div class="list-group-item sl_htag">
-              <a href="#">
-                  <span class="htag_top"> #test</span>
-              </a>
-          </div>
-          <div class="list-group-item sl_htag">
-              <a href="#">
-                  <span class="htag_top"> #test</span>
-              </a>
-          </div>
-
-
-          <div class="uk-position-relative" uk-slider="finite: true; autoplay:true">
-
-              <div class="uk-slider-container pb-3">
-
-
-                  <a class="uk-position-center-left uk-hidden-hover slidenav-prev sl_pro_users_prev"
-                      href="#" uk-slider-item="previous"></a>
-                  <a class="uk-position-center-right-out uk-position-small uk-hidden-hover slidenav-next sl_pro_users_next"
-                      href="#" uk-slider-item="next"></a>
-
-              </div>
-          </div>
-
-          <div class="sl_sidebar_sugs_title">Les gens que vous connaissez peut-être
-              <i class="icon-feather-rotate-cw"></i>
-          </div>
-          <div class="sl_sidebar_sugs">
-              <div class="sl_sidebar_sugs_avatar">
-                  <img src="assets/images/avatars/avatar-1.jpg" alt="">
-              </div>
-              <div class="sl_sidebar_sugs_text">
-                  <a href="#" class="sl_user_link_name"> Le protecteur </a>
-              </div>
-              <div class="user-follow-button sl_sidebar_sugs_btns">
-                  <button type="button" class="button small">
-                      <span> Suivre</span>
-                  </button>
-              </div>
-          </div>
-          <div class="sl_sidebar_sugs">
-              <div class="sl_sidebar_sugs_avatar">
-                  <img src="assets/images/avatars/avatar-6.jpg" alt="">
-              </div>
-              <div class="sl_sidebar_sugs_text">
-                  <a href="#" class="sl_user_link_name"> Annie January </a>
-              </div>
-              <div class="user-follow-button sl_sidebar_sugs_btns">
-                  <button type="button" class="button small">
-                      <span> Accepter</span>
-                  </button>
-              </div>
-          </div>
-          <div class="sl_sidebar_sugs_title mt-4">Ressources que vous pourriez aimer
-              <i class="icon-feather-rotate-cw"></i>
-          </div>
-          <div class="sl_sidebar_sugs_title mt-4">Groupes suggérés
-              <i class="icon-feather-rotate-cw"></i>
-          </div>
-          <div class="sl_sidebar_sugs">
-              <div class="sl_sidebar_sugs_avatar">
-                  <img src="assets/images/group/group-2.jpg" alt="">
-              </div>
-              <div class="sl_sidebar_sugs_text">
-                  <a href="#" class="sl_user_link_name"> Les saiyans </a>
-                  <span> 6 Membres</span>
-              </div>
-              <div class="user-follow-button sl_sidebar_sugs_btns">
-                  <button type="button" class="button small">
-                      <span> Rejoindre </span>
-                  </button>
-              </div>
-          </div>
-          <div class="sl_sidebar_sugs_title mt-4">Utilisateurs en ligne 1
-          </div>
-          <div class="sl_sidebar_sugs_title mt-1"> Invite tes amis
-              <i class="icon-feather-rotate-cw"></i>
-          </div>
-          <form action="#" class="invite-user-form">
-              <div class="sl_form_fields invite-user-combine">
-                  <input type="text" name="email" placeholder="E-mail" class="form-control">
-                  <button class="button small" title="Envoyer une invitation"><svg
-                          xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                          <path fill="currentColor" d="M2,21L23,12L2,3V10L17,12L2,14V21Z"></path>
-                      </svg></button>
-              </div>
-          </form>
-          <!-- Footer menus-->
-          <div class="footer-wrapper-sidebar mt-4">
-              <div class="footer-powered">
-                  <p> © 2020 Resources relationnelles</p>
-              </div>
-              <hr>
-              <ul class="list-inline">
-                  <li><a href="#">A propos de nous</a></li>
-                  <li><a href="#">Blog</a></li>
-                  <li><a href="#">Contactez-nous</a></li>
+      <div class="post-title">
+          <h4> Butcher </h4>
+          <p> 17 <span> h</span> <i class="uil-users-alt"></i> </p>
+      </div>
+      <div class="post-btn-action">
+          <span class="icon-more uil-ellipsis-h"></span>
+          <div class="mt-0 p-2" uk-dropdown="pos: top-right;mode:hover ">
+              <ul class="uk-nav uk-dropdown-nav">
+                  <li><a href="#"> <i class="uil-share-alt mr-1"></i> Partager</a> </li>
+                  <li><a href="#"> <i class="uil-edit-alt mr-1"></i> Modifier le message </a></li>
+                  <li><a href="#"> <i class="uil-comment-slash mr-1"></i> Désactiver les commentaires
+                      </a></li>
+                  <li><a href="#"> <i class="uil-favorite mr-1"></i> Ajouter des favoris </a>
+                  </li>
+                  <li><a href="#" class="text-danger"> <i class="uil-trash-alt mr-1"></i>
+                          Supprimer </a></li>
               </ul>
-              <div class="clear"></div>
           </div>
       </div>
+  </div>
+  <div class="post-description">
+      <div class="fullsizeimg">
+          <img src="assets/images/post/img-1.jpg" alt="">
+      </div>
+
+      <div class="post-state-details">
+          <div>
+              <img src="assets/images/icons/reactions_like.png" alt="">
+              <img src="assets/images/icons/reactions_love.png" alt="">
+              <p> 13 </p>
+          </div>
+          <p> 24 commentaires</p>
+      </div>
+  </div>
+  <div class="post-state">
+      <div class="post-state-btns"> <i class="uil-thumbs-up"></i> 126<span> Aimé(e) </span>
+      </div>
+      <div class="post-state-btns"> <i class="uil-heart"></i> 18 <span> commentaires</span>
+      </div>
+      <div class="post-state-btns"> <i class="uil-share-alt"></i> 193 <span> Partagé
+          </span>
+      </div>
+      <div class="post-state-btns"> <i class="uil-bookmark"></i> 13 <span> Enregistré(e) </span>
+      </div>
+  </div>
+
+  <!-- post comments -->
+  <div class="post-comments">
+      <a href="#" class="view-more-comment"> Voir 8 autres commentaires</a>
+      <div class="post-comments-single">
+          <div class="post-comment-avatar">
+              <img src="assets/images/avatars/avatar-5.jpg" alt="">
+          </div>
+          <div class="post-comment-text">
+              <div class="post-comment-text-inner">
+                  <h6> Le français</h6>
+                  <p> Bla bla bla</p>
+              </div>
+              <div class="uk-text-small">
+                  <a href="#" class="text-danger mr-1"> <i class="uil-heart"></i> J'aime
+                  </a>
+
+                  <span> 1 jour</span>
+              </div>
+          </div>
+          <a href="#" class="post-comment-opt"></a>
+      </div>
+
   </div>
 </div>

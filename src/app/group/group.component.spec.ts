@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MainContentInnerComponent } from './main-content-inner.component';
+import { GroupComponent } from './group.component';
 
-describe('MainContentInnerComponent', () => {
-  let component: MainContentInnerComponent;
-  let fixture: ComponentFixture<MainContentInnerComponent>;
+describe('GroupComponent', () => {
+  let component: GroupComponent;
+  let fixture: ComponentFixture<GroupComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MainContentInnerComponent ]
+      declarations: [ GroupComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MainContentInnerComponent);
+    fixture = TestBed.createComponent(GroupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

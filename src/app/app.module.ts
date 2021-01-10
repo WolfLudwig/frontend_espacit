@@ -1,28 +1,28 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { HeaderComponent } from './header/header.component';
 import { MainContentComponent } from './main-content/main-content.component';
-import { MainContentInnerComponent } from './main-content-inner/main-content-inner.component';
-import { ChatSidebarComponent } from './chat-sidebar/chat-sidebar.component';
 import { RessourceComponent } from './ressource/ressource.component';
-import { PostComponent } from './post/post.component';
-import { CreatePostComponent } from './create-post/create-post.component';
+import { GameComponent } from './game/game.component';
+import { GroupComponent } from './group/group.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidebarComponent,
+    HeaderComponent,
     MainContentComponent,
-    MainContentInnerComponent,
-    ChatSidebarComponent,
     RessourceComponent,
-    PostComponent,
-    CreatePostComponent
+    GameComponent,
+    GroupComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
