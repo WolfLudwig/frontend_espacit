@@ -5,10 +5,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', component: RessourceComponent },
+  { path: 'incription', component: RessourceComponent, outlet: 'connection' },
   { path: 'actu', component: RessourceComponent },
   { path: 'jeu', component: GameComponent },
-  { path: 'groupe', component: GroupComponent }
+  { path: 'groupe', component: GroupComponent },
+  { path: "", component: RessourceComponent }
 ];
 
 @NgModule({
