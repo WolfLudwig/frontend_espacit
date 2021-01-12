@@ -1,4 +1,16 @@
-<div id="wrapper">
-  <app-sidebar></app-sidebar>
-  <app-header></app-header>
-</div>
+ <!-- Affichage web écran >= 1280px -->
+<mat-sidenav-container fxHide.lt-lg>
+  <mat-sidenav #sidenav mode="side" fixedInViewport="fixed" fixedTopGap="20" opened>
+    <app-sidebar ></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-header></app-header>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- Affichage tablette entre 600px et 1279px -->
+
+<span fxHide.xs fxHide.gt-md>Tablette</span>
+
+<!-- Affichage mobile < 600px -->
+<span fxHide.gt-xs>Mobile</span>

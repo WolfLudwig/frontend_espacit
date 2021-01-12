@@ -8,6 +8,13 @@ import { Component, OnInit } from '@angular/core';
 export class SidebarComponent implements OnInit {
 
   constructor() { }
+  public menu = [
+    { icone: 'home', nom: 'Fil d\'actualité', lien: '/actu' },
+    { icone: 'article', nom: 'Mon fil', lien: '/actu' },
+    { icone: 'gamepad', nom: 'Jeux', lien: '/jeu' },
+    { icone: 'explore', nom: 'Explorer', lien: '/groupe' },
+    { icone: 'groups', nom: 'Groupes', lien: 'groupe' }
+  ];
 
   ngOnInit(): void {
   }
