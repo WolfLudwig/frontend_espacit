@@ -8,7 +8,7 @@
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  * 3. Style
  */
-html {
+ html {
   /* 1 */
   font-size: 14px;
   font-weight: normal;
@@ -304,7 +304,39 @@ h6,
   font-size: 14px;
   line-height: 1.4;
 }
-
+/* Tablet landscape and bigger */
+@media (min-width: 960px) {
+  h1,
+  .uk-h1 {
+    font-size: 28px;
+    font-weight: 600;
+  }
+  h2,
+  .uk-h2 {
+    font-size: 22px;
+    font-weight: 600;
+  }
+  h3,
+.uk-h3 {
+  font-size: 20px;
+  line-height: 1.4;
+}
+h4,
+.uk-h4 {
+  font-size: 17px;
+  line-height: 1.4;
+}
+h5,
+.uk-h5 {
+  font-size: 16px;
+  line-height: 1.4;
+}
+h6,
+.uk-h6 {
+  font-size: 15.5px;
+  line-height: 1.4;
+}
+}
 /* Lists
  ========================================================================== */
 ul,
@@ -540,7 +572,39 @@ a.uk-link-reset,
   font-size: 6rem;
   line-height: 1;
 }
-
+/* Tablet Landscape and bigger */
+@media (min-width: 960px) {
+  .uk-heading-small {
+    font-size: 3.25rem;
+  }
+  .uk-heading-medium {
+    font-size: 3.5rem;
+  }
+  .uk-heading-large {
+    font-size: 4rem;
+  }
+  .uk-heading-xlarge {
+    font-size: 6rem;
+  }
+  .uk-heading-2xlarge {
+    font-size: 8rem;
+  }
+}
+/* Laptop and bigger */
+@media (min-width: 1200px) {
+  .uk-heading-medium {
+    font-size: 4rem;
+  }
+  .uk-heading-large {
+    font-size: 6rem;
+  }
+  .uk-heading-xlarge {
+    font-size: 8rem;
+  }
+  .uk-heading-2xlarge {
+    font-size: 11rem;
+  }
+}
 /* Primary
    Deprecated: Use `uk-heading-medium` instead
  ========================================================================== */
@@ -970,7 +1034,47 @@ a.uk-link-reset,
 .uk-table-small .uk-table-link > a {
   padding: 10px 12px;
 }
-
+/* Responsive table
+ ========================================================================== */
+/* Phone landscape and smaller */
+@media (max-width: 959px) {
+  .uk-table-responsive,
+  .uk-table-responsive tbody,
+  .uk-table-responsive th,
+  .uk-table-responsive td,
+  .uk-table-responsive tr {
+    display: block;
+  }
+  .uk-table-responsive thead {
+    display: none;
+  }
+  .uk-table-responsive th,
+  .uk-table-responsive td {
+    width: auto !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    overflow: visible !important;
+    white-space: normal !important;
+  }
+  .uk-table-responsive th:not(:first-child):not(.uk-table-link),
+  .uk-table-responsive td:not(:first-child):not(.uk-table-link),
+  .uk-table-responsive .uk-table-link:not(:first-child) > a {
+    padding-top: 5px !important;
+  }
+  .uk-table-responsive th:not(:last-child):not(.uk-table-link),
+  .uk-table-responsive td:not(:last-child):not(.uk-table-link),
+  .uk-table-responsive .uk-table-link:not(:last-child) > a {
+    padding-bottom: 5px !important;
+  }
+  .uk-table-justify.uk-table-responsive th,
+  .uk-table-justify.uk-table-responsive td {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+.uk-table tbody tr {
+  transition: background-color 0.1s linear;
+}
 /* ========================================================================
    Component: Icon
  ========================================================================== */
@@ -1733,7 +1837,32 @@ select.uk-form-width-xsmall {
   display: block;
   margin-bottom: 5px;
 }
-
+/*
+ * Horizontal
+ */
+/* Tablet portrait and smaller */
+@media (max-width: 959px) {
+  /* Behave like `uk-form-stacked` */
+  .uk-form-horizontal .uk-form-label {
+    display: block;
+    margin-bottom: 5px;
+  }
+}
+/* Tablet landscape and bigger */
+@media (min-width: 960px) {
+  .uk-form-horizontal .uk-form-label {
+    width: 200px;
+    margin-top: 7px;
+    float: left;
+  }
+  .uk-form-horizontal .uk-form-controls {
+    margin-left: 215px;
+  }
+  /* Better vertical alignment if controls are checkboxes and radio buttons with text */
+  .uk-form-horizontal .uk-form-controls-text {
+    padding-top: 7px;
+  }
+}
 /* Icons
  ========================================================================== */
 /*
@@ -2074,7 +2203,13 @@ select.uk-form-width-xsmall {
   padding-top: 40px;
   padding-bottom: 40px;
 }
-
+/* Desktop and bigger */
+@media (min-width: 960px) {
+  .uk-section {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+}
 /*
  * Micro clearfix
  */
@@ -2115,7 +2250,13 @@ select.uk-form-width-xsmall {
   padding-top: 70px;
   padding-bottom: 70px;
 }
-
+/* Tablet landscape and bigger */
+@media (min-width: 960px) {
+  .uk-section-large {
+    padding-top: 140px;
+    padding-bottom: 140px;
+  }
+}
 /*
  * XLarge
  */
@@ -2123,8 +2264,39 @@ select.uk-form-width-xsmall {
   padding-top: 140px;
   padding-bottom: 140px;
 }
-
-
+/* Tablet landscape and bigger */
+@media (min-width: 960px) {
+  .uk-section-xlarge {
+    padding-top: 210px;
+    padding-bottom: 210px;
+  }
+}
+/* Style modifiers
+ ========================================================================== */
+/*
+ * Default
+ */
+.uk-section-default {
+  background: #fff;
+}
+/*
+ * Muted
+ */
+.uk-section-muted {
+  background: #f8f8f8;
+}
+/*
+ * Primary
+ */
+.uk-section-primary {
+  background: #1e87f0;
+}
+/*
+ * Secondary
+ */
+.uk-section-secondary {
+  background: #222;
+}
 /* Overlap modifier
  ========================================================================== */
 /*
@@ -2147,7 +2319,20 @@ select.uk-form-width-xsmall {
   padding-left: 15px;
   padding-right: 15px;
 }
-
+/* Phone landscape and bigger */
+@media (min-width: 640px) {
+  .uk-container {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+/* Tablet landscape and bigger */
+@media (min-width: 960px) {
+  .uk-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
 /*
  * Micro clearfix
  */
@@ -2197,7 +2382,36 @@ select.uk-form-width-xsmall {
 .uk-container-expand-right {
   margin-right: 0;
 }
-
+/* Phone landscape and bigger */
+@media (min-width: 640px) {
+  .uk-container-expand-left.uk-container-xsmall,
+  .uk-container-expand-right.uk-container-xsmall {
+    max-width: calc(50% + (750px / 2) - 30px);
+  }
+  .uk-container-expand-left.uk-container-small,
+  .uk-container-expand-right.uk-container-small {
+    max-width: calc(50% + (900px / 2) - 30px);
+  }
+}
+/* Tablet landscape and bigger */
+@media (min-width: 960px) {
+  .uk-container-expand-left,
+  .uk-container-expand-right {
+    max-width: calc(50% + (1200px / 2) - 40px);
+  }
+  .uk-container-expand-left.uk-container-xsmall,
+  .uk-container-expand-right.uk-container-xsmall {
+    max-width: calc(50% + (750px / 2) - 40px);
+  }
+  .uk-container-expand-left.uk-container-small,
+  .uk-container-expand-right.uk-container-small {
+    max-width: calc(50% + (900px / 2) - 40px);
+  }
+  .uk-container-expand-left.uk-container-large,
+  .uk-container-expand-right.uk-container-large {
+    max-width: calc(50% + (1600px / 2) - 40px);
+  }
+}
 /* Item
  ========================================================================== */
 /*
@@ -2214,7 +2428,32 @@ select.uk-form-width-xsmall {
 .uk-container-item-padding-remove-right {
   margin-right: -15px;
 }
-
+/* Phone landscape and bigger */
+@media (min-width: 640px) {
+  .uk-container-item-padding-remove-left,
+  .uk-container-item-padding-remove-right {
+    width: calc(100% + 30px);
+  }
+  .uk-container-item-padding-remove-left {
+    margin-left: -30px;
+  }
+  .uk-container-item-padding-remove-right {
+    margin-right: -30px;
+  }
+}
+/* Tablet landscape and bigger */
+@media (min-width: 960px) {
+  .uk-container-item-padding-remove-left,
+  .uk-container-item-padding-remove-right {
+    width: calc(100% + 40px);
+  }
+  .uk-container-item-padding-remove-left {
+    margin-left: -40px;
+  }
+  .uk-container-item-padding-remove-right {
+    margin-right: -40px;
+  }
+}
 /* ========================================================================
    Component: Grid
  ========================================================================== */
@@ -2264,7 +2503,22 @@ select.uk-form-width-xsmall {
 * + .uk-grid-margin {
   margin-top: 20px;
 }
-
+/* Desktop and bigger */
+@media (min-width: 1200px) {
+  /* Horizontal */
+  .uk-grid {
+    margin-left: -25px;
+  }
+  .uk-grid > * {
+    padding-left: 30px;
+  }
+  /* Vertical */
+  .uk-grid + .uk-grid,
+  .uk-grid > .uk-grid-margin,
+  * + .uk-grid-margin {
+    margin-top: 30px;
+  }
+}
 
 /*
  * Small
@@ -2286,7 +2540,13 @@ select.uk-form-width-xsmall {
 * + .uk-grid-margin-small {
   margin-top: 15px;
 }
-
+/* Desktop and bigger */
+@media (max-width: 1200px) {
+ .uk-grid-small > *,
+.uk-grid-column-small > * {
+  padding-left: 20px !important;
+}
+}
 /*
  * Medium
  */
@@ -2327,7 +2587,26 @@ select.uk-form-width-xsmall {
 * + .uk-grid-margin-large {
   margin-top: 40px;
 }
-
+/* Desktop and bigger */
+@media (min-width: 1200px) {
+  /* Horizontal */
+  .uk-grid-large,
+  .uk-grid-column-large {
+    margin-left: -70px;
+  }
+  .uk-grid-large > *,
+  .uk-grid-column-large > * {
+    padding-left: 70px;
+  }
+  /* Vertical */
+  .uk-grid + .uk-grid-large,
+  .uk-grid + .uk-grid-row-large,
+  .uk-grid-large > .uk-grid-margin,
+  .uk-grid-row-large > .uk-grid-margin,
+  * + .uk-grid-margin-large {
+    margin-top: 70px;
+  }
+}
 /*
  * Collapse
  */
@@ -2388,7 +2667,27 @@ select.uk-form-width-xsmall {
   top: -30px;
   left: 60px;
 }
-
+/* Desktop and bigger */
+@media (min-width: 1200px) {
+  /* Horizontal */
+  .uk-grid-divider {
+    margin-left: -80px;
+  }
+  .uk-grid-divider > * {
+    padding-left: 80px;
+  }
+  .uk-grid-divider > :not(.uk-first-column)::before {
+    left: 40px;
+  }
+  /* Vertical */
+  .uk-grid-divider.uk-grid-stack > .uk-grid-margin {
+    margin-top: 80px;
+  }
+  .uk-grid-divider.uk-grid-stack > .uk-grid-margin::before {
+    top: -40px;
+    left: 80px;
+  }
+}
 /*
  * Small
  */
@@ -2482,7 +2781,37 @@ select.uk-form-width-xsmall {
 .uk-grid-divider.uk-grid-column-large.uk-grid-stack > .uk-grid-margin::before {
   left: 80px;
 }
-
+/* Desktop and bigger */
+@media (min-width: 1200px) {
+  /* Horizontal */
+  .uk-grid-divider.uk-grid-large,
+  .uk-grid-divider.uk-grid-column-large {
+    margin-left: -140px;
+  }
+  .uk-grid-divider.uk-grid-large > *,
+  .uk-grid-divider.uk-grid-column-large > * {
+    padding-left: 140px;
+  }
+  .uk-grid-divider.uk-grid-large > :not(.uk-first-column)::before,
+  .uk-grid-divider.uk-grid-column-large > :not(.uk-first-column)::before {
+    left: 70px;
+  }
+  /* Vertical */
+  .uk-grid-divider.uk-grid-large.uk-grid-stack > .uk-grid-margin,
+  .uk-grid-divider.uk-grid-row-large.uk-grid-stack > .uk-grid-margin {
+    margin-top: 140px;
+  }
+  .uk-grid-divider.uk-grid-large.uk-grid-stack > .uk-grid-margin::before {
+    top: -70px;
+    left: 140px;
+  }
+  .uk-grid-divider.uk-grid-row-large.uk-grid-stack > .uk-grid-margin::before {
+    top: -70px;
+  }
+  .uk-grid-divider.uk-grid-column-large.uk-grid-stack > .uk-grid-margin::before {
+    left: 140px;
+  }
+}
 /* Match child of a grid cell
  ========================================================================== */
 /*
@@ -2516,7 +2845,22 @@ select.uk-form-width-xsmall {
   padding-top: 40px;
   padding-bottom: 40px;
 }
-
+/* Phone landscape and bigger */
+@media (min-width: 640px) {
+  .uk-tile {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+/* Tablet landscape and bigger */
+@media (min-width: 960px) {
+  .uk-tile {
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+}
 /*
  * Micro clearfix
  */
@@ -2557,7 +2901,13 @@ select.uk-form-width-xsmall {
   padding-top: 70px;
   padding-bottom: 70px;
 }
-
+/* Tablet landscape and bigger */
+@media (min-width: 960px) {
+  .uk-tile-large {
+    padding-top: 140px;
+    padding-bottom: 140px;
+  }
+}
 /*
  * XLarge
  */
@@ -2565,7 +2915,13 @@ select.uk-form-width-xsmall {
   padding-top: 140px;
   padding-bottom: 140px;
 }
-
+/* Tablet landscape and bigger */
+@media (min-width: 960px) {
+  .uk-tile-xlarge {
+    padding-top: 210px;
+    padding-bottom: 210px;
+  }
+}
 /* Style modifiers
  ========================================================================== */
 /*
@@ -2611,7 +2967,18 @@ select.uk-form-width-xsmall {
 .uk-card-footer {
   padding: 15px 30px;
 }
-
+/* Desktop and bigger */
+@media (min-width: 1200px) {
+  .uk-card-body {
+    padding: 40px 40px;
+  }
+  .uk-card-header {
+    padding: 20px 40px;
+  }
+  .uk-card-footer {
+    padding: 20px 40px;
+  }
+}
 /*
  * Micro clearfix
  */
@@ -2648,6 +3015,12 @@ select.uk-form-width-xsmall {
 .uk-card-title {
   font-size: 1.5rem;
   line-height: 1.4;
+}
+@media (max-width:960px){
+  .uk-card-title {
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
 }
 /* Badge
  ========================================================================== */
@@ -5694,7 +6067,17 @@ ul.uk-nav-sub {
   top: auto;
   bottom: 10px;
 }
-
+/* Responsiveness
+========================================================================== */
+/* Phones portrait and smaller */
+@media (max-width: 639px) {
+  .uk-notification {
+    left: 10px;
+    right: 10px;
+    width: auto;
+    margin: 0;
+  }
+}
 /* Message
 ========================================================================== */
 .uk-notification-message {
@@ -6662,6 +7045,9 @@ ul.uk-nav-sub {
   /* Thirds */
   .uk-width-1-3\@m {
     width: calc(100% * 1 / 3.001);
+  }
+  .uk-width-2-3\@m {
+    width: calc(100% * 2 / 3.001);
   }
   /* Quarters */
   .uk-width-1-4\@m {
