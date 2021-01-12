@@ -10,6 +10,8 @@ import { MainContentComponent } from './main-content/main-content.component';
 import { RessourceComponent } from './ressource/ressource.component';
 import { GameComponent } from './game/game.component';
 import { GroupComponent } from './group/group.component';
+import { RegisterComponent } from './register/register.component';
+import { ChatComponent } from './chat/chat.component';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 // Import matérial
@@ -28,7 +30,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MainContentComponent,
     RessourceComponent,
     GameComponent,
-    GroupComponent
+    GroupComponent,
+    RegisterComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
