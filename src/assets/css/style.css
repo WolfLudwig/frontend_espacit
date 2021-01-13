@@ -1,89 +1,12 @@
 @charset "UTF-8";
 
-<<<<<<< HEAD
-@import "https://fonts.googleapis.com/icon?family=Material+Icons";
-/* -------------------------------------------------------------- */
-/* Table of Contents
- -----------------------------------------------------------------
-
-   #Base
-   section
-   #responsive-tab
-   #responsive-tab style-1
-   #responsive-tab style-2
-   #responsive-tab style-3
-   #responsive-tab style-4
-   #embed-video
-   #Background
-   #Button
-   #spacing
-   #avatar
-   #simplebar
-   #grid_slider_header
-   #slidenav
-   #dropdown-notifications
-   #chats-container
-   #user-details-card
-   #main_header
-   #sidebar
-   #main_sidebar
-   #collapse-sidebar
-   #main_content
-   #group-catagroy-card
-   #story-slider
-   #story-slider-card
-   #post-new
-   #post
-   #profile
-   #profile-cover
-   #btn-option
-   #dropdown option nav
-   #list-items
-   #list-group-items
-   #events-list
-   #sl_event_listing
-   #sl_side_invite_prnt
-   #sl_avatar-groups
-   #sl_hide_members
-   #sl_group_list
-   #sl_page_list
-   #sl_events_list
-   #sl_game_list
-   #sl_jobs_list
-   #sl_blog_list
-   #sl_srch_form
-   #sl_srch_innr_filtr
-   #sl_form_fields
-   #fundings
-   #sl_pokes_cont
-   #sl_find_frns_user
-   #sl_sidebar_sugs_title
-   #sl_sidebar_sugs
-   #sl_side_invite
-   #sl_htag
-   #sl_pro_users
-   #widget
-   #sl_user-widget
-   #sidebar-user-data
-   #sl_right_user_info
-   #footer-wrapper
-   #product
-   #sl_offer_list
-   #sl_photo_list
-   #shadow classes
-   #sl_event_listing
-   #load-mor
-
-
- ----------------------------------------------------------------- */
-=======
->>>>>>> b8d95c60f122b4c2f400946c97dc40b307ad6ce7
 
 /* -------------------------------------------------------------- */
 /* 01. Import googlefonts
  ----------------------------------------------------------------- */
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700);
 
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
 
 html {
@@ -91,12 +14,9 @@ html {
 }
 html body {-webkit-font-smoothing: antialiased;overflow-x: hidden;padding: .75rem 2rem;background-repeat: no-repeat;background-attachment: fixed;padding-top: 1.25rem;padding-bottom: 1.25rem;background: #03989e;}
 
-<<<<<<< HEAD
-=======
 .wrapper{
-  background-color: #f1f5f;
+  background-color: #f1f5f0;
 }
->>>>>>> b8d95c60f122b4c2f400946c97dc40b307ad6ce7
 
 /* @import url('https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&subset=latin-ext');
 
@@ -1961,31 +1881,6 @@ header .header-btn-traiger {
 }
 
 
-.header-btn-traiger.is-hidden~#logo{
-   left: 25px;
-}
-
-header #logo {
-  position: absolute;
-  left:65px
-}
-
-
-header #logo img {
-  width: 121px;
-}
-
-header #logo .logo-inverse {
-  display: none;
-}
-
-.uk-light #logo img {
-  display: none;
-}
-
-.uk-light #logo .logo-inverse {
-  display: inline;
-}
 
 header {
   padding: 0;
@@ -2006,24 +1901,7 @@ header .head_search {
   z-index: 10001;
 }
 
-.head_search .head_search_cont input {
-  height: 40px;
-  color: #393939;
-  padding: 0 30px 0 40px;
-  outline: 0;
-  background: #eaf0f5;
-  border: 1px solid transparent;
-  -webkit-border-radius: 2rem;
-  min-width: 450px;
-  font-size: 15px;
-}
 
-.uk-light header .head_search .head_search_cont input {
-  background-color: white !important
-}
-.head_search .head_search_cont input:focus {
-  border-radius: 2rem 2rem 10px 10px;
-}
 .head_search .head_search_cont>i.s_icon {
   position: absolute;
   pointer-events: none;
@@ -2376,12 +2254,6 @@ header .opts_icon_link:hover {
   align-items: center;
   border-bottom: 1px solid #e2e2e2;
 }
-.main_sidebar .sidebar-header #logo img{
-  width: 136px;
-  padding-left: 15px;
-}
-
-
 .main_sidebar .sidebar-header h4 {
   margin-bottom: 0;
   font-size: 18px;
@@ -3780,10 +3652,7 @@ header .opts_icon_link:hover {
   padding: 30px !important;
 }
 
-.form-media .logo {
-  max-width: 140px;
-  margin-bottom: 15px;
-}
+
 
 .form-media::before {
   position: absolute;

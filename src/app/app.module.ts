@@ -13,6 +13,7 @@ import { GroupComponent } from './group/group.component';
 import { RegisterComponent } from './register/register.component';
 import { ChatComponent } from './chat/chat.component';
 
+import { ToolbarComponent } from './toolbar/toolbar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 // Import matérial
 import { MatListModule } from '@angular/material/list';
@@ -20,6 +21,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -32,7 +36,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     GameComponent,
     GroupComponent,
     RegisterComponent,
-    ChatComponent
+    ChatComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +51,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatDividerModule,
     MatIconModule,
     MatButtonModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
