@@ -1,88 +1,11 @@
 @charset "UTF-8";
 
-<<<<<<< HEAD
-@import "https://fonts.googleapis.com/icon?family=Material+Icons";
-/* -------------------------------------------------------------- */
-/* Table of Contents
- -----------------------------------------------------------------
-
-   #Base
-   section
-   #responsive-tab
-   #responsive-tab style-1
-   #responsive-tab style-2
-   #responsive-tab style-3
-   #responsive-tab style-4
-   #embed-video
-   #Background
-   #Button
-   #spacing
-   #avatar
-   #simplebar
-   #grid_slider_header
-   #slidenav
-   #dropdown-notifications
-   #chats-container
-   #user-details-card
-   #main_header
-   #sidebar
-   #main_sidebar
-   #collapse-sidebar
-   #main_content
-   #group-catagroy-card
-   #story-slider
-   #story-slider-card
-   #post-new
-   #post
-   #profile
-   #profile-cover
-   #btn-option
-   #dropdown option nav
-   #list-items
-   #list-group-items
-   #events-list
-   #sl_event_listing
-   #sl_side_invite_prnt
-   #sl_avatar-groups
-   #sl_hide_members
-   #sl_group_list
-   #sl_page_list
-   #sl_events_list
-   #sl_game_list
-   #sl_jobs_list
-   #sl_blog_list
-   #sl_srch_form
-   #sl_srch_innr_filtr
-   #sl_form_fields
-   #fundings
-   #sl_pokes_cont
-   #sl_find_frns_user
-   #sl_sidebar_sugs_title
-   #sl_sidebar_sugs
-   #sl_side_invite
-   #sl_htag
-   #sl_pro_users
-   #widget
-   #sl_user-widget
-   #sidebar-user-data
-   #sl_right_user_info
-   #footer-wrapper
-   #product
-   #sl_offer_list
-   #sl_photo_list
-   #shadow classes
-   #sl_event_listing
-   #load-mor
-
-
- ----------------------------------------------------------------- */
-=======
->>>>>>> b8d95c60f122b4c2f400946c97dc40b307ad6ce7
 
 /* -------------------------------------------------------------- */
 /* 01. Import googlefonts
  ----------------------------------------------------------------- */
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700);
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
 
 
@@ -91,12 +14,6 @@ html {
 }
 html body {-webkit-font-smoothing: antialiased;overflow-x: hidden;padding: .75rem 2rem;background-repeat: no-repeat;background-attachment: fixed;padding-top: 1.25rem;padding-bottom: 1.25rem;background: #03989e;}
 
-<<<<<<< HEAD
-=======
-.wrapper{
-  background-color: #f1f5f;
-}
->>>>>>> b8d95c60f122b4c2f400946c97dc40b307ad6ce7
 
 /* @import url('https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&subset=latin-ext');
 
