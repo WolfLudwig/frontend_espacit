@@ -11,6 +11,8 @@ import { GameComponent } from './game/game.component';
 import { GroupComponent } from './group/group.component';
 import { RegisterComponent } from './register/register.component';
 import { ChatComponent } from './chat/chat.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { ChatComponent } from './chat/chat.component';
     GameComponent,
     GroupComponent,
     RegisterComponent,
-    ChatComponent
+    ChatComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
