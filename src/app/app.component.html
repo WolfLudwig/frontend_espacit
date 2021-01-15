@@ -1,5 +1,6 @@
- <!-- Affichage web écran >= 1280px -->
-<mat-sidenav-container fxHide.lt-lg>
+<app-toolbar></app-toolbar>
+
+<mat-sidenav-container>
   <mat-sidenav #sidenav mode="side" fixedInViewport="fixed" fixedTopGap="20" opened>
     <app-sidebar ></app-sidebar>
   </mat-sidenav>
@@ -8,10 +9,3 @@
     <app-chat></app-chat>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-<!-- Affichage tablette entre 600px et 1279px -->
-
-<span fxHide.xs fxHide.gt-md>Tablette</span>
-
-<!-- Affichage mobile < 600px -->
-<span fxHide.gt-xs>Mobile</span>
