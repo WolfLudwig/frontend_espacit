@@ -34,7 +34,7 @@ export class SignupComponent implements OnInit {
     this.auth.createNewUser(email, username, password).then(
       () => {
         this.loading = false;
-        this.router.navigate(['/']);
+        this.router.navigate(['/auth/login']);
       }
     ).catch(
       (error) => {

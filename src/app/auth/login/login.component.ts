@@ -11,7 +11,6 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  loading = false;
   errorMessage: string;
 
   constructor(private formBuilder: FormBuilder,
@@ -26,17 +25,14 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
-    this.loading = true;
     const email = this.loginForm.get('email').value;
     const password = this.loginForm.get('password').value;
     this.auth.login(email, password).then(
       () => {
-        this.loading = false;
-        this.router.navigate(['/part-three/all-stuff']);
+        this.router.navigate(['/']);
       }
     ).catch(
       (error) => {
-        this.loading = false;
         this.errorMessage = error.message;
       }
     );
