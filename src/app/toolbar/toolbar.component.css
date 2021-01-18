@@ -62,3 +62,6 @@ mat-form-field {
     border-radius: 20px;
     background-color: white;
 }
+mat-icon {
+    cursor: pointer;
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-chat',
@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatComponent implements OnInit {
 
+  @Output() openChat = new EventEmitter<boolean>();
   constructor() { }
 
   ngOnInit(): void {

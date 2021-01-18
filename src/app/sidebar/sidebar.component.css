@@ -18,7 +18,7 @@
 .divider {
     color: #03989E;
 }
-.foot-content {
+.foot {
     margin: 0px;
     color: rgb(255 255 255 / 82%);
     font-size: 13px;
@@ -250,7 +250,7 @@
     z-index: 10000;
   }
   
-  @media (min-width: 1220px) {
+  @media (min-width: 920px) {
   
     .collapse-sidebar .main_sidebar {
       width: 80px;
@@ -477,6 +477,56 @@ header #logo .logo-inverse {
     position: relative;
     left: -15px !important;
   }
+ .main_sidebar .sidebar-header {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e2e2e27a;
+  width: 96%;
+}
+
+.main_sidebar .sidebar-header h4 {
+  margin-bottom: 0;
+  font-size: 18px;
+}
+
+.main_sidebar .sidebar-header .btn-close {
+  position: absolute;
+  right: 25px;
+}
+
+.main_sidebar .sidebar-header .btn-close::before {
+  font-family: "Feather-Icons";
+  font-size: 22px;
+  content: '\e92f';
+  line-height: 30px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  padding: 6px;
+  cursor: pointer;
+  color: white;
+  padding-right: 15px;
+}
+
+.main_sidebar .sidebar-header .btn-close {
+  display: none;
+}
+
+.main_sidebar .side-overlay {
+    z-index: 1;
+    position: fixed;
+    width: 100%;
+    margin-left: 270px;
+    height: 100%;
+    background: hsl(0deg 0% 0% / 18%);
+    visibility: hidden;
+}
+
+.main_sidebar .sidebar-header h4 {
+  font-size: 15px;
+}
 
 
 */

@@ -1,34 +1,13 @@
-<div class="main_sidebar">
-  <div class="side-overlay" uk-toggle="target: #wrapper ; cls: collapse-sidebar mobile-visible"></div>
 
-  <!-- sidebar header -->
-  <div class="sidebar-header">
-      <!-- Logo-->
-      <div id="logo">
-          <a href="/"> <img src="assets/images/logo-light.png" alt=""></a>
-      </div>
-      <span class="btn-close" uk-toggle="target: #wrapper ; cls: collapse-sidebar mobile-visible"></span>
-  </div>
-  <div class="sidebar">
-    <div class="sidebar_innr" data-simplebar>
-      <div class="sections">
-        <!-- Remplacement menu -->
-        <mat-list fxLayout="column">
-            <a *ngFor="let item of menu" class="itemMenu" [routerLink]="item.lien">
-                <mat-list-item>
-                    <mat-icon class="blanc">{{item.icone}}</mat-icon>
-                    <span class="blanc">{{item.nom}}</span>
-                </mat-list-item>
-            </a>
-        </mat-list>
-      </div>
-      <!--  Optional Footer -->
-      <div id="foot">
-          <div class="foot-content">
-              <p>© 2020 <strong>The Boys</strong>. All Rights Reserved. </p>
-          </div>
-      </div>
-    </div>
-  </div>
+<div id="logo">
+    <a href="/"> <img src="assets/images/logo-light.png" alt=""></a>
 </div>
-
+<mat-list fxLayout="column">
+    <a *ngFor="let item of menu" class="itemMenu" [routerLink]="item.lien">
+        <mat-list-item>
+            <mat-icon class="blanc">{{item.icone}}</mat-icon>
+            <span class="blanc">&nbsp;{{item.nom}}</span>
+        </mat-list-item>
+    </a>
+</mat-list>
+<p class="foot">© 2020 <strong>The Boys</strong>. All Rights Reserved. </p>

@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { HeaderComponent } from './header/header.component';
 import { MainContentComponent } from './main-content/main-content.component';
 import { RessourceComponent } from './ressource/ressource.component';
 import { GameComponent } from './game/game.component';
@@ -24,26 +23,24 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     SidebarComponent,
-    HeaderComponent,
     MainContentComponent,
     RessourceComponent,
     GameComponent,
     GroupComponent,
     RegisterComponent,
     ChatComponent,
-    ToolbarComponent
+    ToolbarComponent,
   ],
   imports: [
     BrowserModule,
-    BrowserModule,
     AppRoutingModule,
-    BrowserModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
     // Matérial
@@ -55,6 +52,7 @@ import { MatInputModule } from '@angular/material/input';
     MatToolbarModule,
     MatFormFieldModule,
     MatInputModule,
+    MatExpansionModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
