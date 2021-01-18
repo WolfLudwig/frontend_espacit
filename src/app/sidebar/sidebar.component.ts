@@ -13,7 +13,10 @@ export class SidebarComponent implements OnInit {
     { icone: 'article', nom: 'Mon fil', lien: '/actu' },
     { icone: 'gamepad', nom: 'Jeux', lien: '/jeu' },
     { icone: 'explore', nom: 'Explorer', lien: '/groupe' },
-    { icone: 'groups', nom: 'Groupes', lien: 'groupe' }
+    { icone: 'groups', nom: 'Groupes', lien: 'groupe' },
+    { icone: 'person_add', nom: 'Retrouver des amis', lien: '/findFriends'},
+    { icone: 'supervised_user_circle', nom: 'Créer un admin', lien: '/createUser'},
+    { icone: 'people_outline', nom: 'Liste des utilisateurs', lien: '/userList'}
   ];
 
   ngOnInit(): void {

@@ -1,0 +1,77 @@
+<div class="default">
+  <br/>
+  <br/>
+  <form class="uk-child-width-1-1 uk-grid-small" uk-grid>
+
+    <div>
+        <div class="uk-form-group">
+            <label class="uk-form-label"> Nom</label>
+
+            <div class="uk-position-relative w-100">
+                <span class="uk-form-icon">
+                    <i class="icon-feather-user"></i>
+                </span>
+                <input class="uk-input" type="text" placeholder="Votre nom">
+            </div>
+
+        </div>
+    </div>
+    <div>
+        <div class="uk-form-group">
+            <label class="uk-form-label"> Adresse mail</label>
+
+            <div class="uk-position-relative w-100">
+                <span class="uk-form-icon">
+                    <i class="icon-feather-mail"></i>
+                </span>
+                <input class="uk-input" type="email" placeholder="nom@exemple.fr">
+            </div>
+
+        </div>
+    </div>
+
+    <div class="uk-width-1-2@s">
+        <div class="uk-form-group">
+            <label class="uk-form-label"> Mot de passe</label>
+            <div class="uk-position-relative w-100">
+                <span class="uk-form-icon">
+                    <i class="icon-feather-lock"></i>
+                </span>
+                <input class="uk-input" type="password" placeholder="********">
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-1-2@s">
+        <div class="uk-form-group">
+            <label class="uk-form-label"> Confirmez le mot de passe</label>
+
+            <div class="uk-position-relative w-100">
+                <span class="uk-form-icon">
+                    <i class="icon-feather-lock"></i>
+                </span>
+                <input class="uk-input" type="password" placeholder="********">
+            </div>
+
+        </div>
+    </div>
+    <div>
+        <div class="mt-4 uk-flex-middle uk-grid-small" uk-grid>
+            <div class="uk-width-expand@s">
+              <span>Rôle de l'utilisateur ? </span>
+              <select id="pet-select">
+                <option value="">--Role--</option>
+                <option value="moderateur">Modérateur</option>
+                <option value="admin">Administrateur</option>
+                <option value="superAdmin">Super Administrateur</option>
+            </select>
+            </div>
+            <div class="uk-width-auto@s">
+                <button type="button" class="btn button small primary">
+                  <span>Envoyer</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</form>
+</div>

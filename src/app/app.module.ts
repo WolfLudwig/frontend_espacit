@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { MatTableModule } from '@angular/material/table';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
@@ -23,7 +23,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
-
+import { FindFriendsComponent } from './find-friends/find-friends.component';
+import { CreateUSerComponent } from './create-user/create-user.component';
+import { UsertableComponent } from './components/usertable/usertable.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
     RegisterComponent,
     ChatComponent,
     ToolbarComponent,
+    FindFriendsComponent,
+    CreateUSerComponent,
+    UsertableComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +56,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatFormFieldModule,
     MatInputModule,
     MatExpansionModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
