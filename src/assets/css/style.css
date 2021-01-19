@@ -1,30 +1,31 @@
 @charset "UTF-8";
-
-
-/* -------------------------------------------------------------- */
-/* 01. Import googlefonts
- ----------------------------------------------------------------- */
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700);
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
 html {
   font-family: "Open Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #1b74e8;
 }
-html body {-webkit-font-smoothing: antialiased;overflow-x: hidden;padding: .75rem 2rem;background-repeat: no-repeat;background-attachment: fixed;padding-top: 1.25rem;padding-bottom: 1.25rem;background: #03989e;}
+html body {
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  padding: .75rem 2rem;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  background: #03989e;}
 
-
-/* ---------------------------------- */
-/*   page contents Layout
-------------------------------------- */
 .default {
-  position: relative;
-  z-index: 5;
+  z-index: -1;
   display: block;
-  overflow: visible;
+  overflow-y: visible;
   border-radius: 30px;
-  min-height: 100vh;
+  margin-top: 50px;
+  max-height: 80vh;
   background-color: #f1f5f8;
-  padding: 0 22px 2.5rem;
+  padding: 10px 22px 2.5rem;
 }
 
+.logo { 
+  z-index:8;
+}

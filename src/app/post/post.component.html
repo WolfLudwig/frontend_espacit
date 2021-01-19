@@ -1,0 +1,11 @@
+<form [formGroup]="postForm" fxLayout="column" class="default">
+    <textarea placeholder="Hohoho" formControlName="message"></textarea>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxFlex="40" fxLayout="row" fxLayoutAlign="none center" fxLayoutGap="20px">
+            <mat-icon [ngStyle]="{'cursor':'pointer'}" (click)="fileInput.click()">attach_file</mat-icon>
+            <input hidden #fileInput type="file" formControlName="file" accept=".pdf" (change)="onFileUpload($event.target.files); affNomDoc();">
+            <p *ngIf="nomDoc">{{nomDoc}}<mat-icon [ngStyle]="{'cursor':'pointer'}" (click)="delFile()">close</mat-icon></p>
+        </div>
+        <button type="button" [disabled]="!postForm.valid" (click)="sendPost()">Envoyer</button>
+    </div>
+</form>

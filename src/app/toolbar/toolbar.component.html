@@ -1,12 +1,15 @@
-<mat-toolbar fxLayout="row" fxLayoutAlign.gt-sm="space-around center" fxLayoutGap.gt-sm="15vw">
-    <div fxHide.gt-sm fxLayout="row" fxLayoutAlign="space-around center" fxFlex.lt-md="30">
-        <mat-icon fxHide.gt-sm>menu_open</mat-icon>
+<mat-toolbar class="toolbar" fxLayout="row" fxLayoutAlign="space-around center" >
+
+    <div fxLayout="row" fxLayoutAlign="space-around center" fxFlex.lt-md="30" fxFlex.gt-sm="200px">
+        <mat-icon fxHide.gt-sm (click)="menu.emit()">menu_open</mat-icon>
         <a fxHide.gt-sm href="/"> <img src="assets/images/logo.png" class="logo-inverse" alt=""></a>
     </div>
-    <mat-form-field fxFlex.lt-md="45" fxFlex.gt-sm="60">
-        <mat-icon matPrefix>search</mat-icon>
-        <input matInput type="text" placeholder="Recherchez des amis, des vidéos et plus encore..." />
-    </mat-form-field>
+
+    <div class="divSearch" fxFlex="55" fxLayoutAlign="start center" [formGroup]="searchForm">
+        <input #search class="search" formControlName="search" type="text" placeholder="Rechercher des amis" (onkeypress)="send($event)"/>
+        <mat-icon *ngIf="search.value !== ''">search</mat-icon>
+    </div>
+    
     <div fxLayout="row" fxLayoutAlign="space-around center" fxFlex="15">
         <mat-icon>create</mat-icon>
         <div uk-dropdown="pos: bottom-right;mode:click ">
@@ -14,10 +17,6 @@
                 <mat-list-item>
                     <mat-icon [ngStyle]="{'color': 'purple'}">campaign</mat-icon>
                     &nbsp;Créer une ressource
-                </mat-list-item>
-                <mat-list-item>
-                    <mat-icon [ngStyle]="{'color': 'green'}">event_available</mat-icon>
-                    &nbsp;Créer une évènement
                 </mat-list-item>
                 <mat-list-item>
                     <mat-icon [ngStyle]="{'color': 'blue'}">groups</mat-icon>
@@ -53,6 +52,6 @@
                 </mat-list-item>
             </mat-list>
         </div>
-        
     </div>
+
 </mat-toolbar>

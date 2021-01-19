@@ -25,7 +25,9 @@
     position: fixed;
     bottom: 0;
 }
-
+.logo { 
+    z-index:8;
+}
 /*   main sidebar
 
 .sidebar {

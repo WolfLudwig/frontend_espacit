@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { fakeAsync } from '@angular/core/testing';
-
+import { MediaObserver } from '@angular/flex-layout';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,4 +8,8 @@ import { fakeAsync } from '@angular/core/testing';
 export class AppComponent {
   title = 'app';
   public openChat = false;
+  public menu = (this.media.isActive('lg') || this.media.isActive('md'));
+
+  constructor(public media: MediaObserver) { }
+
 }

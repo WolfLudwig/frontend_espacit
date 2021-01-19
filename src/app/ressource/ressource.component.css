@@ -1,5 +1,5 @@
 /* button closec */
-.post-new-btn-close {
+/* .post-new-btn-close {
   z-index: 100;
   border-radius: 100%;
   background: #f1f3f4;
@@ -69,11 +69,6 @@
 
 .post-new-tab-nav a svg {margin-right: 6px;}
 .post-new-tab-nav a span {font-size: 15px;font-weight: 600;}
-
-
-/* ---------------------------------- */
-/*  posts
-/* ---------------------------------- */
 
 .post {
   margin-bottom: 20px;
@@ -385,10 +380,12 @@
   font-family: "unicons";
   font-size: 24px;
   content: '\e99e';
-  /* line-height: 30px; */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   position: absolute;
 }
-
+ */
+img {
+  max-width: 50%;
+}
