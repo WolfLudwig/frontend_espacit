@@ -1,89 +1,86 @@
- <!-- Content
-    ================================================== -->
-    <div uk-height-viewport class="uk-flex uk-flex-middle">
-      <div class="uk-width-2-3@m uk-width-1-2@s m-auto rounded uk-overflow-hidden shadow-lg">
-          <div class="uk-child-width-1-2@m uk-grid-collapse bg-gradient-primary" uk-grid>
+<div class="default">
+  <br/>
+  <br/>
+ <!-- <div uk-height-viewport class="uk-flex uk-flex-middle"> -->
+    <!-- <div class="uk-width-2-3@m uk-width-1-2@s m-auto rounded uk-overflow-hidden shadow-lg"> -->
+       <div class="uk-grid-collapse bg-gradient-primary" uk-grid>
+        <div class="uk-card-default px-5 py-8">
+          <div class="mb-4 uk-text-center">
+              <h2 class="mb-0"> Créer un nouveau compte</h2>
+          </div>
+        <form class="uk-child-width-1-1 uk-grid-small" uk-grid *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
 
-              <!-- column one -->
-              <div class="uk-margin-auto-vertical uk-text-center uk-animation-scale-up p-3 uk-light">
-                  <img src="assets/images/logo-light-icon.png" alt="">
-                  <h3 class="mb-3 mt-lg-4"> Resources relationnelles</h3>
-                  <p>La plateforme pour améliorer<br> vos relations. </p>
+          <div>
+              <div class="uk-form-group">
+                  <label class="uk-form-label"> Nom d'utilisateur</label>
+
+                  <div class="uk-position-relative w-100">
+                      <span class="uk-form-icon">
+                          <i class="icon-feather-user"></i>
+                      </span>
+                      <input class="uk-input" type="text" placeholder="Votre pseudo" name="pseudo" [(ngModel)]="form.pseudo" required minlength="3" maxlength="20" #pseudo="ngModel">
+                  </div>
+                  <div class="uk-alert-danger" *ngIf="pseudo.errors && f.submitted">
+                    <div *ngIf="pseudo.errors.required">Le pseudo est requis</div>
+                    <div *ngIf="pseudo.errors.minlength">
+                      le pseudo doit comporter au moins 3 caractères
+                    </div>
+                    <div *ngIf="pseudo.errors.maxlength">
+                      le pseudo doit comporter au maximum 20 caractères
+                    </div>
+                  </div>
               </div>
+          </div>
+          <div>
+              <div class="uk-form-group">
+                  <label class="uk-form-label"> Adresse mail</label>
 
-              <!-- column two -->
-                  <div class="uk-card-default px-5 py-8">
-                      <div class="mb-4 uk-text-center">
-                          <h2 class="mb-0"> Créer un nouveau compte</h2>
+                  <div class="uk-position-relative w-100">
+                      <span class="uk-form-icon">
+                          <i class="icon-feather-mail"></i>
+                      </span>
+                      <input class="uk-input" type="email" placeholder="votre-adresse-mail@exemple.fr" name="email" [(ngModel)]="form.email" required  #email="ngModel" >
+                  </div>
+                  <div class="uk-alert-danger" *ngIf="submitted && email.errors">
+                    <div *ngIf="email.errors.required">L'adresse mail est obligatoire</div>
+                    <div *ngIf="email.errors.email">L'adresse mail doit être valide</div>
+                  </div>
+              </div>
+          </div>
 
-                      </div>
+          <div class="uk-width-1-2@s">
+              <div class="uk-form-group">
+                  <label class="uk-form-label"> Mot de passe</label>
 
-                  <form class="uk-child-width-1-1 uk-grid-small" uk-grid>
+                  <div class="uk-position-relative w-100">
+                      <span class="uk-form-icon">
+                          <i class="icon-feather-lock"></i>
+                      </span>
+                      <input class="uk-input" type="password" placeholder="********"  name="password" [(ngModel)]="form.password" required minlength="6"  #password="ngModel">
+                  </div>
+                  <div *ngIf="password.touched && password.invalid" class="uk-alert-danger">
+                    <small *ngIf="password.errors.required">Le mot de passe est obligatoire</small>
+                    <small *ngIf="password.errors.minlength">le mot de passe doit contenir au moins 6 caractères</small>
+                  </div>
+              </div>
+          </div>
 
-                      <div>
-                          <div class="uk-form-group">
-                              <label class="uk-form-label"> Nom</label>
+          <div>
+              <div class="mt-4 uk-flex-middle uk-grid-small" uk-grid>
+                  <div class="uk-width-expand@s">
+                      <p> Avez-vous un compte ? <a routerLink="/login">Se connecter</a></p>
+                  </div>
+                  <div class="uk-width-auto@s">
+                    <button class="uk-button-primary">S'inscrire'</button>
+                  </div>
+                <div class="uk-alert-warning" *ngIf="f.submitted && isSignUpFailed">
+                    L'inscription a échoué! <br />{{ errorMessage }}
+                </div>
+              </div>
+          </div>
 
-                              <div class="uk-position-relative w-100">
-                                  <span class="uk-form-icon">
-                                      <i class="icon-feather-user"></i>
-                                  </span>
-                                  <input class="uk-input" type="text" placeholder="Votre nom">
-                              </div>
-
-                          </div>
-                      </div>
-                      <div>
-                          <div class="uk-form-group">
-                              <label class="uk-form-label"> Adresse mail</label>
-
-                              <div class="uk-position-relative w-100">
-                                  <span class="uk-form-icon">
-                                      <i class="icon-feather-mail"></i>
-                                  </span>
-                                  <input class="uk-input" type="email" placeholder="nom@exemple.fr">
-                              </div>
-
-                          </div>
-                      </div>
-
-                      <div class="uk-width-1-2@s">
-                          <div class="uk-form-group">
-                              <label class="uk-form-label"> Mot de passe</label>
-
-                              <div class="uk-position-relative w-100">
-                                  <span class="uk-form-icon">
-                                      <i class="icon-feather-lock"></i>
-                                  </span>
-                                  <input class="uk-input" type="password" placeholder="********">
-                              </div>
-
-                          </div>
-                      </div>
-                      <div class="uk-width-1-2@s">
-                          <div class="uk-form-group">
-                              <label class="uk-form-label"> Confirmez le mot de passe</label>
-
-                              <div class="uk-position-relative w-100">
-                                  <span class="uk-form-icon">
-                                      <i class="icon-feather-lock"></i>
-                                  </span>
-                                  <input class="uk-input" type="password" placeholder="********">
-                              </div>
-
-                          </div>
-                      </div>
-
-                      <div>
-                          <div class="mt-4 uk-flex-middle uk-grid-small" uk-grid>
-                              <div class="uk-width-expand@s">
-                                  <p> Avez-vous un compte ? <a href="#">Se connecter</a></p>
-                              </div>
-                              <div class="uk-width-auto@s">
-                                  <input type="submit" class="button primary" value="S'inscrire">
-                              </div>
-                          </div>
-                      </div>
-
-                  </form>
-
+      </form>
+      <div class="uk-alert-success" *ngIf="isSuccessful">
+        Votre inscription est réussie!
+      </div>
+    </div>

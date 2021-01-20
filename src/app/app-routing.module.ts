@@ -1,3 +1,7 @@
+import { UserListComponent } from './user-list/user-list.component';
+import { ProfileComponent } from './profile/profile.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 import { UsertableComponent } from './components/usertable/usertable.component';
 import { CreateUSerComponent } from './create-user/create-user.component';
 import { FindFriendsComponent } from './find-friends/find-friends.component';
@@ -12,9 +16,11 @@ const routes: Routes = [
   { path: 'actu', component: RessourceComponent },
   { path: 'jeu', component: GameComponent },
   { path: 'groupe', component: GroupComponent },
-  { path: 'findFriends', component: FindFriendsComponent },
-  { path: 'createUser', component: CreateUSerComponent},
-  { path: 'userList', component: UsertableComponent },
+  { path: 'findFriends', component: ProfileComponent },
+  { path: 'login', component: LoginComponent},
+  { path: 'register', component: RegisterComponent },
+  { path: 'userList', component: UserListComponent },
+  { path: 'createUser', component: CreateUSerComponent },
   { path: '**', component: RessourceComponent }
 ];
 

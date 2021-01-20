@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -27,6 +29,14 @@ import { FindFriendsComponent } from './find-friends/find-friends.component';
 import { CreateUSerComponent } from './create-user/create-user.component';
 import { UsertableComponent } from './components/usertable/usertable.component';
 
+import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import { LoginComponent } from './login/login.component';
+import { ProfileComponent } from './profile/profile.component';
+import { BoardAdminComponent } from './board-admin/board-admin.component';
+import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
+import { BoardUserComponent } from './board-user/board-user.component';
+import { UserListComponent } from './user-list/user-list.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,12 +50,20 @@ import { UsertableComponent } from './components/usertable/usertable.component';
     FindFriendsComponent,
     CreateUSerComponent,
     UsertableComponent,
+    LoginComponent,
+    ProfileComponent,
+    BoardAdminComponent,
+    BoardModeratorComponent,
+    BoardUserComponent,
+    UserListComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    FormsModule,
+    HttpClientModule,
     // Matérial
     MatListModule,
     MatDividerModule,
@@ -58,7 +76,7 @@ import { UsertableComponent } from './components/usertable/usertable.component';
     MatExpansionModule,
     MatTableModule
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

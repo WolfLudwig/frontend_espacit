@@ -4,10 +4,11 @@
 </div>
 <mat-list fxLayout="column">
     <a *ngFor="let item of menu" class="itemMenu" [routerLink]="item.lien">
-        <mat-list-item>
+        <mat-list-item *ngIf="isLoggedIn">
             <mat-icon class="blanc">{{item.icone}}</mat-icon>
             <span class="blanc">&nbsp;{{item.nom}}</span>
         </mat-list-item>
     </a>
+
 </mat-list>
 <p class="foot">© 2020 <strong>The Boys</strong>. All Rights Reserved. </p>

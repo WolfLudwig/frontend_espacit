@@ -3,13 +3,13 @@
         <mat-icon fxHide.gt-sm>menu_open</mat-icon>
         <a fxHide.gt-sm href="/"> <img src="assets/images/logo.png" class="logo-inverse" alt=""></a>
     </div>
-    <mat-form-field fxFlex.lt-md="45" fxFlex.gt-sm="60">
+    <mat-form-field *ngIf="isLoggedIn" fxFlex.lt-md="45" fxFlex.gt-sm="60">
         <mat-icon matPrefix>search</mat-icon>
-        <input matInput type="text" placeholder="Recherchez des amis, des vidéos et plus encore..." />
+        <input  matInput type="text" placeholder="Recherchez des amis, des vidéos et plus encore..." />
     </mat-form-field>
     <div fxLayout="row" fxLayoutAlign="space-around center" fxFlex="15">
-        <mat-icon>create</mat-icon>
-        <div uk-dropdown="pos: bottom-right;mode:click ">
+        <mat-icon *ngIf="isLoggedIn">create</mat-icon>
+        <div *ngIf="isLoggedIn" uk-dropdown="pos: bottom-right;mode:click ">
             <mat-list>
                 <mat-list-item>
                     <mat-icon [ngStyle]="{'color': 'purple'}">campaign</mat-icon>
@@ -26,11 +26,21 @@
             </mat-list>
         </div>
 
-        <mat-icon (click)="openChat.emit()">mail</mat-icon>
-
+          <mat-icon *ngIf="isLoggedIn" (click)="openChat.emit()">mail</mat-icon>
+          <mat-icon *ngIf='!isLoggedIn'><a routerLink="/actu">home</a></mat-icon>
         <mat-icon>person</mat-icon>
         <div uk-dropdown="pos: bottom-right;mode:click ">
-            <mat-list>
+            <mat-list *ngIf="!isLoggedIn">
+              <mat-list-item>
+                <mat-icon [ngStyle]="{'color': 'red'}"><a routerLink="/register">assignment_ind</a></mat-icon>
+                <span><a routerLink="/register">&nbsp; S'inscrire</a></span>
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon [ngStyle]="{'color': 'green'}"><a routerLink="/login">login</a></mat-icon>
+                <span><a routerLink="/login">&nbsp; Se connecter</a></span>
+              </mat-list-item>
+            </mat-list>
+            <mat-list *ngIf="isLoggedIn">
                 <mat-list-item>
                     <mat-icon [ngStyle]="{'color': 'purple'}">campaign</mat-icon>
                     <span>&nbsp; Mes ressources</span>
@@ -47,12 +57,12 @@
                     <mat-icon [ngStyle]="{'color': 'black'}">settings</mat-icon>
                     <span>&nbsp; Mes paramètres</span>
                 </mat-list-item>
-                <mat-list-item>
+                <mat-list-item  (click)="logout()">
                     <mat-icon [ngStyle]="{'color': 'red'}">person_off</mat-icon>
-                    <span>&nbsp; Se déconnecter</span>
+                    <span >&nbsp; Se déconnecter</span>
                 </mat-list-item>
             </mat-list>
         </div>
-        
+
     </div>
 </mat-toolbar>
