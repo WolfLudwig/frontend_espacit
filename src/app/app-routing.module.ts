@@ -12,16 +12,14 @@ import { RessourceComponent } from './ressource/ressource.component';
 
 
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { SignInComponent } from './signIn/signIn.component';
 import { FriendsComponent } from './friends/friends.component';
 import { MyFriendsComponent } from './myFriends/myFriends.component';
 
 const routes: Routes = [
   // Routes
-  { path: '', redirectTo: '/signin', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'incription', component: RessourceComponent, outlet: 'connection' },
   { path: 'register', component: RegisterComponent },
-  { path: 'signin', component: SignInComponent },
   { path: 'login', component: LoginComponent },
   { path: 'createUser', component: CreateUSerComponent },
   { path: 'actu', component: RessourceComponent },
@@ -34,7 +32,7 @@ const routes: Routes = [
   { path: 'friends', component: FriendsComponent },
 
   // Erreur
-  { path: '**', component: SignInComponent }
+  { path: '**', component: LoginComponent }
 ];
 
 @NgModule({

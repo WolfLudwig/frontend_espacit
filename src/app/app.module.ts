@@ -14,7 +14,6 @@ import { GameComponent } from './game/game.component';
 import { GroupComponent } from './group/group.component';
 import { RegisterComponent } from './register/register.component';
 import { ChatComponent } from './chat/chat.component';
-import { SignInComponent } from './signIn/signIn.component';
 import { FriendsComponent } from './friends/friends.component';
 import { MyFriendsComponent } from './myFriends/myFriends.component';
 import { AddRessourceComponent } from './add-ressource/add-ressource.component';
@@ -63,7 +62,6 @@ import { UserListComponent } from './user-list/user-list.component';
     BoardModeratorComponent,
     BoardUserComponent,
     UserListComponent,
-    SignInComponent,
     FriendsComponent,
     MyFriendsComponent,
     AddRessourceComponent,
