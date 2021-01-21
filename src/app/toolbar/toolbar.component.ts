@@ -1,6 +1,5 @@
-import { TokenStorageService } from './../_services/token-storage.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-
+import { TokenStorageService } from './../_services/token-storage.service';
 
 @Component({
   selector: 'app-toolbar',

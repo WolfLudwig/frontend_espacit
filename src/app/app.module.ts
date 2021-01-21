@@ -1,5 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { FormGroup, FormBuilder, Validators, FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 import { MatTableModule } from '@angular/material/table';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -10,17 +14,13 @@ import { GameComponent } from './game/game.component';
 import { GroupComponent } from './group/group.component';
 import { RegisterComponent } from './register/register.component';
 import { ChatComponent } from './chat/chat.component';
-import { HttpClientModule } from '@angular/common/http';
-import { FormGroup, FormBuilder, Validators, FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SignInComponent } from './signIn/signIn.component';
 import { HomeComponent } from './home/home.component';
 import { FriendsComponent } from './friends/friends.component';
 import { MyFriendsComponent } from './myFriends/myFriends.component';
 import { AddRessourceComponent } from './add-ressource/add-ressource.component';
-
-
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
+
 // Import matérial
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
@@ -31,6 +31,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
+
+
 import { FindFriendsComponent } from './find-friends/find-friends.component';
 import { CreateUSerComponent } from './create-user/create-user.component';
 import { UsertableComponent } from './components/usertable/usertable.component';
@@ -74,7 +76,9 @@ import { UserListComponent } from './user-list/user-list.component';
     BrowserAnimationsModule,
     FlexLayoutModule,
     FormsModule,
+    ReactiveFormsModule,    
     HttpClientModule,
+
     // Matérial
     MatListModule,
     MatDividerModule,
@@ -85,10 +89,7 @@ import { UserListComponent } from './user-list/user-list.component';
     MatFormFieldModule,
     MatInputModule,
     MatExpansionModule,
-    MatTableModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
+    MatTableModule,    
   ],
   providers: [authInterceptorProviders, HttpClientModule],
     
