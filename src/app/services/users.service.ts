@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UserService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   private usr: Users[] = [
     {
@@ -18,14 +18,14 @@ export class UserService {
       password: 4900,
     },
     {
-        _id: '324sdfmoih3',
-        pseudo: 'Mon objet 2',
-        email: 'A propos de mon objet 2',
-        password: 49000,
+      _id: '324sdfmoih3',
+      pseudo: 'Mon objet 2',
+      email: 'A propos de mon objet 2',
+      password: 49000,
     },
   ];
 
-  private myFriends : Users[] = [
+  private myFriends: Users[] = [
     {
       _id: '324sdfmoih3',
       pseudo: 'Mon objet',
@@ -33,72 +33,50 @@ export class UserService {
       password: 4900,
     },
     {
-        _id: '324sdfmoih3',
-        pseudo: 'Mon objet 2',
-        email: 'A propos de mon objet 2',
-        password: 49000,
+      _id: '324sdfmoih3',
+      pseudo: 'Mon objet 2',
+      email: 'A propos de mon objet 2',
+      password: 49000,
     },
   ];
   public usr$ = new Subject<Users[]>();
   public frd$ = new Subject<Users[]>();
 
-   getUser(id : String) {
-     this.http.get('http://localhost:3000/api/users'+ id).subscribe(
-       (stuff: Users[]) => {
-         if (stuff) {
-           this.usr = stuff;
-           console.log("je suis dans getUser");
-           console.log(this.usr);
-           this.emitUser();
-         }
-       },
-       (error) => {
-         console.log(error);
-       }
-     );
-   }
-
-  emitUser() {
-    this.usr$.next(this.usr);
-  }
-
-  getUsers(id : String[]) {
-    this.http.get('http://localhost:3000/api/users/infos'+ id).subscribe(
+  getUser(id: string) {
+    this.http.get('http://localhost:3000/api/users' + id).subscribe(
       (stuff: Users[]) => {
         if (stuff) {
           this.usr = stuff;
-          console.log("je suis dans getUsers");
-          console.log(this.usr);
           this.emitUser();
         }
       },
       (error) => {
-        console.log(error);
       }
     );
   }
 
+  emitUser(): void {
+    this.usr$.next(this.usr);
+  }
 
-
-//   getUserById(id: string) {
-//     return new Promise((resolve, reject) => {
-//       this.http.get('http://localhost:3000/api/users/' + id).subscribe(
-//         (response) => {
-//           resolve(response);
-//         },
-//         (error) => {
-//           reject(error);
-//         }
-//       );
-//     });
-//   }
+  getUsers(id: string[]) {
+    this.http.get('http://localhost:3000/api/users/infos' + id).subscribe(
+      (stuff: Users[]) => {
+        if (stuff) {
+          this.usr = stuff;
+          this.emitUser();
+        }
+      },
+      (error) => { }
+    );
+  }
 
   createNewUser(usr: Users) {
     return new Promise((resolve, reject) => {
       this.http.post('http://localhost:3000/api/users', usr).subscribe(
         (response) => {
           resolve(response);
-          
+
         },
         (error) => {
           reject(error);
@@ -107,15 +85,13 @@ export class UserService {
     });
   }
 
-  signInUser(usr : Users)
-  {
+  signInUser(usr: Users) {
     return new Promise((resolve, reject) => {
       this.http.post('http://localhost:3000/api/users/signIn', usr).subscribe(
         (response) => {
-          resolve(response); 
+          resolve(response);
         },
         (error) => {
-          console.log(error);
           reject(error);
         }
       );
@@ -123,19 +99,16 @@ export class UserService {
 
   }
 
-  getAllUsers()
-  {
+  getAllUsers() {
     return new Promise((resolve, reject) => {
       this.http.get('http://localhost:3000/api/users').subscribe(
-        (friends : Users[]) => {
+        (friends: Users[]) => {
           if (friends) {
             this.usr = friends;
-            console.log(friends);
             this.emitFriends();
-          } 
+          }
         },
         (error) => {
-          console.log(error);
           reject(error);
         }
       );
@@ -144,40 +117,35 @@ export class UserService {
   }
 
 
-  emitFriends() {
+  emitFriends(): void {
     this.usr$.next(this.usr);
   }
 
-  getAllFriends(id : string)
-  {
-    console.log(id + " identifiant récupéré ");
+  getAllFriends(id: string) {
     return new Promise((resolve, reject) => {
-      this.http.get('http://localhost:3000/api/users/myFriends/'+ id).subscribe(
-        (friends : Users[]) => {
+      this.http.get('http://localhost:3000/api/users/myFriends/' + id).subscribe(
+        (friends: Users[]) => {
           if (friends) {
             this.myFriends = friends;
-            console.log(this.myFriends);
             this.emitMyFriends();
-          } 
+          }
         },
         (error) => {
-          console.log(error);
           reject(error);
         }
       );
     });
   }
 
-  emitMyFriends() {
+  emitMyFriends(): void {
     this.frd$.next(this.myFriends);
   }
 
-  isLog()
-  {
+  isLog() {
     return new Promise<boolean>((resolve, reject) => {
       this.http.get('http://localhost:3000/api/users/isLog').subscribe(
         () => {
-          resolve(true); 
+          resolve(true);
         },
         () => {
           reject(false);

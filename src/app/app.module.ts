@@ -11,9 +11,8 @@ import { GroupComponent } from './group/group.component';
 import { RegisterComponent } from './register/register.component';
 import { ChatComponent } from './chat/chat.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormGroup, FormBuilder, Validators, FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SignInComponent } from './signIn/signIn.component';
-import { HomeComponent } from './home/home.component';
 import { FriendsComponent } from './friends/friends.component';
 import { MyFriendsComponent } from './myFriends/myFriends.component';
 import { AddRessourceComponent } from './add-ressource/add-ressource.component';
@@ -63,7 +62,6 @@ import { UserListComponent } from './user-list/user-list.component';
     BoardUserComponent,
     UserListComponent,
     SignInComponent,
-    HomeComponent,
     FriendsComponent,
     MyFriendsComponent,
     AddRessourceComponent,
@@ -91,7 +89,7 @@ import { UserListComponent } from './user-list/user-list.component';
     HttpClientModule,
   ],
   providers: [authInterceptorProviders, HttpClientModule],
-    
+
   exports: [
     FormsModule,
     ReactiveFormsModule

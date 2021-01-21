@@ -11,12 +11,10 @@ import { UserService } from '../services/users.service';
 })
 export class FriendsComponent implements OnInit {
 
-  public friends : Users[] = [];
+  public friends: Users[] = [];
   private friendsSub: Subscription;
 
-  constructor(private userService : UserService,
-    private router: Router,
-    ) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -29,8 +27,7 @@ export class FriendsComponent implements OnInit {
 
   }
 
-  goMyFriends(id : string)
-  {
+  goMyFriends(id: string): void {
     this.router.navigateByUrl('/myFriends/' + id);
   }
 

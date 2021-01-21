@@ -10,52 +10,56 @@ const source = interval(1000);
   providedIn: 'root'
 })
 export class RessourceService {
-constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   private ress: Ressource[] = [
     {
-        posterId: "1234",
-        posterPseudo : "LaCrème",
-        message: "String",
-        picture:  "assets/images/logo-light-icon.png",
-        video:  "",
-        likers: [{ _id: "5ff2f561f3831a54b42fce83",
-            pseudo: "la crème",
-            email: "lacreme@gmail.com"}],
-        comments: [{commenterId : "5ff2f561f3831a54b42fce83",
-         commenterPseudo : "laCrème", text :"c'est un commentaire ! "}],
-        relation : [{_id :"1234", title :"1 relation", description :"une description de rel "}],       
-        category : {_id : "1234", title :"1 catégorie", description :"une description de cat"},
-        ressourceType : [{_id :"1234", title :"1 type de ressource", description :"une description de ress "}]
-      
+      posterId: '1234',
+      posterPseudo: 'LaCrème',
+      message: 'string',
+      picture: 'assets/images/logo-light-icon.png',
+      video: '',
+      likers: [{
+        _id: '5ff2f561f3831a54b42fce83',
+        pseudo: 'la crème',
+        email: 'lacreme@gmail.com'
+      }],
+      comments: [{
+        commenterId: '5ff2f561f3831a54b42fce83',
+        commenterPseudo: 'laCrème', text: 'c\'est un commentaire ! '
+      }],
+      relation: [{ _id: '1234', title: '1 relation', description: 'une description de rel ' }],
+      category: { _id: '1234', title: '1 catégorie', description: 'une description de cat' },
+      ressourceType: [{ _id: '1234', title: '1 type de ressource', description: 'une description de ress ' }]
+
     }
   ];
 
   private user: Users[] = [];
-    
+
   public post$ = new Subject<Ressource[]>();
   public usr$ = new Subject<Users[]>();
   currentPost$ = this.post$.asObservable();
 
-   getPostById(id: string) {
-     return new Promise((resolve, reject) => {
-       this.http.get('http://localhost:3000/api/post/' + id).subscribe(
-         (response) => {
-           resolve(response);
-         },
-         (error) => {
-           reject(error);
-         }
-       );
-     });
-   }
+  getPostById(id: string) {
+    return new Promise((resolve, reject) => {
+      this.http.get('http://localhost:3000/api/post/' + id).subscribe(
+        (response) => {
+          resolve(response);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  }
 
   createNewPost(ress: Ressource) {
     return new Promise((resolve, reject) => {
       this.http.post('http://localhost:3000/api/post', ress).subscribe(
         (response) => {
           resolve(response);
-          
+
         },
         (error) => {
           reject(error);
@@ -64,42 +68,37 @@ constructor(private http: HttpClient) {}
     });
   }
 
-   getAllPosts()
-   {
-     return new Promise((resolve, reject) => {
-       this.http.get('http://localhost:3000/api/post').subscribe(
-         (ress : Ressource[]) => {
-           if (ress) {
-             this.ress = ress;
-             this.emitPosts();
-             
-           } 
-         },
-         (error) => {
-           console.log(error);
-           reject(error);
-         }
-       );
-     });
+  getAllPosts() {
+    return new Promise((resolve, reject) => {
+      this.http.get('http://localhost:3000/api/post').subscribe(
+        (ress: Ressource[]) => {
+          if (ress) {
+            this.ress = ress;
+            this.emitPosts();
 
-   }
+          }
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
 
-     emitPosts() {
-      // this.currentPost$.subscribe(this.post$);
-       this.post$.next(this.ress);
-     }
+  }
 
-   emitUsersInfos() {
+  emitPosts(): void {
+    this.post$.next(this.ress);
+  }
+
+  emitUsersInfos(): void {
     this.usr$.next(this.user);
   }
 
-  addLike(ress : Ressource)
-  {
-    console.log("dans le addLike avec id : " + ress);
+  addLike(ress: Ressource) {
     return new Promise((resolve, reject) => {
       this.http.patch('http://localhost:3000/api/post/like', ress).subscribe(
         (response) => {
-          resolve(response);  
+          resolve(response);
         },
         (error) => {
           reject(error);
@@ -109,14 +108,12 @@ constructor(private http: HttpClient) {}
 
   }
 
-  createNewComm(infosComm : String[]) {
-    console.log(infosComm);
+  createNewComm(infosComm: string[]) {
     return new Promise((resolve, reject) => {
       this.http.patch('http://localhost:3000/api/post/comment-post', infosComm).subscribe(
         (response) => {
-          console.log(response + " reponse du back");
           resolve(response);
-          
+
         },
         (error) => {
           reject(error);

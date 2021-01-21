@@ -1,5 +1,5 @@
 export class Relation {
-  _id : String;
-  title: String;
-  description: String;
+  _id: string;
+  title: string;
+  description: string;
 }
