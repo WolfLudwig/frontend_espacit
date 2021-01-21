@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Users } from '../models/user.model';
-import { UserService} from '../services/users.service';
+import { UserService } from '../services/users.service';
 
 
 @Component({
@@ -12,14 +12,12 @@ import { UserService} from '../services/users.service';
 })
 export class SignInComponent implements OnInit {
 
-  signInForm : FormGroup;
-  errorMessage : string;
+  signInForm: FormGroup;
+  errorMessage: string;
 
-  constructor(private formBuilder: FormBuilder,
-    private userService : UserService, 
-    private router: Router,) { }
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     this.signInForm = this.formBuilder.group({
       email: [null, Validators.required],
@@ -28,8 +26,7 @@ export class SignInComponent implements OnInit {
     });
   }
 
-  onSubmit()
-  {
+  onSubmit(): void {
     const usr = new Users();
     usr.email = this.signInForm.get('email').value;
     usr.password = this.signInForm.get('Mdp').value;

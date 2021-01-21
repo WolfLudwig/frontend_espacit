@@ -1,26 +1,28 @@
-import { Users } from "./user.model";
-import {Relation} from "./relation.model";
-import {Category } from "./category.model";
-import {RessourceType } from "./ressourceType.model";
+import { Users } from './user.model';
+import { Relation } from './relation.model';
+import { Category } from './category.model';
+import { RessourceType } from './ressourceType.model';
 
 export class Ressource {
-  posterId: String;
-  posterPseudo: String;
-  message: String;
-  picture:  String;
-  video:  String;
-  likers: [{_id : String,
-            pseudo : String,
-            email : String}];
-  comments: [ 
+  posterId: string;
+  posterPseudo: string;
+  message: string;
+  picture: string;
+  video: string;
+  likers: [{
+    _id: string,
+    pseudo: string,
+    email: string
+  }];
+  comments: [
     {
-        commenterId : String,
-        commenterPseudo : String;
-        text : String;
+      commenterId: string,
+      commenterPseudo: string;
+      text: string;
     }
-  ]
-  relation : [Relation];       
-  category : Category;
-  ressourceType : [RessourceType];
+  ];
+  relation: [Relation];
+  category: Category;
+  ressourceType: [RessourceType];
 
 }

@@ -7,44 +7,44 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class RelationService {
-constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  private rel : Relation[] = 
-  [
-    {
-        _id : "1234",
-        title : "salut",
-        description :"une desc"
+  private rel: Relation[] =
+    [
+      {
+        _id: '1234',
+        title: 'salut',
+        description: 'une desc'
 
-    }
-  ];
+      }
+    ];
 
-  
+
   public rel$ = new Subject<Relation[]>();
 
-   getRelationById(id: string) {
-     return new Promise<Relation>((resolve, reject) => {
-       this.http.get('http://localhost:3000/api/relation/' + id).subscribe(
-         (relation : Relation[]) => {
+  getRelationById(id: string) {
+    return new Promise<Relation>((resolve, reject) => {
+      this.http.get('http://localhost:3000/api/relation/' + id).subscribe(
+        (relation: Relation[]) => {
           if (relation) {
             this.rel = relation;
             this.emitRelation();
-          } 
-         },
-         (error) => {
-           reject(error);
-         }
-       );
-     });
-   }
+          }
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  }
 
-   emitRelation() {
+  emitRelation(): void {
     this.rel$.next(this.rel);
-    
+
   }
 
 
-   getRelationByTitle(title: string) {
+  getRelationByTitle(title: string) {
     return new Promise((resolve, reject) => {
       this.http.get('http://localhost:3000/api/relation/' + title).subscribe(
         (response) => {
@@ -56,81 +56,23 @@ constructor(private http: HttpClient) {}
       );
     });
   }
-   getAllRelations()
-  {
+  getAllRelations() {
     return new Promise((resolve, reject) => {
       this.http.get('http://localhost:3000/api/relation').subscribe(
-        (rela : Relation[]) => {
+        (rela: Relation[]) => {
           if (rela) {
             this.rel = rela;
             this.emitRelations();
-          } 
+          }
         },
         (error) => {
-          console.log(error);
           reject(error);
         }
       );
     });
 
   }
-  emitRelations() {
+  emitRelations(): void {
     this.rel$.next(this.rel);
   }
-
-
-
-  
-
-//   getAllUsers()
-//   {
-//     return new Promise((resolve, reject) => {
-//       this.http.get('http://localhost:3000/api/users').subscribe(
-//         (friends : Users[]) => {
-//           if (friends) {
-//             this.usr = friends;
-//             console.log(friends);
-//             this.emitFriends();
-//           } 
-//         },
-//         (error) => {
-//           console.log(error);
-//           reject(error);
-//         }
-//       );
-//     });
-
-//   }
-
-
-//   emitFriends() {
-//     this.usr$.next(this.usr);
-//   }
-
-//   getAllFriends(id : string)
-//   {
-//     console.log(id + " identifiant récupéré ");
-//     return new Promise((resolve, reject) => {
-//       this.http.get('http://localhost:3000/api/users/myFriends/'+ id).subscribe(
-//         (friends : Users[]) => {
-//           if (friends) {
-//             this.myFriends = friends;
-//             console.log(this.myFriends);
-//             this.emitMyFriends();
-//           } 
-//         },
-//         (error) => {
-//           console.log(error);
-//           reject(error);
-//         }
-//       );
-//     });
-//   }
-
-//   emitMyFriends() {
-//     this.frd$.next(this.myFriends);
-//   }
-
-
-
 }
