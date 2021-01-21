@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-
-/* -------------------------------------------------------------- */
-/* 01. Import googlefonts
- ----------------------------------------------------------------- */
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700);
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
@@ -13,10 +9,6 @@ html {
 }
 html body {-webkit-font-smoothing: antialiased;overflow-x: hidden;padding: .75rem 2rem;background-repeat: no-repeat;background-attachment: fixed;padding-top: 1.25rem;padding-bottom: 1.25rem;background: #03989e;}
 
-
-/* ---------------------------------- */
-/*   page contents Layout
-------------------------------------- */
 .default {
   position: relative;
   z-index: 5;

@@ -1,7 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,6 +10,14 @@ import { GameComponent } from './game/game.component';
 import { GroupComponent } from './group/group.component';
 import { RegisterComponent } from './register/register.component';
 import { ChatComponent } from './chat/chat.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormGroup, FormBuilder, Validators, FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { SignInComponent } from './signIn/signIn.component';
+import { HomeComponent } from './home/home.component';
+import { FriendsComponent } from './friends/friends.component';
+import { MyFriendsComponent } from './myFriends/myFriends.component';
+import { AddRessourceComponent } from './add-ressource/add-ressource.component';
+
 
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -56,6 +62,11 @@ import { UserListComponent } from './user-list/user-list.component';
     BoardModeratorComponent,
     BoardUserComponent,
     UserListComponent,
+    SignInComponent,
+    HomeComponent,
+    FriendsComponent,
+    MyFriendsComponent,
+    AddRessourceComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,9 +85,17 @@ import { UserListComponent } from './user-list/user-list.component';
     MatFormFieldModule,
     MatInputModule,
     MatExpansionModule,
-    MatTableModule
+    MatTableModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
-  providers: [authInterceptorProviders],
+  providers: [authInterceptorProviders, HttpClientModule],
+    
+  exports: [
+    FormsModule,
+    ReactiveFormsModule
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

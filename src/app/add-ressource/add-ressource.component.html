@@ -1,0 +1,59 @@
+ <!-- Content
+    ================================================== -->
+    <div uk-height-viewport class="uk-flex uk-flex-middle">
+        <div class="uk-width-2-3@m uk-width-1-2@s m-auto rounded uk-overflow-hidden shadow-lg">
+            <div class="uk-child-width-1-2@m uk-grid-collapse bg-gradient-primary" uk-grid>
+  
+                <!-- column one -->
+                <div class="uk-margin-auto-vertical uk-text-center uk-animation-scale-up p-3 uk-light">
+                    <img src="assets/images/logo-light-icon.png" alt="">
+                    <h3 class="mb-3 mt-lg-4"> Resources relationnelles</h3>
+                    <p>La plateforme pour améliorer<br> vos relations. </p>
+                </div>
+  
+                <!-- column two -->
+                    <div class="uk-card-default px-5 py-8">
+  
+                    <form [formGroup] = " ressourceForm " class="uk-child-width-1-1 uk-grid-small" uk-grid >
+                        <div>
+                            <div class="uk-form-group">
+                                <label class="uk-form-label"> Titre de l'article </label>
+  
+                                <div class="uk-position-relative w-100">
+                                    <span class="uk-form-icon">
+                                        <i class="icon-feather-user"></i>
+                                    </span>
+                                    <input formControlName="postTitle" class="uk-input" type="text" placeholder="Titre">
+                                </div>
+  
+                            </div>
+                        </div>
+                        <div >
+                            <label for="category" >Catégories</label>
+                            <select name="category" formControlName="category" >
+                                <option *ngFor="let cat of categories" [value]="cat._id">{{cat.title}}</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="ressourceType" >Type de ressource</label>
+                            <select name="ressourceType"  formControlName="ressourceType" >
+                                <option  *ngFor="let ress of ressourceType" [value]="ress._id">{{ress.title}}</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="relation" >Relations</label>
+                            <select name="relation" formControlName="relation" >
+                                <option  *ngFor="let rel of relations" [value]="rel._id">{{rel.title}}</option>
+                            </select>
+                        </div>
+                        <div>
+                            <div class="mt-4 uk-flex-middle uk-grid-small" uk-grid>
+                                <div class="uk-width-auto@s">
+                                    <input type="submit" class="button primary" value="S'inscrire" (click)="onSubmit()">
+                                </div>
+                            </div>
+                        </div>
+  
+                    </form>
+  
+  

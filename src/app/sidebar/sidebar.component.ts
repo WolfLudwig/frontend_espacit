@@ -1,5 +1,8 @@
 import { TokenStorageService } from './../_services/token-storage.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Users } from '../models/user.model';
+import { UserService } from '../services/users.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,7 +17,8 @@ export class SidebarComponent implements OnInit {
   showModeratorBoard = false;
   username?: string;
 
-  constructor(private tokenStorageService: TokenStorageService) { }
+  constructor(private tokenStorageService: TokenStorageService,private userService : UserService,
+    private route : Router) { }
   public menu = [
     { icone: 'home', nom: 'Fil d\'actualité', lien: '/actu' },
     { icone: 'article', nom: 'Mon fil', lien: '/actu' },
@@ -43,6 +47,13 @@ export class SidebarComponent implements OnInit {
   logout(): void {
     this.tokenStorageService.signOut();
     window.location.reload();
+  }
+
+  searchFriends()
+  {
+    this.route.navigateByUrl('/friends');
+    this.userService.getAllUsers();
+    
   }
 
 }

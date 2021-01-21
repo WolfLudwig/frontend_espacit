@@ -10,6 +10,11 @@ import { GameComponent } from './game/game.component';
 import { RessourceComponent } from './ressource/ressource.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { SignInComponent } from './signIn/signIn.component';
+import {FriendsComponent} from './friends/friends.component';
+import { MyFriendsComponent } from './myFriends/myFriends.component';
 
 const routes: Routes = [
   { path: 'incription', component: RessourceComponent, outlet: 'connection' },
@@ -21,7 +26,14 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'userList', component: UserListComponent },
   { path: 'createUser', component: CreateUSerComponent },
-  { path: '**', component: RessourceComponent }
+  { path: 'home', component: HomeComponent },
+  { path: 'sideBar', component: SidebarComponent },
+  { path: 'friends', component: FriendsComponent },
+  { path: 'myFriends/:id', component: MyFriendsComponent },
+  { path: '**', component: SignInComponent },
+  {path: 'register', component: RegisterComponent }
+
+
 ];
 
 @NgModule({
