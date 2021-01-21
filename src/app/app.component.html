@@ -1,12 +1,13 @@
+<app-toolbar (openChat)="openChat = !openChat"></app-toolbar>
 <mat-sidenav-container>
-  <mat-sidenav fxHide.lt-md mode="side" fixedInViewport="fixed" fixedTopGap="20" opened>
+  <mat-sidenav fxHide.lt-md mode="side" fixedInViewport="fixed" fixedTopGap="20" opened>    
     <app-sidebar></app-sidebar>
   </mat-sidenav>
    <mat-sidenav opened mode="side" fixedInViewport="fixed" [opened]="openChat" position="end"> -->
      <app-chat (openChat)="openChat = !openChat"></app-chat>
   </mat-sidenav>
   <mat-sidenav-content>
-    <app-toolbar (openChat)="openChat = !openChat"></app-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
+  
 </mat-sidenav-container>
