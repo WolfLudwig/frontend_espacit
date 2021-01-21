@@ -1,75 +1,88 @@
 <div class="post">
-  <div class="post-heading">
-      <div class="post-avature">
-          <img src="assets/images/avatars/avatar-6.jpg" alt="">
-      </div>
-      <div class="post-title">
-          <h4> Butcher </h4>
-          <p> 17 <span> h</span> <i class="uil-users-alt"></i> </p>
-      </div>
-      <div class="post-btn-action">
-          <span class="icon-more uil-ellipsis-h"></span>
-          <div class="mt-0 p-2" uk-dropdown="pos: top-right;mode:hover ">
-              <ul class="uk-nav uk-dropdown-nav">
-                  <li><a href="#"> <i class="uil-share-alt mr-1"></i> Partager</a> </li>
-                  <li><a href="#"> <i class="uil-edit-alt mr-1"></i> Modifier le message </a></li>
-                  <li><a href="#"> <i class="uil-comment-slash mr-1"></i> Désactiver les commentaires
-                      </a></li>
-                  <li><a href="#"> <i class="uil-favorite mr-1"></i> Ajouter des favoris </a>
-                  </li>
-                  <li><a href="#" class="text-danger"> <i class="uil-trash-alt mr-1"></i>
-                          Supprimer </a></li>
-              </ul>
-          </div>
-      </div>
-  </div>
-  <div class="post-description">
-      <div class="fullsizeimg">
-          <img src="assets/images/post/img-1.jpg" alt="">
-      </div>
-
-      <div class="post-state-details">
-          <div>
-              <img src="assets/images/icons/reactions_like.png" alt="">
-              <img src="assets/images/icons/reactions_love.png" alt="">
-              <p> 13 </p>
-          </div>
-          <p> 24 commentaires</p>
-      </div>
-  </div>
-  <div class="post-state">
-      <div class="post-state-btns"> <i class="uil-thumbs-up"></i> 126<span> Aimé(e) </span>
-      </div>
-      <div class="post-state-btns"> <i class="uil-heart"></i> 18 <span> commentaires</span>
-      </div>
-      <div class="post-state-btns"> <i class="uil-share-alt"></i> 193 <span> Partagé
-          </span>
-      </div>
-      <div class="post-state-btns"> <i class="uil-bookmark"></i> 13 <span> Enregistré(e) </span>
-      </div>
-  </div>
-
-  <!-- post comments -->
-  <div class="post-comments">
-      <a href="#" class="view-more-comment"> Voir 8 autres commentaires</a>
-      <div class="post-comments-single">
-          <div class="post-comment-avatar">
-              <img src="assets/images/avatars/avatar-5.jpg" alt="">
-          </div>
-          <div class="post-comment-text">
-              <div class="post-comment-text-inner">
-                  <h6> Le français</h6>
-                  <p> Bla bla bla</p>
-              </div>
-              <div class="uk-text-small">
-                  <a href="#" class="text-danger mr-1"> <i class="uil-heart"></i> J'aime
-                  </a>
-
-                  <span> 1 jour</span>
-              </div>
-          </div>
-          <a href="#" class="post-comment-opt"></a>
-      </div>
-
-  </div>
+    <div *ngFor="let ress of ressources" >
+        <div class="post-heading">
+            <div class="post-avature">
+                <img src="assets/images/avatars/avatar-6.jpg" alt="">
+            </div>
+            <div class="post-title">
+                <h4> {{ress.posterPseudo}} </h4>
+                <p> {{ress.createdAt}} <span> h</span> <i class="uil-users-alt"></i> </p>
+                <p>{{ ress.message}}</p>
+            </div>
+            <div class="post-btn-action">
+                <span class="icon-more uil-ellipsis-h"></span>
+                <div class="mt-0 p-2" uk-dropdown="pos: top-right;mode:hover ">
+                    <ul class="uk-nav uk-dropdown-nav">
+                        <li><a href="#"> <i class="uil-share-alt mr-1"></i> Partager</a> </li>
+                        <li><a href="#"> <i class="uil-edit-alt mr-1"></i> Modifier le message </a></li>
+                        <li><a href="#"> <i class="uil-comment-slash mr-1"></i> Désactiver les commentaires
+                            </a></li>
+                        <li><a href="#"> <i class="uil-favorite mr-1"></i> Ajouter des favoris </a>
+                        </li>
+                        <li><a href="#" class="text-danger"> <i class="uil-trash-alt mr-1"></i>
+                                Supprimer </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="post-description">
+            <div class="fullsizeimg">
+                <img src="assets/images/post/img-1.jpg" alt="">
+            </div>
+    
+            <div class="post-state-details">
+                <div>
+                    <img src="assets/images/icons/reactions_like.png" alt="">
+                    <img src="assets/images/icons/reactions_love.png" alt="">
+                    <p> 13 </p>
+                </div>
+                <p> {{ress.comments.length }} commentaire(s)</p>
+            </div>
+        </div>
+        <div class="post-state">
+            <div (click)="like(ress._id)" class="post-state-btns"> <i class="uil-thumbs-up"></i> {{ress.likers.length}}<span > Aimé(e) </span>
+            </div>
+            <div class="post-state-btns"> <i class="uil-heart"></i> {{ress.comments.length}} <span> commentaires</span>
+            </div>
+            <div class="post-state-btns"> <i class="uil-share-alt"></i> 193 <span> Partagé
+                </span>
+            </div>
+            <div class="post-state-btns"> <i class="uil-bookmark"></i> 13 <span> Enregistré(e) </span>
+            </div>
+        </div>
+    
+        <!-- post comments -->
+        <div class="post-comments" *ngFor="let comm of ress.comments;let i= index;">
+            <div class="post-comments-single">
+                <div class="post-comment-avatar">
+                    <img src="assets/images/avatars/avatar-5.jpg" alt="">
+                </div>
+                <div class="post-comment-text">
+                    <div class="post-comment-text-inner">
+                        <h6> {{comm.commenterPseudo}}</h6>
+                        <p>{{i}}</p>
+                        <p> {{comm.text}}</p>
+                    </div>
+                    <div class="uk-text-small">
+                        <a href="#" class="text-danger mr-1"> <i class="uil-heart"></i> J'aime
+                        </a>
+    
+                        <span> {{comm.createdAt}}</span>
+                    </div>
+                </div>
+                <a href="#" class="post-comment-opt"></a>
+            </div>
+            <div class="post-new-media">
+                <form [formGroup] = " commentForm " *ngIf=" i== ress.comments.length -1">
+                    <div class="post-new-media-input" >
+                        <input formControlName="userComm" type="text" class="uk-input" placeholder="Répondre aux commentaires" >
+                            <a  (click)="addComment(ress._id, comm.commenterId, comm.commenterPseudo)">
+                                Envoyer
+                            </a>
+                    </div>
+                </form>
+            </div>
+    
+        </div>
+    </div>
 </div>

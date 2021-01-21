@@ -42,24 +42,43 @@ export class UserService {
   public usr$ = new Subject<Users[]>();
   public frd$ = new Subject<Users[]>();
 
-//   getUser() {
-//     this.http.get('http://localhost:3000/api/users').subscribe(
-//       (stuff: Users[]) => {
-//         if (stuff) {
-//           this.usr = stuff;
-//           alert("je suis dans getUser");
-//           this.emitUser();
-//         }
-//       },
-//       (error) => {
-//         console.log(error);
-//       }
-//     );
-//   }
+   getUser(id : String) {
+     this.http.get('http://localhost:3000/api/users'+ id).subscribe(
+       (stuff: Users[]) => {
+         if (stuff) {
+           this.usr = stuff;
+           console.log("je suis dans getUser");
+           console.log(this.usr);
+           this.emitUser();
+         }
+       },
+       (error) => {
+         console.log(error);
+       }
+     );
+   }
 
   emitUser() {
     this.usr$.next(this.usr);
   }
+
+  getUsers(id : String[]) {
+    this.http.get('http://localhost:3000/api/users/infos'+ id).subscribe(
+      (stuff: Users[]) => {
+        if (stuff) {
+          this.usr = stuff;
+          console.log("je suis dans getUsers");
+          console.log(this.usr);
+          this.emitUser();
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+
 
 //   getUserById(id: string) {
 //     return new Promise((resolve, reject) => {
@@ -153,6 +172,17 @@ export class UserService {
     this.frd$.next(this.myFriends);
   }
 
-
-
+  isLog()
+  {
+    return new Promise<boolean>((resolve, reject) => {
+      this.http.get('http://localhost:3000/api/users/isLog').subscribe(
+        () => {
+          resolve(true); 
+        },
+        () => {
+          reject(false);
+        }
+      );
+    });
+  }
 }

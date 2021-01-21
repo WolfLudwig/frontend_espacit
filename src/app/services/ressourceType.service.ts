@@ -1,35 +1,34 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Relation } from '../models/relation.model';
+import { RessourceType } from '../models/ressourceType.model';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RelationService {
+export class RessourceTypeService {
 constructor(private http: HttpClient) {}
 
-  private rel : Relation[] = 
+  private typeRess : RessourceType[] = 
   [
     {
         _id : "1234",
         title : "salut",
         description :"une desc"
 
-    }
+    },
   ];
 
   
-  public rel$ = new Subject<Relation[]>();
+  public rsType$ = new Subject<RessourceType[]>();
 
-   getRelationById(id: string) {
-     return new Promise<Relation>((resolve, reject) => {
-       this.http.get('http://localhost:3000/api/relation/' + id).subscribe(
-         (relation : Relation[]) => {
-          if (relation) {
-            this.rel = relation;
-            this.emitRelation();
-          } 
+
+
+   getRessourceTypeById(id: string) {
+     return new Promise((resolve, reject) => {
+       this.http.get('http://localhost:3000/api/ressourceType/' + id).subscribe(
+         (response) => {
+           resolve(response);
          },
          (error) => {
            reject(error);
@@ -38,32 +37,15 @@ constructor(private http: HttpClient) {}
      });
    }
 
-   emitRelation() {
-    this.rel$.next(this.rel);
-    
-  }
-
-
-   getRelationByTitle(title: string) {
-    return new Promise((resolve, reject) => {
-      this.http.get('http://localhost:3000/api/relation/' + title).subscribe(
-        (response) => {
-          resolve(response);
-        },
-        (error) => {
-          reject(error);
-        }
-      );
-    });
-  }
-   getAllRelations()
+   getAllRessourceTypes()
   {
     return new Promise((resolve, reject) => {
-      this.http.get('http://localhost:3000/api/relation').subscribe(
-        (rela : Relation[]) => {
-          if (rela) {
-            this.rel = rela;
-            this.emitRelations();
+      this.http.get('http://localhost:3000/api/ressourceType').subscribe(
+        (ress : RessourceType[]) => {
+          if (ress) {
+            this.typeRess = ress;
+            console.log(this.typeRess);
+            this.emitRessourceType();
           } 
         },
         (error) => {
@@ -74,8 +56,8 @@ constructor(private http: HttpClient) {}
     });
 
   }
-  emitRelations() {
-    this.rel$.next(this.rel);
+  emitRessourceType() {
+    this.rsType$.next(this.typeRess);
   }
 
 

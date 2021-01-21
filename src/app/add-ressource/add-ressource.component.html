@@ -15,7 +15,6 @@
                     <div class="uk-card-default px-5 py-8">
   
                     <form [formGroup] = " ressourceForm " class="uk-child-width-1-1 uk-grid-small" uk-grid >
-  
                         <div>
                             <div class="uk-form-group">
                                 <label class="uk-form-label"> Titre de l'article </label>
@@ -32,15 +31,19 @@
                         <div >
                             <label for="category" >Catégories</label>
                             <select name="category" formControlName="category" >
-                                <option value="" >Choisissez une catégorie</option>
-                                <option value="" *ngFor="let cat of categories" (change)="salut">{{cat.title}}</option>
+                                <option *ngFor="let cat of categories" [value]="cat._id">{{cat.title}}</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="ressourceType" >Type de ressource</label>
+                            <select name="ressourceType"  formControlName="ressourceType" >
+                                <option  *ngFor="let ress of ressourceType" [value]="ress._id">{{ress.title}}</option>
                             </select>
                         </div>
                         <div>
                             <label for="relation" >Relations</label>
                             <select name="relation" formControlName="relation" >
-                                <option value="" >Choisissez une relation</option>
-                                <option  *ngFor="let rel of relations">{{rel.title}}</option>
+                                <option  *ngFor="let rel of relations" [value]="rel._id">{{rel.title}}</option>
                             </select>
                         </div>
                         <div>
