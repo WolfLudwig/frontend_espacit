@@ -1,19 +1,22 @@
-import { Injectable } from '@angular/core';
-import { Observable, Subject, BehaviorSubject, interval } from 'rxjs';
+import { EventEmitter, Injectable, Output } from '@angular/core';
+import { Observable, Subject, BehaviorSubject, interval, observable, from } from 'rxjs';
 import { Ressource } from '../models/ressource.model';
 import { HttpClient } from '@angular/common/http';
 import { Users } from '../models/user.model';
+import { DataSource } from '@angular/cdk/table';
+import { map, switchMap, tap  } from 'rxjs/operators';
 
-const source = interval(1000);
 
 @Injectable({
   providedIn: 'root'
 })
 export class RessourceService {
+
 constructor(private http: HttpClient) {}
 
   private ress: Ressource[] = [
     {
+        _id : "1234",
         posterId: "1234",
         posterPseudo : "LaCrème",
         message: "String",
@@ -31,11 +34,14 @@ constructor(private http: HttpClient) {}
     }
   ];
 
+
   private user: Users[] = [];
+
+
     
-  public post$ = new Subject<Ressource[]>();
-  public usr$ = new Subject<Users[]>();
-  currentPost$ = this.post$.asObservable();
+  post$ = new Subject<Ressource[]>();
+  comm$ = new Subject<Comment[]>();
+  
 
    getPostById(id: string) {
      return new Promise((resolve, reject) => {
@@ -51,55 +57,71 @@ constructor(private http: HttpClient) {}
    }
 
   createNewPost(ress: Ressource) {
-    return new Promise((resolve, reject) => {
-      this.http.post('http://localhost:3000/api/post', ress).subscribe(
-        (response) => {
-          resolve(response);
-          
+      return this.http.post('http://localhost:3000/api/post', ress).subscribe(
+        (ress : Ressource[]) => {
+          if (ress) {
+            console.log(ress)
+            this.emitPosts();
+            
+          } 
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  }
+
+  getAllPosts() {
+     return new Promise((resolve, reject) => {
+      this.http.get('http://localhost:3000/api/post').subscribe(
+        (ress: Ressource[]) => {
+          if (ress) {
+            this.ress = ress;
+            this.emitPosts();
+
+          }
         },
         (error) => {
           reject(error);
         }
       );
     });
+
   }
 
-   getAllPosts()
-   {
-     return new Promise((resolve, reject) => {
-       this.http.get('http://localhost:3000/api/post').subscribe(
-         (ress : Ressource[]) => {
-           if (ress) {
-             this.ress = ress;
-             this.emitPosts();
-             
-           } 
-         },
-         (error) => {
-           console.log(error);
-           reject(error);
-         }
-       );
-     });
+  getAllPostsObs() {
+    return new Promise((resolve, reject) => {
+     this.http.get('http://localhost:3000/api/post').subscribe(
+       (ress: Ressource[]) => {
+         if (ress) {
+           this.ress = ress;
+           //this.emitPosts();
 
-   }
+         }
+       },
+       (error) => {
+         reject(error);
+       }
+     );
+   });
+
+ }
+
+
+
 
      emitPosts() {
-      // this.currentPost$.subscribe(this.post$);
        this.post$.next(this.ress);
      }
 
-   emitUsersInfos() {
-    this.usr$.next(this.user);
-  }
 
-  addLike(ress : Ressource)
+  addLike(infos : any)
   {
-    console.log("dans le addLike avec id : " + ress);
     return new Promise((resolve, reject) => {
-      this.http.patch('http://localhost:3000/api/post/like', ress).subscribe(
-        (response) => {
-          resolve(response);  
+      this.http.patch('http://localhost:3000/api/post/like', infos).subscribe(
+        (response: Ressource) => {
+          this.getAllPosts();
+          resolve(response);
         },
         (error) => {
           reject(error);
@@ -109,14 +131,26 @@ constructor(private http: HttpClient) {}
 
   }
 
-  createNewComm(infosComm : String[]) {
-    console.log(infosComm);
+  createNewComm(infosComm: any) {
     return new Promise((resolve, reject) => {
       this.http.patch('http://localhost:3000/api/post/comment-post', infosComm).subscribe(
-        (response) => {
-          console.log(response + " reponse du back");
-          resolve(response);
+        (response : Ressource) => {
+          let count =0;
+
+          this.ress.forEach(element =>
+            {
+              
+              if(element._id == response._id)
+              {
+
+                element.comments =  response.comments;
+              }
+              count++;
+            })
+            this.emitPosts();
           
+          //this.getAllPosts();
+          resolve(response);
         },
         (error) => {
           reject(error);
@@ -124,6 +158,30 @@ constructor(private http: HttpClient) {}
       );
     });
   }
+
+  getAllPostsByLikes(id : String)
+  {
+    console.log(id + " id a traiter pour likes ");
+    return new Promise((resolve, reject) => {
+      this.http.get('http://localhost:3000/api/post/liked-post/'+ id).subscribe(
+        (response : Ressource[]) => {
+          if(response)
+          {
+            this.ress = response;
+            this.emitPosts();
+          }
+
+          
+          resolve(response);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+
+  }
+
 
 
 }

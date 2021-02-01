@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Users } from '../models/user.model';
+import { UserService } from '../services/users.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 
 @Component({
@@ -7,11 +9,23 @@ import { TokenStorageService } from '../_services/token-storage.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  currentUser: any;
+  currentUser: Users;
+  user : String;
+  @Output() openChat = new EventEmitter<boolean>();
+  
 
-  constructor(private token: TokenStorageService) { }
+  constructor(private token: TokenStorageService,
+    private userService : UserService) { }
+    
 
-  ngOnInit(): void {
+  ngOnInit(){
+
+    console.log("je suis dans l'init profil");
     this.currentUser = this.token.getUser();
+
+    //this.user = this.userService.getUser(this.currentUser._id);
+    console.log(this.user + " user récupéré");
+    
+    
   }
 }

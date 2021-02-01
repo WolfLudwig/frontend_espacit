@@ -13,7 +13,7 @@
             <mat-list>
                 <mat-list-item>
                     <mat-icon [ngStyle]="{'color': 'purple'}">campaign</mat-icon>
-                    &nbsp;Créer une ressource
+                    &nbsp;<a routerLink ="/addRessource">Créer une ressource</a>
                 </mat-list-item>
                 <mat-list-item>
                     <mat-icon [ngStyle]="{'color': 'green'}">event_available</mat-icon>
@@ -56,6 +56,10 @@
                 <mat-list-item>
                     <mat-icon [ngStyle]="{'color': 'black'}">settings</mat-icon>
                     <span>&nbsp; Mes paramètres</span>
+                </mat-list-item>
+                <mat-list-item  (click)="profil(roles)">
+                    <mat-icon [ngStyle]="{'color': 'orange'}">person_on</mat-icon>
+                    <span >&nbsp; Mon profil</span>
                 </mat-list-item>
                 <mat-list-item  (click)="logout()">
                     <mat-icon [ngStyle]="{'color': 'red'}">person_off</mat-icon>

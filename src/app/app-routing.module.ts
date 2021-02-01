@@ -15,23 +15,28 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { SignInComponent } from './signIn/signIn.component';
 import {FriendsComponent} from './friends/friends.component';
 import { MyFriendsComponent } from './myFriends/myFriends.component';
+import { AddRessourceComponent } from './add-ressource/add-ressource.component';
+import { BoardUserComponent } from './board-user/board-user.component';
 
 const routes: Routes = [
-  { path: 'incription', component: RessourceComponent, outlet: 'connection' },
+  //{ path: 'incription', component: RessourceComponent},
   { path: 'actu', component: RessourceComponent },
   { path: 'jeu', component: GameComponent },
   { path: 'groupe', component: GroupComponent },
-  { path: 'findFriends', component: ProfileComponent },
-  { path: 'login', component: LoginComponent},
+  { path: 'findFriends', component: FindFriendsComponent },
+  { path: 'profil/:id', component: BoardUserComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'userList', component: UserListComponent },
   { path: 'createUser', component: CreateUSerComponent },
   { path: 'home', component: HomeComponent },
   { path: 'sideBar', component: SidebarComponent },
-  { path: 'friends', component: FriendsComponent },
+  //{ path: 'friends', component: FriendsComponent },
   { path: 'myFriends/:id', component: MyFriendsComponent },
-  { path: '**', component: SignInComponent },
-  {path: 'register', component: RegisterComponent }
+  { path: 'signIn', component: SignInComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'addRessource', component: AddRessourceComponent},
+  { path: '**', component: LoginComponent},
+
 
 
 ];

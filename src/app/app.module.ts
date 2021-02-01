@@ -10,7 +10,7 @@ import { GameComponent } from './game/game.component';
 import { GroupComponent } from './group/group.component';
 import { RegisterComponent } from './register/register.component';
 import { ChatComponent } from './chat/chat.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule,  } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators, FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SignInComponent } from './signIn/signIn.component';
 import { HomeComponent } from './home/home.component';
@@ -35,7 +35,7 @@ import { FindFriendsComponent } from './find-friends/find-friends.component';
 import { CreateUSerComponent } from './create-user/create-user.component';
 import { UsertableComponent } from './components/usertable/usertable.component';
 
-import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import { AuthInterceptor, authInterceptorProviders } from './_helpers/auth.interceptor';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { BoardAdminComponent } from './board-admin/board-admin.component';
@@ -74,7 +74,6 @@ import { UserListComponent } from './user-list/user-list.component';
     BrowserAnimationsModule,
     FlexLayoutModule,
     FormsModule,
-    HttpClientModule,
     // Matérial
     MatListModule,
     MatDividerModule,
@@ -90,11 +89,12 @@ import { UserListComponent } from './user-list/user-list.component';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [authInterceptorProviders, HttpClientModule],
+  providers: [authInterceptorProviders, HttpClientModule, AuthInterceptor],
     
   exports: [
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   bootstrap: [AppComponent]
 })

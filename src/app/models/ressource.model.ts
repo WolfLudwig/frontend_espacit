@@ -4,6 +4,10 @@ import {Category } from "./category.model";
 import {RessourceType } from "./ressourceType.model";
 
 export class Ressource {
+  static fromJson(jsonItem: Ressource): any {
+    throw new Error('Method not implemented.');
+  }
+  _id : String;
   posterId: String;
   posterPseudo: String;
   message: String;

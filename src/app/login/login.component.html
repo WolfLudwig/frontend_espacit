@@ -1,58 +1,3 @@
-<!-- <div class="default">
-  <br/>
-  <br/>
-  <div class="uk-grid-collapse bg-gradient-primary" uk-grid>
-    <div class="uk-card-default px-5 py-8">
-      <div class="mb-4 uk-text-center">
-        <h2 class="mb-0"> Se connecter</h2>
-      </div>
-      <form class="uk-child-width-1-1 uk-grid-small" uk-grid *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate >
-        <div>
-          <div class="uk-form-group">
-            <label class="uk-form-label"> Nom d'utilisateur</label>
-            <div class="uk-position-relative w-100">
-              <span class="uk-form-icon">
-                <i class="icon-feather-user"></i>
-              </span>
-              <input type="text" class="uk-input" name="username" [(ngModel)]="form.username" required #username="ngModel"/>
-            </div>
-              <div class="uk-alert-danger" role="alert" *ngIf="username.errors && f.submitted">
-                Le nom d'utilisateur est requis !
-              </div>
-            </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="uk-input" name="password" [(ngModel)]="form.password" required minlength="6" #password="ngModel"/>
-          <div
-            class="uk-alert-danger"
-            role="alert"
-            *ngIf="password.errors && f.submitted"
-          >
-            <div *ngIf="password.errors.required">Password is required</div>
-            <div *ngIf="password.errors.minlength">
-              Password must be at least 6 characters
-            </div>
-          </div>
-        </div>
-        <br/>
-        <div class="form-group">
-          <button class="uk-button-primary">Login</button>
-        </div>
-        <div class="form-group">
-          <div class="uk-alert-danger" role="alert"*ngIf="f.submitted && isLoginFailed">
-            Login failed: {{ errorMessage }}
-          </div>
-        </div>
-      </div>
-      </form>
-
-      <div class="uk-alert-success" *ngIf="isLoggedIn">
-        Logged in as {{ roles }}.
-      </div>
-    </div>
-  </div>
-
-</div> -->
 <div class="default">
   <br/>
   <br/>
@@ -63,20 +8,20 @@
           <div class="mb-4 uk-text-center">
               <h2 class="mb-0"> Se connecter</h2>
           </div>
-          <form class="uk-child-width-1-1 uk-grid-small" uk-grid *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate >
+          <form class="uk-child-width-1-1 uk-grid-small" uk-grid  [formGroup] = " form " >
           <div>
-              <div class="uk-form-group">
-                  <label class="uk-form-label"> Nom d'utilisateur</label>
+              <div class="uk-form-group" >
+                  <label class="uk-form-label"> Email </label>
 
                   <div class="uk-position-relative w-100">
                       <span class="uk-form-icon">
                           <i class="icon-feather-user"></i>
                       </span>
-                      <input type="text" class="uk-input" name="username" [(ngModel)]="form.username" required #username="ngModel"/>
+                      <input type="email" class="uk-input" formControlName="email" />
                   </div>
-                  <div class="uk-alert-danger" role="alert" *ngIf="username.errors && f.submitted">
-                    Le nom d'utilisateur est requis !
-                  </div>
+                  <!-- <div class="uk-alert-danger" role="alert">
+                    L'email est requis !
+                  </div> -->
               </div>
           </div>
           <div class="uk-width-1-2@s">
@@ -87,7 +32,7 @@
                       <span class="uk-form-icon">
                           <i class="icon-feather-lock"></i>
                       </span>
-                      <input type="password" class="uk-input" name="password" [(ngModel)]="form.password" required minlength="6" #password="ngModel"/>
+                      <input type="password" class="uk-input" formControlName="password"/>
                   </div>
               </div>
           </div>
@@ -98,18 +43,15 @@
                       <p> Vous n'avez pas de compte ? <a routerLink="/register">S'inscrire</a></p>
                   </div>
                   <div class="form-group">
-                    <button class="uk-button-primary">Login</button>
+                    <button class="uk-button-primary" (click) = "onSubmit()">Login</button>
                   </div>
                   <div class="form-group">
-                    <div class="uk-alert-danger" role="alert"*ngIf="f.submitted && isLoginFailed">
+                    <div class="uk-alert-danger" role="alert"*ngIf="submitted && isLoginFailed">
                       Échec de la connexion: {{ errorMessage }}
                     </div>
                   </div>
               </div>
           </div>
-
       </form>
-      <div class="uk-alert-success" *ngIf="isLoggedIn">
-        connecté en tant que {{ roles }}.
-      </div>
     </div>
+<router-outlet></router-outlet>

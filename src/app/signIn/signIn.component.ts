@@ -3,6 +3,7 @@ import {Users} from '../models/user.model';
 import { FormGroup, FormBuilder, Validators, FormControl, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { UserService} from '../services/users.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-signIn',
@@ -16,7 +17,8 @@ export class SignInComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private userService : UserService, 
-    private router: Router,) { }
+    private router: Router,
+    private authService : AuthService) { }
 
   ngOnInit() {
 
@@ -30,10 +32,10 @@ export class SignInComponent implements OnInit {
   onSubmit()
   {
     const usr = new Users();
-    usr.email = this.signInForm.get('email').value;
-    usr.password = this.signInForm.get('Mdp').value;
-    this.userService.signInUser(usr);
-    this.router.navigateByUrl('/home');
+    const email = this.signInForm.get('email').value;
+    const password = this.signInForm.get('Mdp').value;
+    this.authService.login(email, password);
+    //this.router.navigateByUrl('/home');
 
   }
 

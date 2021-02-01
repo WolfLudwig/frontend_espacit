@@ -45,15 +45,17 @@ constructor(private http: HttpClient) {}
 
   
 
-   getAllComments()
+   getAllCommentsById(id : String)
    {
      return new Promise((resolve, reject) => {
-       this.http.get('http://localhost:3000/api/post').subscribe(
+       this.http.get('http://localhost:3000/api/post/comments/' + id).subscribe(
          (com : Comment[]) => {
            if (com) {
+             console.log(com);
              this.comm = com;
+             this.emitComms();
            } 
-           this.emitComms();
+           
          },
          (error) => {
            console.log(error);
@@ -67,7 +69,6 @@ constructor(private http: HttpClient) {}
 
    emitComms() {
      this.com$.next(this.comm);
-     this.com$.complete();
    }
 
 

@@ -2,9 +2,14 @@
   <br/>
   <br/>
   <h2> Retrouver des amis</h2>
+  <nav class="responsive-tab style-1 mb-3">
+    <ul>
+        <li class="uk-active"><a (click) = "goMyFriends(usr)"> Voir tous mes amis </a></li>
+    </ul>
+</nav>
   <div class="section-small pt-2">
   <div class="uk-child-width-1-4@m uk-child-width-1-2@s uk-grid-small" uk-grid>
-    <div>
+    <div *ngFor="let friend of friends">
 
         <div class="sl_find_frns_user">
             <div class="sl_find_frns_user_cover">
@@ -16,11 +21,12 @@
                         <img src="assets/images/avatars/avatar-4.jpg" alt="">
                     </a>
                 </div>
-                <h4> <a href="timeline.html"> Pseudo User </a> </h4>
+                 <a (click) ="goProfil(friend._id)">
+                    <h4>  {{friend.pseudo}}  </h4> </a> 
             </div>
             <div class="sl_find_frns_user_btns">
                 <span>
-                    <button type="button" class="btn button small primary">
+                    <button type="button" class="btn button small primary" (click) = "addFriend(friend._id)">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>

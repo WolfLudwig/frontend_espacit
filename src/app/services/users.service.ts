@@ -25,6 +25,8 @@ export class UserService {
     },
   ];
 
+  private user : Users;
+
   private myFriends : Users[] = [
     {
       _id: '324sdfmoih3',
@@ -41,15 +43,15 @@ export class UserService {
   ];
   public usr$ = new Subject<Users[]>();
   public frd$ = new Subject<Users[]>();
+  public oneUser$ = new Subject<Users>();
 
-   getUser(id : String) {
-     this.http.get('http://localhost:3000/api/users'+ id).subscribe(
-       (stuff: Users[]) => {
+   getUser(usr : String) : any {
+     this.http.get('http://localhost:3000/api/users/infos/'+ usr).subscribe(
+       (stuff: Users) => {
          if (stuff) {
-           this.usr = stuff;
-           console.log("je suis dans getUser");
-           console.log(this.usr);
-           this.emitUser();
+           console.log(stuff);
+           this.user = stuff
+           this.emitOneUser();
          }
        },
        (error) => {
@@ -58,8 +60,16 @@ export class UserService {
      );
    }
 
+   
+
+
   emitUser() {
     this.usr$.next(this.usr);
+  }
+
+  emitOneUser()
+  {
+    this.oneUser$.next(this.user)
   }
 
   getUsers(id : String[]) {
@@ -77,21 +87,6 @@ export class UserService {
       }
     );
   }
-
-
-
-//   getUserById(id: string) {
-//     return new Promise((resolve, reject) => {
-//       this.http.get('http://localhost:3000/api/users/' + id).subscribe(
-//         (response) => {
-//           resolve(response);
-//         },
-//         (error) => {
-//           reject(error);
-//         }
-//       );
-//     });
-//   }
 
   createNewUser(usr: Users) {
     return new Promise((resolve, reject) => {
@@ -143,12 +138,33 @@ export class UserService {
 
   }
 
+  getAllUsersDistinct(myId : String)
+  {
+    console.log(myId + "id Envoyé avant le back");
+    return new Promise((resolve, reject) => {
+      this.http.get('http://localhost:3000/api/users/disctinct/' + myId).subscribe(
+        (friends : Users[]) => {
+          if (friends) {
+            this.usr = friends;
+            console.log(friends);
+            this.emitFriends();
+          } 
+        },
+        (error) => {
+          console.log(error);
+          reject(error);
+        }
+      );
+    });
+
+  }
+
 
   emitFriends() {
     this.usr$.next(this.usr);
   }
 
-  getAllFriends(id : string)
+  getAllFriends(id : String)
   {
     console.log(id + " identifiant récupéré ");
     return new Promise((resolve, reject) => {
@@ -184,5 +200,39 @@ export class UserService {
         }
       );
     });
+  }
+
+  addFriend(idFriend : String, myId : String)
+  {
+    return new Promise((resolve, reject) => {
+      this.http.patch('http://localhost:3000/api/users/friend', {idFriend , myId}).subscribe(
+        (response) => {
+          console.log(response);
+          resolve(response); 
+          this.emitMyFriends();
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+
+  }
+
+  deleteFriend(idFriend : String, myId : String)
+  {
+    return new Promise((resolve, reject) => {
+      this.http.patch('http://localhost:3000/api/users/unFriend', {idFriend , myId}).subscribe(
+        (response) => {
+          this.getAllFriends(myId);
+          console.log(response);
+          resolve(response); 
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+
   }
 }

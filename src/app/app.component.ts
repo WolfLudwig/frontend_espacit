@@ -1,4 +1,6 @@
 import { Component, OnInit} from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AuthService } from './_services/auth.service';
 import { TokenStorageService } from './_services/token-storage.service';
 
 
@@ -20,21 +22,39 @@ export class AppComponent implements OnInit {
   // pseudo?: string;
   title = 'app';
   public openChat = false;
+  public authSub : Subscription;
+  public currentUser : String;
+  private usr : String;
 
-  constructor() { }
-  // private tokenStorageService: TokenStorageService
+
+  constructor(private tokenStorage: TokenStorageService,
+    private authService : AuthService
+    ) { }
   ngOnInit(): void {
-    // this.isLoggedIn = !!this.tokenStorageService.getToken();
 
-    // if (this.isLoggedIn) {
-    //   const user = this.tokenStorageService.getUser();
-    //   this.roles = user.roles;
+  //   this.authSub = new Subscription();
 
-    //   this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-    //   this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+  //    if (this.tokenStorage.getToken()) {
+  //      this.currentUser = this.tokenStorage.getUser();
+       
+  //     }
 
-    //   this.pseudo = user.pseudo;
-    // }
+  //   this.authSub = this.authService.token$.subscribe(
+  //     (tok : String) =>
+  //     {
+  //       console.log("jai mon token de subscription ! ")
+  //       this.usr = tok;
+  //       console.log(this.usr);
+  //     }  
+  //   );
+  //   this.authService.decodeToken(this.currentUser);
+
+  // }
+
+  // public getUser()
+  // {
+  //   return this.usr;
+  // }
   }
 
   // logout(): void {
