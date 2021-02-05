@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class  UserService {
 
   constructor(private http: HttpClient) {}
 
@@ -45,20 +45,48 @@ export class UserService {
   public frd$ = new Subject<Users[]>();
   public oneUser$ = new Subject<Users>();
 
-   getUser(usr : String) : any {
-     this.http.get('http://localhost:3000/api/users/infos/'+ usr).subscribe(
-       (stuff: Users) => {
-         if (stuff) {
-           console.log(stuff);
-           this.user = stuff
-           this.emitOneUser();
-         }
-       },
-       (error) => {
-         console.log(error);
-       }
-     );
+   getUser(_id : String) {
+     console.log(_id + " id a traiter pour getUser");
+     return new Promise<any>((resolve, reject) =>
+     {
+      this.http.get('http://localhost:3000/api/users/infos/'+ _id).subscribe(
+        (response) => 
+        {
+          console.log(response);
+          resolve(response);
+            
+        },
+        (error) =>
+        {
+          console.log(error);
+          reject(error);
+        }
+        
+      );
+       
+     }) 
    }
+
+   getCurrentUser() {
+    return new Promise<any>((resolve, reject) =>
+    {
+     this.http.get('http://localhost:3000/api/users/infos').subscribe(
+       (response) => 
+       {
+         console.log(response);
+         resolve(response);
+           
+       },
+       (error) =>
+       {
+         console.log(error);
+         reject(error);
+       }
+       
+     );
+      
+    }) 
+  }
 
    
 
@@ -164,11 +192,10 @@ export class UserService {
     this.usr$.next(this.usr);
   }
 
-  getAllFriends(id : String)
+  getAllFriends()
   {
-    console.log(id + " identifiant récupéré ");
     return new Promise((resolve, reject) => {
-      this.http.get('http://localhost:3000/api/users/myFriends/'+ id).subscribe(
+      this.http.get('http://localhost:3000/api/users/myFriends').subscribe(
         (friends : Users[]) => {
           if (friends) {
             this.myFriends = friends;
@@ -202,10 +229,11 @@ export class UserService {
     });
   }
 
-  addFriend(idFriend : String, myId : String)
+  addFriend(idFriend : String)
   {
+    console.log( "j'entre avec :" + idFriend );
     return new Promise((resolve, reject) => {
-      this.http.patch('http://localhost:3000/api/users/friend', {idFriend , myId}).subscribe(
+      this.http.patch('http://localhost:3000/api/users/friend/', {idFriend}).subscribe(
         (response) => {
           console.log(response);
           resolve(response); 
@@ -219,12 +247,12 @@ export class UserService {
 
   }
 
-  deleteFriend(idFriend : String, myId : String)
+  deleteFriend(idFriend : String)
   {
     return new Promise((resolve, reject) => {
-      this.http.patch('http://localhost:3000/api/users/unFriend', {idFriend , myId}).subscribe(
+      this.http.patch('http://localhost:3000/api/users/unFriend/', {idFriend}).subscribe(
         (response) => {
-          this.getAllFriends(myId);
+          this.getAllFriends();
           console.log(response);
           resolve(response); 
         },

@@ -1,7 +1,9 @@
+import { Token } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Users } from '../models/user.model';
 import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 
@@ -13,8 +15,6 @@ import { TokenStorageService } from '../_services/token-storage.service';
 })
 export class LoginComponent implements OnInit {
 
-
-
   form : FormGroup; 
 
   isLoggedIn = false;
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
   public currentUser : String;
   public authSub : Subscription;
-  public usr : String;
+  public usr : Users;
 
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService, 
     private router : Router,
@@ -34,20 +34,20 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.authSub = new Subscription();
 
-     if (this.tokenStorage.getToken()) {
-       this.currentUser = this.tokenStorage.getUser();
-      }
+    //  if (this.tokenStorage.getToken()) {
+    //    this.currentUser = this.tokenStorage.getUser();
+    //    this.isLoggedIn = true
+    //   }
 
-    this.authSub = this.authService.token$.subscribe(
-      (tok : String) =>
-      {
-        console.log("jai mon token de subscription ! ")
-        this.usr = tok;
-        console.log(this.usr);
+    // this.authSub = this.authService.token$.subscribe(
+    //   (tok : String) =>
+    //   {
+    //     console.log("jai mon token de subscription ! ")
+    //     this.usr = tok;
+    //     console.log(this.usr + " token de login");
         
-      }  
-    );
-    this.authService.decodeToken(this.currentUser);
+    //   }  
+    // );
     
     this.form = this.formBuilder.group({
       email : [null, Validators.required],
@@ -56,36 +56,61 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
+    
     const email = this.form.get('email').value;
     const pass = this.form.get('password').value;
     console.log(email, pass + " onSubmit");
 
-    this.authService.login(email, pass).subscribe(
-      (data) => {
-        console.log (data + " data sortie login");
+    // this.authService.user$.subscribe(
+    //   data =>
+    //   {
+    //     if(data)
+    //     {
+    //       console.log(data)
+    //       this.user = data;
+    //       console.log(data + " data souscription login");
 
+    //       this.tokenStorage.saveToken(data.idToken);
+    //     const user ={pseudo : data.pseudo, email : data.email}
+    //     this.tokenStorage.saveUser(user);
+  
+    //     this.isLoginFailed = false;
+    //     this.isLoggedIn = true;
+    //     this.submitted = true;
+  
+    //     this.router.navigateByUrl('/actu');
+    //     }
+
+    //   }
+    // )
+
+
+    this.authService.login(email, pass).then(
+      (data : any)  => {
+        console.log(data)
+  
         this.tokenStorage.saveToken(data.idToken);
-        this.tokenStorage.saveUser(data.idToken);
-        console.log(data.idToken + " idToken de methode login");
-
+        const user = data.pseudo;
+        this.tokenStorage.saveUser(user);
+  
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.submitted = true;
-        this.roles = this.tokenStorage.getUser();
-
-        console.log(this.roles + " roles");
-
-        console.log("avant d'aller vers home");
+  
         this.router.navigateByUrl('/actu');
-
+  
       },
       err => {
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
       }
     );
-  }
 
+    this.authService.login(email, pass);
+  }
+  
+
+ 
   reloadPage(): void {
     window.location.reload();
   }

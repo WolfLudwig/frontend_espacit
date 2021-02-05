@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Users } from '../models/user.model';
 import { UserService } from '../services/users.service';
 import { TokenStorageService } from '../_services/token-storage.service';
@@ -11,7 +11,6 @@ import { TokenStorageService } from '../_services/token-storage.service';
 export class ProfileComponent implements OnInit {
   currentUser: Users;
   user : String;
-  @Output() openChat = new EventEmitter<boolean>();
   
 
   constructor(private token: TokenStorageService,

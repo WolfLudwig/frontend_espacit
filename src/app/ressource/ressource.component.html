@@ -2,6 +2,9 @@
 <div class="default">
 <br/>
 <br/>
+<div *ngIf="error">
+    <H3>{{errorMessage}}</H3>
+</div>
         <div class="post">
             <div  *ngFor="let ress of ressources" class="sl_group_list">
                 <div class="post-heading">
@@ -44,8 +47,10 @@
                     </div>
                 </div>
                 <div class="post-state" >
-                    <div class="post-state-btns"> <i class="uil-thumbs-up" 
-                        (click)="like(ress._id)" ></i> {{ress.likers.length}}<span > Aimé(e) </span>
+                    <div class="post-state-btns"> 
+
+                    <i class="uil-thumbs-up" 
+                            (click)="like(ress._id)" ></i> {{ress.likers.length}}<span > Aimé(e) </span>
                     <div *ngIf="ress.comments?.length > 0"> 
                         <i class="uil-heart" >{{ress.comments.length}} <span> Favori(s)</span></i>
                     </div> 
@@ -64,9 +69,31 @@
                         </div> -->
                         <div class="post-comment-text">
                             <div class="post-comment-text-inner" >
-                                <div class="sl_group_list">
-                                    <h6> {{comm.commenterPseudo}}</h6>
-                                    <p> {{comm.text}}</p>
+                                <div class="uk-slider-container">                            
+                                    <span class="icon-more uil-ellipsis-h" position :top-right></span>
+                                    <div  uk-dropdown="pos: right-center uk-animation-scale-up uk-inline">
+                                        <form [formGroup] = "answerForm">
+                                            <ul class="uk-nav uk-dropdown-nav " >
+                                                    <li class="uk-nav-header">Répondre à <b>{{comm.commenterPseudo}}</b></li>
+                                                    <li class="uk-nav-divider"></li>
+                                                    <li>
+                                                        <input formControlName="answer" type="text"  class="uk-input uk-active" >
+                                                    </li>
+                                                    <li><button class="uil-comment mr-1" (click) = "askComment(comm.commenterId, comm.commenterPseudo, ress._id)"> </button></li>
+                                            </ul>
+                                        </form>
+                                    </div>
+                                    <div class ="uk-flex">
+                                        <div style="text-align: left; margin:auto; padding : auto;">
+                                            <h6> {{comm.commenterPseudo}}</h6>
+                                            <p> {{comm.text}}</p>
+                                        </div>
+
+                                        <div style="text-align: right; margin:auto; padding : auto;">
+                                            <h6>{{comm.answerPseudo}}</h6>
+                                            <p>{{comm.answertext}}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <!-- <div class="uk-text-small">

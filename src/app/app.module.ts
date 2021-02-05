@@ -46,6 +46,7 @@ import { UserListComponent } from './user-list/user-list.component';
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
     SidebarComponent,
     RessourceComponent,
     GameComponent,
@@ -56,7 +57,6 @@ import { UserListComponent } from './user-list/user-list.component';
     FindFriendsComponent,
     CreateUSerComponent,
     UsertableComponent,
-    LoginComponent,
     ProfileComponent,
     BoardAdminComponent,
     BoardModeratorComponent,

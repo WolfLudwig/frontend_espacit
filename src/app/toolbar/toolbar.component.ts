@@ -18,7 +18,7 @@ export class ToolbarComponent implements OnInit {
   showModeratorBoard = false;
   username?: string;
   public authSub : Subscription;
-  public usr : any
+  public user : String
 
   @Output() openChat = new EventEmitter<boolean>();
 
@@ -30,31 +30,20 @@ export class ToolbarComponent implements OnInit {
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
-    if (this.tokenStorageService.getUser()) {
-      let user = this.tokenStorageService.getUser();
-      this.roles = this.authService.decodeToken(user);
 
-      
-
-      // this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      // this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
-
-      this.username = user.username;
-    }
-
-    this.authSub = this.authService.token$.subscribe(
-      (tok : String) =>
+    this.tokenStorageService.usrToken$.subscribe(
+      (data : any) =>
       {
-        console.log("jai mon token de subscription ! ")
-        this.roles = tok;
-        console.log(this.roles);
-      }  
-    );
+        console.log("Dans subscription a usrToken suite au login : toolbar");
+        this.user = data;
+        this.isLoggedIn = true;
+      }
+    )
   }
 
   profil(id : String)
   {
-    this.route.navigateByUrl('/profil/' + id);
+    this.route.navigateByUrl('/profil');
   }
 
   logout(): void {

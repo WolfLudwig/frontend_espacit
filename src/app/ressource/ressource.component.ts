@@ -9,6 +9,7 @@ import { Users } from '../models/user.model';
 import { UserService } from '../services/users.service';
 import { AuthService } from '../_services/auth.service';
 import { AuthInterceptor } from '../_helpers/auth.interceptor';
+import { ToolbarComponent } from '../toolbar/toolbar.component';
 
 @Component({
   selector: 'app-ressource',
@@ -23,12 +24,16 @@ export class RessourceComponent implements OnInit {
 
   public ressourcesSub : Subscription;
   commentForm : FormGroup;
-  user: string;
-  public monObservable : Observable<any>;
+  answerForm : FormGroup;
+  user: Users;
+
+
 
   public authSub : Subscription;
-  public currentUser : String;
-  public usr : String;
+  public currentUser : Users;
+  public error = false;
+  public errorMessage : String;
+  public tokenSub : Subscription;
 
   constructor(private ressourceService : RessourceService,
   
@@ -43,30 +48,75 @@ export class RessourceComponent implements OnInit {
     ) { }
 
     ngOnInit(){
-       if (this.tokenStorage.getToken()) {
-         this.currentUser = this.tokenStorage.getUser();
-         console.log(" token récupé après getUser : " + this.currentUser);
-         this.isLogged = true;
-         console.log( " J'ai mon token !! ");
-       }
+      this.currentUser = this.tokenStorage.getUser();
+      console.log(this.currentUser)
+      
 
-       this.authSub = new Subscription();
+      // this.route.params.subscribe(
+      //   (params: Params) => {
+
+      //     this.user = new Users();
+      //     this.user = {_id : params._id,
+      //                  pseudo : params.pseudo,
+      //                  email : params.email,
+      //                  password :params.password};
+
+      //                 }
+      //   );
+
+      this.authSub = new Subscription();
+      // this.tokenSub = new Subscription();
+
+      // this.tokenSub = this.tokenStorage.usrToken$.subscribe(
+      //   (tok) =>
+      //   {
+      //     this.usr = tok;
+      //     console.log(this.usr + " token suite sub tokenStorage");
+      //   }
+      // );
+
+//--------------------A CONSERVER POUR LES TOKENS---------------------------------------
+      // this.authSub = this.authService.token$.subscribe(
+      //   (tok : String) =>
+      //   {
+      //     this.currentUser = tok;
+      //     console.log(this.currentUser + " user observable authService ressource");
+      //   }  
+      // );
+
+      //  if (this.tokenStorage.getToken()) {
+      //    this.currentUser = this.tokenStorage.getUser();
+
+      //     console.log(" token récupé après getUser : " + this.currentUser);
+      //     this.isLogged = true;
+      //  }
+      //  else
+      //  {
+      //   this.error = true;
+      //   this.errorMessage ="Veuillez vous connexter pour profiter de l'intégralité des fonctionnalités";  
+      //  }
+//---------------------------------------------------------------------------------------
 
 
-    this.authSub = this.authService.token$.subscribe(
-      (tok : String) =>
-      {
-        console.log("jai mon token de subscription ! ")
-        this.currentUser = tok;
-        console.log(this.currentUser);
-      }  
-    );
+      this.userService.getCurrentUser().then(
+        (resp : Users) =>
+        {
+          this.user = resp;
+          console.log(this.user);
+        }
+      );
+      
+
 
       this.ressourcesSub = new Subscription();
 
        this.commentForm = this.formBuilder.group({
          userComm: [null],
        });
+       this.answerForm = this.formBuilder.group({
+         answer : [null]
+       });
+
 
          this.ressourcesSub = this.ressourceService.post$.subscribe(
            (ress : Ressource[]) =>
@@ -82,13 +132,8 @@ export class RessourceComponent implements OnInit {
 
     like(event)
     {  
-      console.log(this.currentUser + " je dois décoder ça ! ");
-      const idUsr = this.authService.decodeToken(this.currentUser);
-      console.log(idUsr);
-      console.log(this.currentUser);
-      const infos = {id : event, idUsr : idUsr};
 
-
+      const infos = {id : event, _id : this.user._id};
 
       this.ressourcesSub = this.ressourceService.post$.subscribe(
         (ress) =>
@@ -104,14 +149,13 @@ export class RessourceComponent implements OnInit {
 
     addComment(idRess : string, commId : string, pseudo : string)
     {
-      const idUsr = this.tokenStorage.getUser()
+
+      
+      console.log(this.user + " comment ");
       
       const infos = {idress : idRess, 
-                    posterId : idUsr,
-                    posterName :  pseudo, 
                     message : this.commentForm.get('userComm').value
                   };
-        let count = 0;
 
         this.ressourcesSub = this.ressourceService.post$.subscribe(
           (ress) =>
@@ -135,6 +179,19 @@ export class RessourceComponent implements OnInit {
       //      this.commentForm.get('userComm').reset();
       //    }
       //  )
+      
+
+    }
+
+    askComment(posterId : String, pseudo : String,  idRess : String)
+    {
+      console.log(" dans ask répondre à : " + posterId);
+      console.log(" dans ask pour la ressource " + idRess);
+      console.log(this.answerForm.get('answer').value);
+      const resp = {idPost : idRess, pseudo : pseudo, idAnswer :posterId, message :  this.answerForm.get('answer').value }
+
+      this.ressourceService.askComm(resp)
+
       
 
     }

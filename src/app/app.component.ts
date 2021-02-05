@@ -1,5 +1,7 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Users } from './models/user.model';
 import { AuthService } from './_services/auth.service';
 import { TokenStorageService } from './_services/token-storage.service';
 
@@ -24,13 +26,38 @@ export class AppComponent implements OnInit {
   public openChat = false;
   public authSub : Subscription;
   public currentUser : String;
-  private usr : String;
+  private usr : Users;
+  public isLoggedIn = false;
 
 
   constructor(private tokenStorage: TokenStorageService,
-    private authService : AuthService
+    private authService : AuthService,
+    private route : Router
     ) { }
   ngOnInit(): void {
+
+    this.authSub = new Subscription();
+
+    if (this.tokenStorage.getToken()) {
+      this.currentUser = this.tokenStorage.getToken();
+      const usr = this.tokenStorage.getUser();
+      console.log(usr + " user session appcomponent");
+      console.log(this.currentUser + " token app component");
+      this.isLoggedIn = true;
+     }
+     else
+     {
+       console.log(" je vais à la connexion");
+       this.route.navigateByUrl('/');
+     }
+
+   this.authSub = this.authService.user$.subscribe(
+     (tok : any) =>
+     {
+       this.usr = tok;
+       
+     }  
+   );
 
   //   this.authSub = new Subscription();
 

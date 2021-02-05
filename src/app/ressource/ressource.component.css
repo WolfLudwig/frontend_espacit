@@ -73,4 +73,16 @@
     .sl_avatar-groups .avatars { -webkit-transition: none;transition: none}
   }
 
+  .default {
+    position: relative;
+    z-index: 5;
+    display: block;
+    overflow: visible;
+    border-radius: 30px;
+    min-height: 100vh;
+    background-color: #f1f5f8;
+    padding: 0 22px 2.5rem;
+    top :30px;
+  }
+
 

@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Users } from '../models/user.model';
 import { UserService } from '../services/users.service';
+import { Subscription, Observable } from 'rxjs';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,9 +18,13 @@ export class SidebarComponent implements OnInit {
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
+  public authSub : Subscription;
+
+  public user : String;
 
   constructor(private tokenStorageService: TokenStorageService,private userService : UserService,
-    private route : Router) { }
+    private route : Router,
+    private authService : AuthService) { }
   public menu = [
     { icone: 'home', nom: 'Fil d\'actualité', lien: '/actu' },
     { icone: 'article', nom: 'Mon fil', lien: '/actu' },
@@ -32,17 +38,42 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
 
+
+    
+
+    // this.authService.checkUser(this.tokenStorageService.getUser()).subscribe(
+    //   (resp : Users) =>
+    //   {
+    //     this.user = resp;
+    //     console.log(resp + " response sidebar user récup");
+    //   }
+    // )
+    this.tokenStorageService.usrToken$.subscribe(
+      (data : any) =>
+      {
+        console.log("Dans subscription a usrToken suite au login");
+        this.user = data;
+        this.isLoggedIn = true;
+      }
+    )
+
+
     this.isLoggedIn = !!this.tokenStorageService.getToken();
+    console.log(this.isLoggedIn + " vérification si user is logged");
 
-    if (this.isLoggedIn) {
-      const user = this.tokenStorageService.getUser();
-      this.roles = user.roles;
+     this.authSub = this.authService.token$.subscribe(
+       (data : any) => {
 
-      // this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      // this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+         this.user = data;
+         console.log(this.user + " data Side bar");
+  
+         this.isLoggedIn = true;
+      
+  
+       }
+     );
 
-      this.username = user.username;
-    }
+
   }
   logout(): void {
     this.tokenStorageService.signOut();
@@ -51,7 +82,7 @@ export class SidebarComponent implements OnInit {
 
   searchFriends()
   {
-    this.route.navigateByUrl('/friends');
+    this.route.navigateByUrl('/findFriends/' + this.user);
     this.userService.getAllUsers();
     
   }

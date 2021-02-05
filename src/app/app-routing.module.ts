@@ -19,23 +19,24 @@ import { AddRessourceComponent } from './add-ressource/add-ressource.component';
 import { BoardUserComponent } from './board-user/board-user.component';
 
 const routes: Routes = [
-  //{ path: 'incription', component: RessourceComponent},
+
   { path: 'actu', component: RessourceComponent },
   { path: 'jeu', component: GameComponent },
-  { path: 'groupe', component: GroupComponent },
+  { path: 'groupe', component: GroupComponent }, 
   { path: 'findFriends', component: FindFriendsComponent },
+  { path: 'profil', component: BoardUserComponent },
   { path: 'profil/:id', component: BoardUserComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'userList', component: UserListComponent },
   { path: 'createUser', component: CreateUSerComponent },
   { path: 'home', component: HomeComponent },
   { path: 'sideBar', component: SidebarComponent },
-  //{ path: 'friends', component: FriendsComponent },
-  { path: 'myFriends/:id', component: MyFriendsComponent },
+  { path: 'myFriends', component: MyFriendsComponent },
   { path: 'signIn', component: SignInComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'addRessource', component: AddRessourceComponent},
   { path: '**', component: LoginComponent},
+    //{ path: 'incription', component: RessourceComponent},
 
 
 

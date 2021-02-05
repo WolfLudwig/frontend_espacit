@@ -12,4 +12,9 @@ export class GroupComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  createGroup()
+  {
+    console.log("dans createGroup");
+  }
+
 }

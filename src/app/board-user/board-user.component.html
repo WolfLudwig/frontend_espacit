@@ -37,8 +37,12 @@
                             <line x1="20" y1="8" x2="20" y2="14"></line>
                             <line x1="23" y1="11" x2="17" y2="11"></line>
                         </svg>
-                        <span *ngIf="user._id == paramId"> <a routerlink ="/actu"> Modifier </a>  </span>
-                        <span *ngIf="user._id != paramId" (click) = "deleteFriend(paramId)">  Supprimer  </span>
+                        <div *ngIf="!paramId">
+                            <button > <a routerlink ="/actu"> Modifier </a>  </button>
+                        </div>
+                        <div *ngIf="paramId">
+                            <button  ><a routerlink = "/profil(paramId)">  Supprimer  </a></button>
+                        </div>
                     </button>
                 </span>
             </div>

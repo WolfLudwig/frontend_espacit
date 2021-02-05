@@ -120,10 +120,21 @@ constructor(private http: HttpClient) {}
     return new Promise((resolve, reject) => {
       this.http.patch('http://localhost:3000/api/post/like', infos).subscribe(
         (response: Ressource) => {
-          this.getAllPosts();
+          console.log(response);
+          this.ress.forEach(element =>
+            {
+              
+              if(element._id == response._id)
+              {
+
+                element.likers =  response.likers;
+              }
+            })
+            this.emitPosts();
           resolve(response);
         },
         (error) => {
+          console.log(error);
           reject(error);
         }
       );
@@ -135,7 +146,6 @@ constructor(private http: HttpClient) {}
     return new Promise((resolve, reject) => {
       this.http.patch('http://localhost:3000/api/post/comment-post', infosComm).subscribe(
         (response : Ressource) => {
-          let count =0;
 
           this.ress.forEach(element =>
             {
@@ -145,7 +155,33 @@ constructor(private http: HttpClient) {}
 
                 element.comments =  response.comments;
               }
-              count++;
+            })
+            this.emitPosts();
+          
+          //this.getAllPosts();
+          resolve(response);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  }
+
+  askComm(infosComm: any) {
+    return new Promise((resolve, reject) => {
+      this.http.patch('http://localhost:3000/api/post/answer-post', infosComm).subscribe(
+        (response : Ressource) => {
+          console.log(response);
+          this.ress.forEach(element =>
+            {
+              
+              
+              if(element._id == response._id)
+              {
+
+                element.comments =  response.comments;
+              }
             })
             this.emitPosts();
           

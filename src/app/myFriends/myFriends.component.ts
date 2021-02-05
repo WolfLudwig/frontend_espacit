@@ -17,8 +17,8 @@ export class MyFriendsComponent implements OnInit {
   private friendsSub: Subscription;
   public authSub : Subscription;
   public currentUser : String;
-  public usr : String;
-
+  public user : Users;
+  private  id : any;
   constructor(private userService : UserService,
     private router: Router,
     private route: ActivatedRoute,
@@ -28,42 +28,77 @@ export class MyFriendsComponent implements OnInit {
 
   ngOnInit(){
 
-    this.authSub = new Subscription();
-
-     if (this.tokenStorage.getToken()) {
-       this.currentUser = this.tokenStorage.getUser();
-       
+    this.userService.getAllFriends().then(
+      (usr: Users[]) => {
+        this.friends = usr;
       }
-
-    this.authSub = this.authService.token$.subscribe(
-      (tok : String) =>
-      {
-        console.log("jai mon token de subscription ! ")
-        this.usr = tok;
-        console.log(this.usr);
-      }  
-    );
-    this.authService.decodeToken(this.currentUser);
+    );       
 
     this.friendsSub = this.userService.frd$.subscribe(
       (users) => {
         this.friends = users;
       }
     );
-    this.route.params.subscribe(
-      (params: Params) => {
-        this.userService.getAllFriends(params.id).then(
-          (usr: Users[]) => {
-            this.friends = usr;
-          }
-        );
-      }
-    );
+   
+
+
+    // this.route.params.subscribe(
+    //   (params: Params) => {
+
+    //     this.user = new Users();
+    //     this.user = {_id : params._id,
+    //                  pseudo : params.pseudo,
+    //                  email : params.email,
+    //                  password :params.password};
+
+    //                 }
+    //   );
+
+//-----------------------------A CONSERVER POUR LES TOKENS----------------------------
+    //  this.authSub = new Subscription();
+
+    //   if (this.tokenStorage.getToken()) {
+    //     this.currentUser = this.tokenStorage.getUser();
+       
+    //    }
+
+    //    console.log(this.currentUser + " avant de décoder");
+      
+    //    this.authSub = this.authService.decodedToken$.subscribe
+    //      (
+    //      (resp : String) =>
+    //      {
+    //        if(resp)
+    //        {
+    //          console.log(resp);
+    //          this.id = resp;
+    //          console.log(this.id + " dans goMyFriends");
+    //          this.userService.getAllFriends(this.id).then(
+    //            (usr: Users[]) => {
+    //              this.friends = usr;
+    //            }
+    //          );       
+    //        }
+    //      }
+    //    );
+    //    this.authService.decodeToken(this.currentUser);
+
+
+    // this.authSub = this.authService.token$.subscribe(
+    //   (tok : String) =>
+    //   {
+    //     console.log("jai mon token de subscription ! ")
+    //     this.usr = tok;
+    //     console.log(this.usr);
+    //   }  
+    // );
+//--------------------------FIN CONSERVATION----------------------------------
+   
   }
 
   deleteFriend(idFriend : String)
   {
-    this.userService.deleteFriend(idFriend, this.usr);
+    this.userService.deleteFriend(idFriend);
   }
 
   goProfil(id : String)

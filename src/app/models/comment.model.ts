@@ -8,5 +8,9 @@ export class Comment {
     commenterId : String;
     commenterPseudo : String;
     text : String;
+    answerId : String;
+    answerPseudo : String;
+    answertext : String;
+
 
 }

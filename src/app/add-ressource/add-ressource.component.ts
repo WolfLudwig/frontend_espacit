@@ -5,10 +5,14 @@ import { Category } from '../models/category.model';
 import { Relation } from '../models/relation.model';
 import { Ressource } from '../models/ressource.model';
 import { RessourceType } from '../models/ressourceType.model';
+import { Users } from '../models/user.model';
 import { CategoryService } from '../services/categories.service';
 import { RelationService } from '../services/relations.service';
 import { RessourceService } from '../services/ressources.service';
 import { RessourceTypeService } from '../services/ressourceType.service';
+import { UserService } from '../services/users.service';
+import { AuthService } from '../_services/auth.service';
+import { TokenStorageService } from '../_services/token-storage.service';
 
 @Component({
   selector: 'app-add-ressource',
@@ -20,20 +24,34 @@ ressourceForm : FormGroup;
 public categories : Category[] = [];
 public relations : Relation[] =[];
 public ressourceType : RessourceType[] = [];
+public user : Users;
 
 
 private categoriesSub: Subscription;
 private relationsSub : Subscription;
 private ressourceTypeSub : Subscription;
+private authSub : Subscription;
 
 
   constructor(private formBuilder: FormBuilder,
     private ressourceService : RessourceService, 
     private categoriesService : CategoryService,
     private relationService : RelationService,
-    private ressourceTypeService : RessourceTypeService) { }
+    private ressourceTypeService : RessourceTypeService,
+    private tokenStorage: TokenStorageService,
+    private userService : UserService,
+    private authService : AuthService) { }
 
   ngOnInit(): void {
+
+
+    this.authSub = this.authService.decodedToken$.subscribe(
+      (result :any) =>
+      {
+        this.user = result
+        console.log(result + " token add ressource");
+      }
+    )
     this.categoriesSub = this.categoriesService.cat$.subscribe(
       (cats) => {
         this.categories = cats;
@@ -109,16 +127,19 @@ private ressourceTypeSub : Subscription;
         
       });
 
+      const token = this.tokenStorage.getToken();
 
+      this.user = this.authService.decodeToken(token);
+
+
+      
       //Le posterId sera à récupérer d'une méthode static pour le fair véhiculer dans toute l'application
-      ress.posterId = "5ff2f561f3831a54b42fce83";
-      ress.posterPseudo = "LaCrème";
+      ress.posterId = token;
+      ress.posterPseudo = "";
       ress.message = (this.ressourceForm.get('postTitle').value);
       ress.picture = "";
-      ress.likers = [{_id : "5ff2f801040ff21ae0d16d5f", pseudo :"Le Français", email :"lefrancais@gmail.com" }];
-      ress.comments = [{commenterId : "5ff2f801040ff21ae0d16d5f", 
-                        commenterPseudo :"Le Français", 
-                        text :"1er commentaire ! "}];
+      ress.likers = [null];
+      ress.comments = [null];
       console.log(ress);
       this.ressourceService.createNewPost(ress);
   }

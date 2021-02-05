@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Users } from '../models/user.model';
 import { UserService } from '../services/users.service';
+import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 
 @Component({
@@ -14,21 +15,28 @@ export class FriendsComponent implements OnInit {
 
   public friends : Users[] = [];
   private friendsSub: Subscription;
-  public currentUser : String;
+  public currentUser : Users;
   public isLogged = false;
+  public authSub : Subscription;
 
   constructor(private userService : UserService,
     private router: Router,
     private tokenStorage : TokenStorageService,
+    private authService : AuthService
     ) { }
 
   ngOnInit(): void {
 
-    if (this.tokenStorage.getToken()) {
-      this.currentUser = this.tokenStorage.getUser();
-      console.log(this.currentUser + " retour token");
-      this.isLogged = true;
-    }
+    this.authSub = this.authService.token$.subscribe(
+      (tok : any) =>
+      {
+        console.log("jai mon token de subscription ! ")
+        this.currentUser = tok;
+        console.log(this.currentUser + " token de app component");
+        
+      }  
+    );
+
 
    
 
