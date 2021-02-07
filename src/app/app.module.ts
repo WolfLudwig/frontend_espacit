@@ -1,7 +1,8 @@
+import { AccountService } from './_services';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -10,9 +11,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { RessourceComponent } from './ressource/ressource.component';
 import { GameComponent } from './game/game.component';
 import { GroupComponent } from './group/group.component';
-import { RegisterComponent } from './register/register.component';
 import { ChatComponent } from './chat/chat.component';
-
+import { JwtInterceptor, ErrorInterceptor, appInitializer } from './_helpers';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 // Import matérial
@@ -26,16 +26,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { FindFriendsComponent } from './find-friends/find-friends.component';
-import { CreateUSerComponent } from './create-user/create-user.component';
-import { UsertableComponent } from './components/usertable/usertable.component';
-
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
-import { LoginComponent } from './login/login.component';
-import { ProfileComponent } from './profile/profile.component';
-import { BoardAdminComponent } from './board-admin/board-admin.component';
-import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
-import { BoardUserComponent } from './board-user/board-user.component';
-import { UserListComponent } from './user-list/user-list.component';
+
 
 @NgModule({
   declarations: [
@@ -44,18 +36,9 @@ import { UserListComponent } from './user-list/user-list.component';
     RessourceComponent,
     GameComponent,
     GroupComponent,
-    RegisterComponent,
     ChatComponent,
     ToolbarComponent,
-    FindFriendsComponent,
-    CreateUSerComponent,
-    UsertableComponent,
-    LoginComponent,
-    ProfileComponent,
-    BoardAdminComponent,
-    BoardModeratorComponent,
-    BoardUserComponent,
-    UserListComponent,
+    FindFriendsComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +59,11 @@ import { UserListComponent } from './user-list/user-list.component';
     MatExpansionModule,
     MatTableModule
   ],
-  providers: [authInterceptorProviders],
+  providers: [
+    { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

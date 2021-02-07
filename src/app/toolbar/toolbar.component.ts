@@ -1,4 +1,6 @@
-import { TokenStorageService } from './../_services/token-storage.service';
+import { AccountService } from './../_services';
+import { Account } from './../models';
+import { Role } from './../models/role';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 
@@ -8,32 +10,19 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./toolbar.component.css']
 })
 export class ToolbarComponent implements OnInit {
-  private roles: string[] = [];
-  isLoggedIn = false;
-  showAdminBoard = false;
-  showModeratorBoard = false;
-  username?: string;
+  Role = Role;
+  account: Account;
 
   @Output() openChat = new EventEmitter<boolean>();
 
-  constructor(private tokenStorageService: TokenStorageService) { }
+  constructor(private accountService: AccountService) {
+    this.accountService.account.subscribe(x => this.account = x);
+   }
 
-  ngOnInit(): void {
-    this.isLoggedIn = !!this.tokenStorageService.getToken();
+  ngOnInit(): void {}
 
-    if (this.isLoggedIn) {
-      const user = this.tokenStorageService.getUser();
-      this.roles = user.roles;
-
-      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
-
-      this.username = user.username;
-    }
+  logout() {
+    this.accountService.logout();
   }
 
-  logout(): void {
-    this.tokenStorageService.signOut();
-    window.location.reload();
-  }
 }

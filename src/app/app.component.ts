@@ -7,37 +7,17 @@ import { TokenStorageService } from './_services/token-storage.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-// export class AppComponent {
-//   title = 'app';
-//   public openChat = false;
-// }
+
 export class AppComponent implements OnInit {
-  // private roles: string[] = [];
-  // isLoggedIn = false;
-  // showAdminBoard = false;
-  // showModeratorBoard = false;
-  // pseudo?: string;
+
   title = 'app';
   public openChat = false;
 
   constructor() { }
-  // private tokenStorageService: TokenStorageService
+  
   ngOnInit(): void {
-    // this.isLoggedIn = !!this.tokenStorageService.getToken();
-
-    // if (this.isLoggedIn) {
-    //   const user = this.tokenStorageService.getUser();
-    //   this.roles = user.roles;
-
-    //   this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-    //   this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
-
-    //   this.pseudo = user.pseudo;
-    // }
+   
   }
 
-  // logout(): void {
-  //   this.tokenStorageService.signOut();
-  //   window.location.reload();
-  // }
+
 }

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AccountService } from './../_services';
 
 @Component({
   selector: 'app-ressource',
@@ -6,8 +7,9 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./ressource.component.css']
 })
 export class RessourceComponent implements OnInit {
+  account = this.accountService.accountValue;
 
-  constructor() { }
+  constructor(private accountService: AccountService) { }
 
   ngOnInit(): void {
   }
