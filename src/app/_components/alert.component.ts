@@ -18,29 +18,29 @@ export class AlertComponent implements OnInit, OnDestroy {
     constructor(private router: Router, private alertService: AlertService) { }
 
     ngOnInit() {
-        // subscribe to new alert notifications
+        // s'abonner aux nouvelles notifications d'alerte
         this.alertSubscription = this.alertService.onAlert(this.id)
             .subscribe(alert => {
-                // clear alerts when an empty alert is received
+                // effacer les alertes lorsqu'une alerte vide est reçue
                 if (!alert.message) {
-                    // filter out alerts without 'keepAfterRouteChange' flag
+                    // filtrer les alertes sans l'indicateur 'keepAfterRouteChange'
                     this.alerts = this.alerts.filter(x => x.keepAfterRouteChange);
 
-                    // remove 'keepAfterRouteChange' flag on the rest
+                    // supprimer le drapeau 'keepAfterRouteChange' sur le reste
                     this.alerts.forEach(x => delete x.keepAfterRouteChange);
                     return;
                 }
 
-                // add alert to array
+                // ajouter une alerte au tableau
                 this.alerts.push(alert);
 
-                // auto close alert if required
+                // alerte de fermeture automatique si nécessaire
                 if (alert.autoClose) {
                     setTimeout(() => this.removeAlert(alert), 3000);
                 }
            });
 
-        // clear alerts on location change
+        // effacer les alertes en cas de changement d'emplacement
         this.routeSubscription = this.router.events.subscribe(event => {
             if (event instanceof NavigationStart) {
                 this.alertService.clear(this.id);
@@ -49,25 +49,25 @@ export class AlertComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        // unsubscribe to avoid memory leaks
+        // se désabonner pour éviter les fuites de mémoire
         this.alertSubscription.unsubscribe();
         this.routeSubscription.unsubscribe();
     }
 
     removeAlert(alert: Alert) {
-        // check if already removed to prevent error on auto close
+        // vérifier si déjà supprimé pour éviter une erreur lors de la fermeture automatique
         if (!this.alerts.includes(alert)) return;
 
         if (this.fade) {
-            // fade out alert
+            // alerte de fondu
             alert.fade = true;
 
-            // remove alert after faded out
+            // supprimer l'alerte après avoir disparu
             setTimeout(() => {
                 this.alerts = this.alerts.filter(x => x !== alert);
             }, 250);
         } else {
-            // remove alert
+            // supprimer l'alerte
             this.alerts = this.alerts.filter(x => x !== alert);
         }
     }

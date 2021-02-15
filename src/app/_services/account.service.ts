@@ -87,9 +87,9 @@ export class AccountService {
     update(id, params) {
         return this.http.put(`${baseUrl}/${id}`, params)
             .pipe(map((account: any) => {
-                // update the current account if it was updated
+                // mettre à jour le compte actuel s'il a été mis à jour
                 if (account.id === this.accountValue.id) {
-                    // publish updated account to subscribers
+                    // publier un compte mis à jour pour les abonnés
                     account = { ...this.accountValue, ...account };
                     this.accountSubject.next(account);
                 }
@@ -100,21 +100,21 @@ export class AccountService {
     delete(id: string) {
         return this.http.delete(`${baseUrl}/${id}`)
             .pipe(finalize(() => {
-                // auto logout if the logged in account was deleted
+                // déconnexion automatique si le compte connecté a été supprimé
                 if (id === this.accountValue.id)
                     this.logout();
             }));
     }
 
-    // helper methods
+    // méthodes d'assistance
 
     private refreshTokenTimeout;
 
     private startRefreshTokenTimer() {
-        // parse json object from base64 encoded jwt token
+        // analyser l'objet json à partir du jeton jwt encodé en base64
         const jwtToken = JSON.parse(atob(this.accountValue.jwtToken.split('.')[1]));
 
-        // set a timeout to refresh the token a minute before it expires
+        // définir un délai pour actualiser le jeton une minute avant son expiration
         const expires = new Date(jwtToken.exp * 1000);
         const timeout = expires.getTime() - Date.now() - (60 * 1000);
         this.refreshTokenTimeout = setTimeout(() => this.refreshToken().subscribe(), timeout);
