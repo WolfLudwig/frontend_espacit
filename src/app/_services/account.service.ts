@@ -31,8 +31,13 @@ export class AccountService {
         return this.http.post<any>(`${baseUrl}/authenticate`, { email, password }, { withCredentials: true })
             .pipe(map(account => {
                 this.accountSubject.next(account);
-                this.startRefreshTokenTimer();
-                return account;
+                if (account.status === false){
+                    return alert('Votre compte a été désactiver');
+                }
+                else {
+                    this.startRefreshTokenTimer();
+                    return account;
+                }
             }));
     }
 
@@ -75,9 +80,17 @@ export class AccountService {
     getAll() {
         return this.http.get<Account[]>(baseUrl);
     }
+    
+    getAllByAdmin() {
+        return this.http.get<Account[]>(`${baseUrl}/admin`);
+    }
 
     getById(id: string) {
         return this.http.get<Account>(`${baseUrl}/${id}`);
+    }
+
+    getOneUser(id: string) {
+        return this.http.get<Account>(`${baseUrl}/admin/${id}`);
     }
 
     create(params) {
@@ -86,6 +99,18 @@ export class AccountService {
 
     update(id, params) {
         return this.http.put(`${baseUrl}/${id}`, params)
+            .pipe(map((account: any) => {
+                // mettre à jour le compte actuel s'il a été mis à jour
+                if (account.id === this.accountValue.id) {
+                    // publier un compte mis à jour pour les abonnés
+                    account = { ...this.accountValue, ...account };
+                    this.accountSubject.next(account);
+                }
+                return account;
+            }));
+    }
+    edit(id, params) {
+        return this.http.put(`${baseUrl}/admin/${id}`, params)
             .pipe(map((account: any) => {
                 // mettre à jour le compte actuel s'il a été mis à jour
                 if (account.id === this.accountValue.id) {

@@ -32,7 +32,7 @@ export class AddEditComponent implements OnInit {
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
-            role: ['', Validators.required],
+            status: [Boolean, Validators.required],
             password: ['', [Validators.minLength(6), this.isAddMode ? Validators.required : Validators.nullValidator]],
             confirmPassword: ['']
         }, {
@@ -40,7 +40,7 @@ export class AddEditComponent implements OnInit {
         });
 
         if (!this.isAddMode) {
-            this.accountService.getById(this.id)
+            this.accountService.getOneUser(this.id)
                 .pipe(first())
                 .subscribe(x => this.form.patchValue(x));
         }
@@ -84,7 +84,7 @@ export class AddEditComponent implements OnInit {
     }
 
     private updateAccount() {
-        this.accountService.update(this.id, this.form.value)
+        this.accountService.edit(this.id, this.form.value)
             .pipe(first())
             .subscribe({
                 next: () => {
@@ -97,4 +97,6 @@ export class AddEditComponent implements OnInit {
                 }
             });
     }
+
+    
 }

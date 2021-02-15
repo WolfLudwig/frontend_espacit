@@ -11,7 +11,7 @@ export class ListComponent implements OnInit {
     constructor(private accountService: AccountService) {}
 
     ngOnInit() {
-        this.accountService.getAll()
+        this.accountService.getAllByAdmin()
             .pipe(first())
             .subscribe(accounts => this.accounts = accounts);
     }
