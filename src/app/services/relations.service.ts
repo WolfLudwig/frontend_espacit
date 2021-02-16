@@ -22,7 +22,7 @@ constructor(private http: HttpClient) {}
   
   public rel$ = new Subject<Relation[]>();
 
-   getRelationById(id: string) {
+   getRelationById(id: String) {
      return new Promise<Relation>((resolve, reject) => {
        this.http.get('http://localhost:3000/api/relation/' + id).subscribe(
          (relation : Relation[]) => {
@@ -63,6 +63,8 @@ constructor(private http: HttpClient) {}
         (rela : Relation[]) => {
           if (rela) {
             this.rel = rela;
+            console.log(rela);
+            resolve(rela);
             this.emitRelations();
           } 
         },

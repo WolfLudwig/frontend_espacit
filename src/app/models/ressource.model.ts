@@ -2,6 +2,7 @@ import { Users } from "./user.model";
 import {Relation} from "./relation.model";
 import {Category } from "./category.model";
 import {RessourceType } from "./ressourceType.model";
+import { Comment } from './comment.model';
 
 export class Ressource {
   static fromJson(jsonItem: Ressource): any {
@@ -16,13 +17,35 @@ export class Ressource {
   likers: [{_id : String,
             pseudo : String,
             email : String}];
-  comments: [ 
+    comments:  
+    [
+      {
+          commenterId : String,
+          commenterPseudo : String;
+          text : String;
+      }
+    ]
+    ;
+    answers : 
     {
-        commenterId : String,
-        commenterPseudo : String;
-        text : String;
-    }
-  ]
+      commId : String;
+      answId : String;
+      commenterIdent :String;
+      commPseudo : String;
+      answerId : String;
+      answerPseudo : String;
+      answertext : String;
+    };
+    thread : {
+              threadPostId : String;
+              threadAsnwId :String;
+              threadPseudo : String;
+              threadMyId : String;
+              threadMyPseudo : String;
+              threadText : String;
+      
+  };
+
   relation : [Relation];       
   category : Category;
   ressourceType : [RessourceType];

@@ -10,7 +10,14 @@ export class ChatComponent implements OnInit {
   @Output() openChat = new EventEmitter<boolean>();
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
+
+  }
+
+  createConv()
+  {
+    
   }
 
 }

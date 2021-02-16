@@ -51,7 +51,6 @@ export class SidebarComponent implements OnInit {
     this.tokenStorageService.usrToken$.subscribe(
       (data : any) =>
       {
-        console.log("Dans subscription a usrToken suite au login");
         this.user = data;
         this.isLoggedIn = true;
       }
@@ -59,13 +58,11 @@ export class SidebarComponent implements OnInit {
 
 
     this.isLoggedIn = !!this.tokenStorageService.getToken();
-    console.log(this.isLoggedIn + " vérification si user is logged");
 
      this.authSub = this.authService.token$.subscribe(
        (data : any) => {
 
          this.user = data;
-         console.log(this.user + " data Side bar");
   
          this.isLoggedIn = true;
       

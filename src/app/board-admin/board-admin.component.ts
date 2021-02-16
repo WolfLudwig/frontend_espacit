@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
+import { EventEmitter } from 'events';
+import { Ressource } from '../models/ressource.model';
+import {RessourceService} from '../services/ressources.service';
 
 @Component({
   selector: 'app-board-admin',
@@ -7,7 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoardAdminComponent implements OnInit {
 
-  constructor() { }
+  @Input() myPosts : Ressource[];
+  @Output() myPostsChange =  new EventEmitter();
+
+  constructor(private ressourceService : RessourceService) { }
 
   ngOnInit(): void {
   }

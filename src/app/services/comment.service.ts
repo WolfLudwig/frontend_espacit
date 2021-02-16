@@ -12,10 +12,10 @@ constructor(private http: HttpClient) {}
 
   private comm: Comment[] = [
     {
-
         commenterId : "5ff2f561f3831a54b42fce83",
         commenterPseudo : "laCrème", 
-        text :"c'est un commentaire ! ",  
+        text :'un commentaire ! ', 
+                
     }
   ];
 
@@ -28,11 +28,13 @@ constructor(private http: HttpClient) {}
 
 
 
-  createNewComm(infosComm : String[]) {
+  createNewComm(infosComm : any) {
     console.log(infosComm);
     return new Promise((resolve, reject) => {
-      this.http.patch('http://localhost:3000/api/post/comment-post', infosComm).subscribe(
-        (response) => {
+      this.http.patch('http://localhost:3000/api/post/comment-post/', infosComm).subscribe(
+        (response : Comment[]) => {
+          this.comm = response;
+          this.emitComms();
           resolve(response);
           
         },
@@ -48,12 +50,12 @@ constructor(private http: HttpClient) {}
    getAllCommentsById(id : String)
    {
      return new Promise((resolve, reject) => {
-       this.http.get('http://localhost:3000/api/post/comments/' + id).subscribe(
-         (com : Comment[]) => {
+       this.http.get('http://localhost:3000/api/comment/all/' + id).subscribe(
+         (com : Comment) => {
            if (com) {
+             
              console.log(com);
-             this.comm = com;
-             this.emitComms();
+             resolve(com);
            } 
            
          },
@@ -69,6 +71,29 @@ constructor(private http: HttpClient) {}
 
    emitComms() {
      this.com$.next(this.comm);
+   }
+
+   getAllComments()
+   {
+    return new Promise((resolve, reject) => {
+      this.http.get('http://localhost:3000/api/comment').subscribe(
+        (com : Comment[]) => {
+          if (com) {
+            console.log(com);
+            this.comm = com;
+            resolve(com);
+            this.emitComms();
+          } 
+          
+        },
+        (error) => {
+          console.log(error);
+          reject(error);
+        }
+      );
+    });
+
+
    }
 
 

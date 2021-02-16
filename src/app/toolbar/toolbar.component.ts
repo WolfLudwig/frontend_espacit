@@ -34,7 +34,6 @@ export class ToolbarComponent implements OnInit {
     this.tokenStorageService.usrToken$.subscribe(
       (data : any) =>
       {
-        console.log("Dans subscription a usrToken suite au login : toolbar");
         this.user = data;
         this.isLoggedIn = true;
       }

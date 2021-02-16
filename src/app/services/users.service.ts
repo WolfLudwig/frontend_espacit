@@ -16,12 +16,10 @@ export class  UserService {
       pseudo: 'Mon objet',
       email: 'A propos de mon objet',
       password: 4900,
-    },
-    {
-        _id: '324sdfmoih3',
-        pseudo: 'Mon objet 2',
-        email: 'A propos de mon objet 2',
-        password: 49000,
+      picture: "..\assets\images\avatars.jpg",
+      bio: "je me présente",
+      friend: ["String"],
+      likes:  ["String"] ,
     },
   ];
 
@@ -33,14 +31,13 @@ export class  UserService {
       pseudo: 'Mon objet',
       email: 'A propos de mon objet',
       password: 4900,
-    },
-    {
-        _id: '324sdfmoih3',
-        pseudo: 'Mon objet 2',
-        email: 'A propos de mon objet 2',
-        password: 49000,
+      picture: "..\assets\images\avatars.jpg",
+      bio: "je me présente",
+      friend: ["String"],
+      likes:  ["String"] ,
     },
   ];
+  
   public usr$ = new Subject<Users[]>();
   public frd$ = new Subject<Users[]>();
   public oneUser$ = new Subject<Users>();

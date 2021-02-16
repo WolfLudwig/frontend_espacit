@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
   // pseudo?: string;
   title = 'app';
   public openChat = false;
+  public createConv = false;
   public authSub : Subscription;
   public currentUser : String;
   private usr : Users;
@@ -41,8 +42,6 @@ export class AppComponent implements OnInit {
     if (this.tokenStorage.getToken()) {
       this.currentUser = this.tokenStorage.getToken();
       const usr = this.tokenStorage.getUser();
-      console.log(usr + " user session appcomponent");
-      console.log(this.currentUser + " token app component");
       this.isLoggedIn = true;
      }
      else

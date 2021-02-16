@@ -3,4 +3,9 @@ export class Users {
     pseudo: string;
     email: string;
     password: number;
+    picture: String;
+    bio:  String;
+    friend: [String];
+    likes:  [String];
+
   }

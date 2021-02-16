@@ -38,7 +38,7 @@
  -->
  <div class="chat">
     <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="20px">
-        <mat-icon>chat</mat-icon>
+        <mat-icon (click)="createConv()" >chat</mat-icon>
         <h2> Chats </h2>
         <mat-icon [ngStyle]="{'color': 'red', 'cursor': 'pointer'}" (click)="openChat.emit()">close</mat-icon>
     </div>

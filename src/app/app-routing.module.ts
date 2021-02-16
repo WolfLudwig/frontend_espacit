@@ -17,6 +17,7 @@ import {FriendsComponent} from './friends/friends.component';
 import { MyFriendsComponent } from './myFriends/myFriends.component';
 import { AddRessourceComponent } from './add-ressource/add-ressource.component';
 import { BoardUserComponent } from './board-user/board-user.component';
+import { CommentComponent } from './comment/comment.component';
 
 const routes: Routes = [
 
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'signIn', component: SignInComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'addRessource', component: AddRessourceComponent},
+  { path: 'comments', component: CommentComponent},
   { path: '**', component: LoginComponent},
     //{ path: 'incription', component: RessourceComponent},
 

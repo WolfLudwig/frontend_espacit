@@ -45,6 +45,7 @@ constructor(private http: HttpClient) {}
           if (ress) {
             this.typeRess = ress;
             console.log(this.typeRess);
+            resolve(ress);
             this.emitRessourceType();
           } 
         },

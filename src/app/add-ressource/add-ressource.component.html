@@ -20,7 +20,7 @@
             <div >
                 <label class="uk-form-label" for="category">  Catégories</label>
                 <div class="uk-position-relative w-100">
-                    <select name="category" formControlName="category" >
+                    <select name="category" formControlName="category" (change) ="getValueCat($event)">
                         <option *ngFor="let cat of categories" [value]="cat._id">{{cat.title}}</option>
                     </select>
                 </div>

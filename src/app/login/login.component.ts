@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.submitted = true;
     
     const email = this.form.get('email').value;
     const pass = this.form.get('password').value;
@@ -95,18 +96,18 @@ export class LoginComponent implements OnInit {
   
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.submitted = true;
   
         this.router.navigateByUrl('/actu');
   
       },
-      err => {
-        this.errorMessage = err.error.message;
+      (err) => {
+        console.log( "je ne suis aps co ");
+        this.submitted = false;
+        this.errorMessage = "Adresse mail ou mot de passe non valide"
         this.isLoginFailed = true;
       }
     );
 
-    this.authService.login(email, pass);
   }
   
 

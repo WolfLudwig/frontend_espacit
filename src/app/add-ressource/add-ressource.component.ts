@@ -26,6 +26,10 @@ public relations : Relation[] =[];
 public ressourceType : RessourceType[] = [];
 public user : Users;
 
+public categorie : String;
+public relation : String;
+public type : String;
+
 
 private categoriesSub: Subscription;
 private relationsSub : Subscription;
@@ -127,14 +131,9 @@ private authSub : Subscription;
         
       });
 
-      const token = this.tokenStorage.getToken();
-
-      this.user = this.authService.decodeToken(token);
-
 
       
       //Le posterId sera à récupérer d'une méthode static pour le fair véhiculer dans toute l'application
-      ress.posterId = token;
       ress.posterPseudo = "";
       ress.message = (this.ressourceForm.get('postTitle').value);
       ress.picture = "";
@@ -142,6 +141,22 @@ private authSub : Subscription;
       ress.comments = [null];
       console.log(ress);
       this.ressourceService.createNewPost(ress);
+  }
+
+  getValueCat(event)
+  {
+    console.log(event.target.value)
+    this.categorie = event.target.value
+  }
+
+  getValueRel(event)
+  {
+    this.relation= event.target.value
+  }
+
+  getValueType(event)
+  {
+    this.type = event.target.value
   }
 
 }

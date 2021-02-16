@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
@@ -42,6 +43,7 @@ import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
 import { BoardUserComponent } from './board-user/board-user.component';
 import { UserListComponent } from './user-list/user-list.component';
+import { CommentComponent } from './comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +69,7 @@ import { UserListComponent } from './user-list/user-list.component';
     FriendsComponent,
     MyFriendsComponent,
     AddRessourceComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,
@@ -88,6 +91,7 @@ import { UserListComponent } from './user-list/user-list.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatProgressSpinnerModule,
   ],
   providers: [authInterceptorProviders, HttpClientModule, AuthInterceptor],
     

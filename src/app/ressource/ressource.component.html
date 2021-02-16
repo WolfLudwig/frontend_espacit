@@ -1,126 +1,273 @@
 
 <div class="default">
-<br/>
-<br/>
-<div *ngIf="error">
-    <H3>{{errorMessage}}</H3>
-</div>
-        <div class="post">
-            <div  *ngFor="let ress of ressources" class="sl_group_list">
-                <div class="post-heading">
-                    <div class="post-avature" *ngIf="ress.picture?.length>0">
-                        <img src="assets/images/post/img-1.jpg" alt="">
-                    </div>
-                    <div class="post-title">
-                        <h4> {{ress.posterPseudo}} </h4>
-                        <p> {{ress.createdAt}} <span> h</span> <i class="uil-users-alt"></i> </p>
-                        <p>{{ ress.message}}</p>
-                    </div>
-                    <div class="post-btn-action">
-                        <span class="icon-more uil-ellipsis-h"></span>
-                        <div class="mt-0 p-2" uk-dropdown="pos: top-right;mode:hover ">
-                            <ul class="uk-nav uk-dropdown-nav">
-                                <li><a href="#"> <i class="uil-share-alt mr-1"></i> Partager</a> </li>
-                                <li><a href="#"> <i class="uil-edit-alt mr-1"></i> Modifier le message </a></li>
-                                <li><a href="#"> <i class="uil-comment-slash mr-1"></i> Désactiver les commentaires
-                                    </a></li>
-                                <li><a href="#"> <i class="uil-favorite mr-1"></i> Ajouter des favoris </a>
-                                </li>
-                                <li><a href="#" class="text-danger"> <i class="uil-trash-alt mr-1"></i>
-                                        Supprimer </a></li>
-                            </ul>
+    <br/>
+    <br/>
+    <div *ngIf="error">
+        <H3>{{errorMessage}}</H3>
+    </div>
+
+    <mat-toolbar fxLayout="row" fxLayoutAlign.gt-sm="space-around center" fxLayoutGap.gt-sm="15vw">
+        <div fxHide.gt-sm fxLayout="row" fxLayoutAlign="space-around center" fxFlex.lt-md="30">
+            <mat-icon fxHide.gt-sm>menu_open</mat-icon>
+            <a fxHide.gt-sm href="/"> <img src="assets/images/logo.png" class="logo-inverse" alt=""></a>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="space-around center" fxFlex="15">
+            <mat-icon >sort</mat-icon>
+            <div uk-dropdown="pos: bottom-center;mode:click ">
+                <mat-list fxLayout="column">
+                    <mat-header  [ngStyle]="{'color': 'purple'}"> Catégories </mat-header>
+                    <mat-list-item *ngFor = "let cat of categories" (change) = "checkCatFilters($event)">
+                        <input type="checkbox" [checked]="false" [value]="cat._id"> {{cat.title}}
+                    </mat-list-item>
+                    <mat-divider ></mat-divider>
+                    <mat-header  [ngStyle]="{'color': 'purple'}"> Relations </mat-header>
+                    <mat-list-item *ngFor = "let rel of relations" (change) = "checkRelFilters($event)">
+                        <input type="checkbox" [checked]="false" [value]="rel._id"> {{rel.title}}
+                    </mat-list-item>
+                    <mat-divider ></mat-divider>
+                    <mat-header  [ngStyle]="{'color': 'purple'}"> Types </mat-header>
+                    <mat-list-item *ngFor = "let type of ressourceTypes" (change) = "checkTypesFilters($event)">
+                        <input type="checkbox" [checked]="false" [value]="type._id"> {{type.title}}
+                    </mat-list-item>
+                </mat-list>
+                <button (click)="validFilters()" style="position: relative; ">Valider la séléction</button>
+            </div>
+        </div>
+    </mat-toolbar>
+            <!-- <mat-icon><b>sort</b> </mat-icon>&nbsp; <b>Filter votre contenu</b>
+        <div fxLayout="row" fxLayoutAlign="left" uk-dropdown="pos: bottom-right;mode:click ">
+            
+            <mat-icon  [ngStyle]="{'color': 'purple'}">category</mat-icon>&nbsp;Par catégories
+                <div>
+                    <mat-nav-list *ngFor="let cat of categories" >
+                        <mat-list-item fxLayout="column" fxLayoutAlign="left" (change)="checkCatFilters($event)">
+                           <input type="checkbox" [checked]="false" [value]="cat._id"> {{cat.title}}
+                        </mat-list-item>
+                    </mat-nav-list>
+                </div>
+                <mat-icon [ngStyle]="{'color': 'purple'}">person_outline</mat-icon>&nbsp;Par relations
+                <div uk-dropdown="pos: bottom-center;mode:click ">
+                    <mat-nav-list  *ngFor="let rel of relations ; let indexRel = index" >
+                        <mat-list-item fxLayout="column" fxLayoutAlign="left" (change)="checkRelFilters($event)">
+                            <input type="checkbox" [checked]="false" [value]="rel._id">{{rel.title}}
+                        </mat-list-item>
+                    </mat-nav-list>
+                </div>
+                <mat-icon [ngStyle]="{'color': 'purple'}">casino</mat-icon>&nbsp;Par type de relation
+                <div uk-dropdown="pos: bottom-center;mode:click ">
+                    <mat-nav-list  *ngFor="let types of ressourceTypes">
+                        <mat-list-item fxLayout="column" fxLayoutAlign="left" (change)="checkTypesFilters($event)">
+                            <input type="checkbox" [checked]="false" [value]="types._id"> {{types.title}}
+                        </mat-list-item>
+                    </mat-nav-list>
+                </div>
+
+        </div> -->
+        <mat-spinner *ngIf="isLoading" diameter="70" style="position: relative;" ></mat-spinner>
+            <div class="post">
+                <div  *ngFor="let ress of ressources; let i = index" class="sl_group_list">
+                    <div class="post-heading">
+                        <div class="post-avature" *ngIf="ress.picture?.length>0">
+                            <img src="assets/images/post/img-1.jpg" alt="">
+                        </div>
+                        <div class="post-title">
+                            <h4> {{ress.posterPseudo}} </h4>
+                            <p> {{ress.createdAt}} <span> h</span> <i class="uil-users-alt"></i> </p>
+                            <p>{{ ress.message}}</p>
+                            <div *ngFor="let cat of ress.category">
+                                <p>{{cat.title}}</p>
+                            </div>
+                            <div *ngFor=" let rel of ress.relation">
+                                <p>{{rel.title}}</p>
+                            </div>
+                            <div *ngFor=" let type of ress.ressourceType">
+                                <p>{{type.title}}</p>
+                            </div>
+                        </div>
+                        <div class="post-btn-action">
+                            <span class="icon-more uil-ellipsis-h"></span>
+                            <div class="mt-0 p-2" uk-dropdown="pos: top-right;mode:hover ">
+                                <ul class="uk-nav uk-dropdown-nav">
+                                    <li><a href="#"> <i class="uil-share-alt mr-1"></i> Partager</a> </li>
+                                    <li><a href="#"> <i class="uil-edit-alt mr-1"></i> Modifier le message </a></li>
+                                    <li><a href="#"> <i class="uil-comment-slash mr-1"></i> Désactiver les commentaires
+                                        </a></li>
+                                    <li><a href="#"> <i class="uil-favorite mr-1"></i> Ajouter des favoris </a>
+                                    </li>
+                                    <li><a href="#" class="text-danger"> <i class="uil-trash-alt mr-1"></i>
+                                            Supprimer </a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="post-description">
-                    <div class="fullsizeimg">
-                        <img src="assets/images/post/img-1.jpg" alt="">
-                    </div>
-            
-                    <div class="post-state-details" >
-                        <div>
-                            <img src="assets/images/icons/reactions_like.png" alt="">
-                            <img src="assets/images/icons/reactions_love.png" alt="">
-                            <p> 13 </p>
+                    <div class="post-description">
+                        <div class="fullsizeimg">
+                            <img src="assets/images/post/img-1.jpg" alt="">
                         </div>
-                        <p *ngIf="ress.comments?.length > 0"> {{ress.comments.length }} commentaire(s)</p>
+                
+                        <div class="post-state-details" >
+                            <div>
+                                <img src="assets/images/icons/reactions_like.png" alt="">
+                                <img src="assets/images/icons/reactions_love.png" alt="">
+                                <p> 13 </p>
+                            </div>
+                            <p *ngIf="ress.comments?.length > 0"> {{ress.comments.length }} commentaire(s)</p>
+                        </div>
                     </div>
-                </div>
-                <div class="post-state" >
-                    <div class="post-state-btns"> 
-
-                    <i class="uil-thumbs-up" 
-                            (click)="like(ress._id)" ></i> {{ress.likers.length}}<span > Aimé(e) </span>
-                    <div *ngIf="ress.comments?.length > 0"> 
-                        <i class="uil-heart" >{{ress.comments.length}} <span> Favori(s)</span></i>
-                    </div> 
-                    
-                    <i class="uil-share-alt"></i> 193 <span> Partagé
-                        </span>
-                    <i class="uil-bookmark"></i> 13 <span> Enregistré(e) </span>
-                    </div>
-                </div>
-            
-                <!-- post comments -->
-                <div class="post-comments" *ngFor="let comm of ress.comments;let i= index;">
-                    <div class="post-comments-single">
-                        <!-- <div class="post-comment-avatar">
-                            <img src="assets/images/avatars/avatar-5.jpg" alt="">
-                        </div> -->
-                        <div class="post-comment-text">
-                            <div class="post-comment-text-inner" >
-                                <div class="uk-slider-container">                            
-                                    <span class="icon-more uil-ellipsis-h" position :top-right></span>
-                                    <div  uk-dropdown="pos: right-center uk-animation-scale-up uk-inline">
-                                        <form [formGroup] = "answerForm">
-                                            <ul class="uk-nav uk-dropdown-nav " >
-                                                    <li class="uk-nav-header">Répondre à <b>{{comm.commenterPseudo}}</b></li>
-                                                    <li class="uk-nav-divider"></li>
-                                                    <li>
-                                                        <input formControlName="answer" type="text"  class="uk-input uk-active" >
-                                                    </li>
-                                                    <li><button class="uil-comment mr-1" (click) = "askComment(comm.commenterId, comm.commenterPseudo, ress._id)"> </button></li>
-                                            </ul>
-                                        </form>
-                                    </div>
-                                    <div class ="uk-flex">
-                                        <div style="text-align: left; margin:auto; padding : auto;">
-                                            <h6> {{comm.commenterPseudo}}</h6>
-                                            <p> {{comm.text}}</p>
-                                        </div>
-
-                                        <div style="text-align: right; margin:auto; padding : auto;">
-                                            <h6>{{comm.answerPseudo}}</h6>
-                                            <p>{{comm.answertext}}</p>
-                                        </div>
+                    <div class="post-state" >
+                        <div class="post-state-btns" > 
+                        <div *ngIf="liked">
+                            <div >                      
+                                <div *ngIf="liked[i] == 1" >
+                                    <i id="postLiked{z}" class ="uil-thumbs-up" style="color : blue"  
+                                        (click)="unLike(ress._id)" ></i> {{ress.likers.length}}<span > Aimé(e) </span>
+                                </div>
+                                <div>
+                                    <div *ngIf="liked[i] != 1">
+                                        <i id="postUnliked{z}" class="uil-thumbs-up"   style="color : grey" 
+                                            (click)="like(ress._id)" ></i> {{ress.likers.length}}<span > Aimé(e) </span>
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="uk-text-small">
-                                <a href="#" class="text-danger mr-1"> <i class="uil-heart"></i> J'aime
-                                </a>
-            
-                                <span> {{comm.createdAt}}</span>
-                            </div> -->
                         </div>
-                        <a href="#" class="post-comment-opt"></a>
+                        <div *ngIf="liked?.length == 0">
+                            <i class="uil-thumbs-up"
+                            (click)="like(ress._id)" ></i> {{ress.likers.length}}<span > Aimé(e) </span>
+                        </div>
+
+                        <div *ngIf="ress.comments?.length > 0"> 
+                            <i class="uil-heart" >{{ress.comments.length}} <span> Favori(s)</span></i>
+                        </div> 
+                        
+                        <i class="uil-share-alt"></i> 193 <span> Partagé
+                            </span>
+                        <i class="uil-bookmark"></i> 13 <span> Enregistré(e) </span>
+                        </div>
+                    </div>
+                
+                    <!-- post comments -->
+                    <div class="post-comments" *ngFor="let comm of ress.comments;let j= index;">
+                        <div class="post-comments-single" *ngIf="comm != null">
+                            <!-- <div class="post-comment-avatar">
+                                <img src="assets/images/avatars/avatar-5.jpg" alt="">
+                            </div> -->
+                            <div class="post-comment-text">
+                                <div class="post-comment-text-inner" >
+                                    <div class="uk-slider-container">                            
+                                        <div >
+                                            <div>
+                                                <span class="icon-more uil-ellipsis-h" ></span>
+                                                <div uk-dropdown="pos: right-center uk-animation-scale-up uk-inline">
+                                                    <form [formGroup] = "answerForm">
+                                                        <ul class="uk-nav uk-dropdown-nav " >
+                                                                <li class="uk-nav-header" >Répondre à <b>{{comm.commenterPseudo}}</b></li>
+                                                                <li class="uk-nav-divider"></li>
+                                                                <li>
+                                                                    <input formControlName="answer" type="text"  class="uk-input uk-active" >
+                                                                </li>
+                                                                <li><button class="uil-comment mr-1" (click) = "askComment(comm._id, comm.commenterId, comm.commenterPseudo, ress._id)"> </button></li>
+                                                        </ul>
+                                                    </form>
+                                                </div>
+                                                <div style="text-align: left; margin:auto; padding : auto;">
+                                                    <h6> {{comm.commenterPseudo}}</h6>
+                                                    <p> {{comm.text}}</p>
+                                                </div>
+                                            </div>
+                                            <div *ngFor="let answ of ress.answers; let k = index" >
+                                                <div *ngIf="ress.answers">
+                                                    <div  >
+                                                        <div *ngIf="answ.commenterIdent == comm._id" >
+                                                            <div style="text-align: center; margin:auto; padding : auto;">
+                                                                <span class="icon-more uil-ellipsis-h position : right-center" ></span>
+                                                                <div uk-dropdown="pos: right-center uk-animation-scale-up uk-inline">
+                                                                    <form [formGroup] = "answersForm">
+                                                                        <ul class="uk-nav uk-dropdown-nav " >
+                                                                                <li class="uk-nav-header" >Répondre à <b>{{answ.answerPseudo}}</b></li>
+                                                                                <li class="uk-nav-divider"></li>
+                                                                                <li>
+                                                                                    <input formControlName="answer" type="text"  class="uk-input uk-active" >
+                                                                                </li>
+                                                                                <li><button class="uil-comment mr-1" (click) = "askAnswer(answ._id, answ.answerId, answ.answerPseudo, ress._id)"> </button></li>
+                                                                        </ul>
+                                                                    </form>
+                                                                </div>
+    
+                                                                <div>
+                                                                    <div>
+                                                                        <h6>{{answ.answerPseudo}}</h6>
+                                                                        <p>{{answ.answertext}}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <div *ngIf="ress.thread">
+                                                                    <div>
+                                                                        <div style="text-align: right; margin:auto; padding : auto;">
+                                                                            <mat-accordion multi ="true" class = "uk-position-relative" uk-slider="finite: true" class = "chat"> 
+                                                                                <mat-expansion-panel >
+                                                                                  <mat-expansion-panel-header >
+                                                                                    <mat-panel-title  fxLayoutAlign="end">
+                                                                                      Voir le fil de discussion
+                                                                                    </mat-panel-title>
+                                                                                  </mat-expansion-panel-header>
+                                                                                  <mat-list *ngFor="let thread of ress.thread; let l = index">
+                                                                                        <div *ngIf="thread.threadAsnwId == answ._id">
+                                                                                                <div class=".sl_group_list_thread"> 
+                                                                                                    <mat-list-item fxLayoutAlign="end" ><b>{{thread.threadPseudo}}</b></mat-list-item>
+                                                                                                    <mat-list-item fxLayoutAlign="end">{{thread.threadText}}</mat-list-item>
+                                                                                                </div>
+                                                                                        </div>
+                                                                                        <div *ngIf=" l == ress.thread.length-1" class=".sl_group_list_thread">
+                                                                                            <form [formGroup] = "answersForm">
+                                                                                                <ul>
+                                                                                                    <input formControlName="answer" type="text" style="text-align: end;" 
+                                                                                                        class="uk-input uk-active" placeholder="Répondre à {{answ.answerPseudo}} ">
+                                                                                                        <button class="uil-comment mr-1" (click) = "askAnswer(answ._id, answ.answerId, answ.answerPseudo, ress._id)"> </button>
+                                                                                                    
+                                                                                                </ul>
+                                                                                            </form>
+
+                                                                                        </div>
+                                                                                   </mat-list>
+                                                                                </mat-expansion-panel>
+                                                                            </mat-accordion>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="uk-text-small">
+                                    <a href="#" class="text-danger mr-1"> <i class="uil-heart"></i> J'aime
+                                    </a>
+                
+                                    <span> {{comm.createdAt}}</span>
+                                </div> -->
+                            </div>
+                            <a href="#" class="post-comment-opt"></a>
+                        </div>
                     </div>
                     <div class="post-new-media">
                         <form [formGroup] = " commentForm ">
-                            <div class="post-new-media-input" *ngIf="ress.comments.length == 0 || i== ress.comments.length -1">
+                            <div class="post-new-media-input">
                                 <input formControlName="userComm" type="text" class="uk-input" placeholder="Répondre aux commentaires" >
-                                <button type="button" class="btn button small primary" (click)="addComment(ress._id, comm.commenterId, comm.commenterPseudo)" class="post-state-btns">
+                                <button type="button" class="btn button small primary" (click)="addComment(ress._id)" class="post-state-btns">
                                     <span> Envoyer</span>
                                 </button>
-
+    
                             </div>
                         </form>
                     </div>
-            
                 </div>
+    
+                
             </div>
-
-            
-        </div>
-
-</div>
+    
+    </div>
+    

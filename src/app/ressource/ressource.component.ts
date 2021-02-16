@@ -9,7 +9,18 @@ import { Users } from '../models/user.model';
 import { UserService } from '../services/users.service';
 import { AuthService } from '../_services/auth.service';
 import { AuthInterceptor } from '../_helpers/auth.interceptor';
-import { ToolbarComponent } from '../toolbar/toolbar.component';
+import {Comment } from '../models/comment.model';
+import { CommentService } from '../services/comment.service';
+import { Answer } from '../models/answer.model';
+import { Thread } from '../models/thread.model';
+import { CategoryService } from '../services/categories.service';
+import { Category } from '../models/category.model';
+import { RelationService } from '../services/relations.service';
+import { Relation } from '../models/relation.model';
+import { RessourceTypeService } from '../services/ressourceType.service';
+import { RessourceType } from '../models/ressourceType.model';
+
+
 
 @Component({
   selector: 'app-ressource',
@@ -17,23 +28,38 @@ import { ToolbarComponent } from '../toolbar/toolbar.component';
   styleUrls: ['./ressource.component.css']
 })
 export class RessourceComponent implements OnInit {
-
+  
+  @Input() errorMessage : String;
   public ressources : Ressource[] = [];
 
-  public isLogged = false;
+  public isLoading = false;
+
 
   public ressourcesSub : Subscription;
   commentForm : FormGroup;
   answerForm : FormGroup;
-  user: Users;
+  answersForm : FormGroup;
+  threadForm : FormGroup;
+  public user: Users;
+
+  public relFilters : String[] = [];
+  public catFilters : String[] = [];
+  public typeFilter : String[] = [];
 
 
 
-  public authSub : Subscription;
   public currentUser : Users;
   public error = false;
-  public errorMessage : String;
-  public tokenSub : Subscription;
+
+  public liked = [];
+
+
+
+  public categories : Category[] = [];
+  public relations : Relation[] = [];
+  public ressourceTypes : RessourceType[] = [];
+
+
 
   constructor(private ressourceService : RessourceService,
   
@@ -44,70 +70,24 @@ export class RessourceComponent implements OnInit {
     private tokenStorage: TokenStorageService,
     private userService: UserService,
     private authService : AuthService,
-    private authInterceptor : AuthInterceptor
-    ) { }
-
-    ngOnInit(){
-      this.currentUser = this.tokenStorage.getUser();
-      console.log(this.currentUser)
-      
-
-      // this.route.params.subscribe(
-      //   (params: Params) => {
-
-      //     this.user = new Users();
-      //     this.user = {_id : params._id,
-      //                  pseudo : params.pseudo,
-      //                  email : params.email,
-      //                  password :params.password};
-
-      //                 }
-      //   );
-
-      this.authSub = new Subscription();
-      // this.tokenSub = new Subscription();
-
-      // this.tokenSub = this.tokenStorage.usrToken$.subscribe(
-      //   (tok) =>
-      //   {
-      //     this.usr = tok;
-      //     console.log(this.usr + " token suite sub tokenStorage");
-      //   }
-      // );
-
-//--------------------A CONSERVER POUR LES TOKENS---------------------------------------
-      // this.authSub = this.authService.token$.subscribe(
-      //   (tok : String) =>
-      //   {
-      //     this.currentUser = tok;
-      //     console.log(this.currentUser + " user observable authService ressource");
-      //   }  
-      // );
-
-      //  if (this.tokenStorage.getToken()) {
-      //    this.currentUser = this.tokenStorage.getUser();
-
-      //     console.log(" token récupé après getUser : " + this.currentUser);
-      //     this.isLogged = true;
-      //  }
-      //  else
-      //  {
-      //   this.error = true;
-      //   this.errorMessage ="Veuillez vous connexter pour profiter de l'intégralité des fonctionnalités";  
-      //  }
-//---------------------------------------------------------------------------------------
-
-
+    private authInterceptor : AuthInterceptor,
+    private commentService : CommentService,
+    private categoriesService : CategoryService,
+    private relationService: RelationService,
+    private ressourceTypeService : RessourceTypeService
+    ) {
       this.userService.getCurrentUser().then(
         (resp : Users) =>
         {
           this.user = resp;
-          console.log(this.user);
+          console.log(this.user)
         }
       );
-      
+     }
 
-
+    ngOnInit()
+    {
+      this.isLoading = true;
       this.ressourcesSub = new Subscription();
 
        this.commentForm = this.formBuilder.group({
@@ -117,34 +97,94 @@ export class RessourceComponent implements OnInit {
          answer : [null]
        });
 
+       this.answersForm = this.formBuilder.group({
+        answer : [null]
+      });
+      this.threadForm = this.formBuilder.group({
+        answer : [null]
+      });
 
-         this.ressourcesSub = this.ressourceService.post$.subscribe(
-           (ress : Ressource[]) =>
-           {
-             this.ressources = ress;
-           }  
-         );
+      this.categoriesService.getAllCategories().then(
+        (cat : Category[]) =>
+        {
+          console.log(cat);
+          this.categories = cat;
+        }
+      )
 
-        this.ressourceService.getAllPosts();
+      this.relationService.getAllRelations().then(
+        (rel : Relation[]) =>
+        {
+          this.relations = rel;
+        }
+      )
+
+      this.ressourceTypeService.getAllRessourceTypes().then(
+        (typeRess : RessourceType[]) =>
+        {
+          this.ressourceTypes = typeRess;
+        }
+      )
+
+       this.ressourceService.getAllPosts().then(
+        (ress : Ressource[]) =>
+        {
+            this.ressources = ress;
+
+            this.checkLikes();
+            this.isLoading= false;
+
+        });
 
  
     }
 
-    like(event)
+    like(idRess : String)
     {  
+      console.log(" dans le like :" + idRess);
 
-      const infos = {id : event, _id : this.user._id};
-
-      this.ressourcesSub = this.ressourceService.post$.subscribe(
-        (ress) =>
+      this.ressourceService.addLike(idRess).then(
+        () =>
         {
-          //console.log(ress);
+          this.userService.getCurrentUser().then(
+            (resp : Users) =>
+            {
+              this.user = resp;
+              console.log(this.user)
+            }
+          );
 
-        });
+          this.checkLikes();
 
+        }
+      )
       
-       this.ressourceService.addLike(infos);
-      
+    }
+
+    unLike(idRess : String)
+    {
+      console.log(this.ressources + " ressource avant unlike");
+
+      this.ressourceService.unLike(idRess).then(
+        () =>
+        {
+          this.userService.getCurrentUser().then(
+            (resp : Users) =>
+            {
+              this.user = resp;
+              console.log(this.user)
+            }
+          );
+
+          if(this.user.likes)
+          {
+            this.checkLikes();
+          }
+          
+
+
+        })   
+
     }
 
     addComment(idRess : string, commId : string, pseudo : string)
@@ -152,24 +192,35 @@ export class RessourceComponent implements OnInit {
 
       
       console.log(this.user + " comment ");
+      // comm : Comment = new Comment({
+
+      // })
       
       const infos = {idress : idRess, 
                     message : this.commentForm.get('userComm').value
                   };
 
-        this.ressourcesSub = this.ressourceService.post$.subscribe(
-          (ress) =>
-          {
-            //console.log(ress);
+        // this.ressourcesSub = this.ressourceService.post$.subscribe(
+        //   (ress) =>
+        //   {
+        //     //console.log(ress);
 
-          });
+        //   });
+        //   this.ressourceService.createNewComm(infos)
+        //   .then(
+        //   () =>
+        //   {
+        //     this.commentForm.get('userComm').reset();
+        //   }
+        // )   
+
           this.ressourceService.createNewComm(infos)
           .then(
           () =>
           {
             this.commentForm.get('userComm').reset();
           }
-        )   
+        )  
 
       //  this.ressourceService.post$.createNewComm(infos)
       //  .then(
@@ -183,17 +234,232 @@ export class RessourceComponent implements OnInit {
 
     }
 
-    askComment(posterId : String, pseudo : String,  idRess : String)
+    askComment(commId : String, posterId : String, pseudo : String,  idRess : String)
     {
-      console.log(" dans ask répondre à : " + posterId);
-      console.log(" dans ask pour la ressource " + idRess);
-      console.log(this.answerForm.get('answer').value);
-      const resp = {idPost : idRess, pseudo : pseudo, idAnswer :posterId, message :  this.answerForm.get('answer').value }
+      console.log(idRess + " identifiant du post");
+      console.log(commId + " l'identifiant commentaire")
+      console.log(posterId + " a qui je répond");
+      console.log(pseudo + " pseudo a qui je répond");
+      let message = this.answerForm.get('answer').value;
+  
+      console.log("message à envoyer : " + message);
+      const resp = {idPost : idRess, commId : commId, answId : null, pseudo : pseudo, commenterId :posterId, message :  message }
 
-      this.ressourceService.askComm(resp)
+      this.ressourceService.askComm(resp).then((
+        resp =>
+        {
+          this.answerForm.get('answer').reset();
+          console.log(resp);
+        }
+      ));
 
       
 
     }
+
+    askAnswer(answId : String, posterId : String, pseudo : String,  idRess : String)
+    {
+      console.log(idRess + " identifiant du post");
+      console.log(answId + " identifiant reponse");
+      console.log(posterId + " a qui je répond");
+      console.log(pseudo + " pseudo a qui je répond");
+      let message = this.answersForm.get('answer').value;
+      const resp = {idPost : idRess, commId : answId, pseudo : pseudo, commenterId :posterId, message :  message }
+
+      this.ressourceService.askAnswer(resp).then((
+        resp =>
+        {
+          this.answersForm.get('answer').reset();
+        }
+      ));
+    }
+
+    askThread( threadId : String, threadPseudo : String, idRess : String)
+    {
+      console.log(threadId)
+      console.log(threadPseudo)
+      console.log(idRess)
+
+    }
+
+
+    checkLikes()
+    {
+      let find = false;
+      this.ressources.forEach(liker =>
+        {
+          this.user.likes.forEach(like =>
+            { 
+              if(liker._id == like)
+              {
+                find = true;
+              }
+            })
+            if(find == true)
+            {
+              this.liked.push(1)
+              find = false;
+            }
+            else
+            {
+              this.liked.push(0)
+            }
+        })
+    }
+
+
+    checkTypesFilters(event)
+    {
+      
+      if(event.target.checked == false)
+      {
+        if( this.typeFilter.includes(event.target.value))
+        {
+          const id = this.typeFilter.indexOf(event.target.value);
+          this.typeFilter.splice(id, 1);
+
+        }
+        if(this.typeFilter.includes("0"))
+        {
+          const id = this.typeFilter.indexOf("0");
+          this.typeFilter.splice(id, 1);
+        }
+      }
+      else
+      {
+        if(this.typeFilter.includes("0"))
+        {
+          const id = this.typeFilter.indexOf("0");
+          this.typeFilter.splice(id, 1);
+        }
+          this.typeFilter.push(event.target.value);
+      }
+      console.log(this.typeFilter)
+    }
+
+
+    checkRelFilters(event)
+    {
+      if(event.target.checked == false)
+      {
+        if( this.relFilters.includes(event.target.value) )
+        {
+          const id = this.relFilters.indexOf(event.target.value);
+          this.relFilters.splice(id, 1);
+
+        }
+        if(this.relFilters.includes("0"))
+        {
+          const id = this.relFilters.indexOf("0");
+          this.relFilters.splice(id, 1);
+        }
+      }
+      else
+      {
+        if(this.relFilters.includes("0"))
+        {
+          const id = this.relFilters.indexOf("0");
+          this.relFilters.splice(id, 1);
+        }
+          this.relFilters.push(event.target.value);
+      }
+      console.log(this.relFilters)
+    }
+
+    checkCatFilters(event)
+    {
+      if(event.target.checked == false)
+      {
+        if( this.catFilters.includes(event.target.value))
+        {
+          const id = this.catFilters.indexOf(event.target.value);
+          this.catFilters.splice(id, 1);
+
+        }
+        if(this.catFilters.includes("0"))
+        {
+          const id = this.catFilters.indexOf("0");
+          this.catFilters.splice(id, 1);
+        }
+      }
+      else
+      {
+        if(this.catFilters.includes("0"))
+        {
+          const id = this.catFilters.indexOf("0");
+          this.catFilters.splice(id, 1);
+        }
+        this.catFilters.push(event.target.value);
+
+    }
+    console.log(this.catFilters)
+  }
+
+  validFilters()
+  {
+    this.error = false;
+    this.isLoading = true;
+
+    if(this.catFilters.length==0)
+    {
+      this.catFilters.push("0");
+    }
+    if(this.relFilters.length==0)
+    {
+      this.relFilters.push("0");
+    }
+    if(this.typeFilter.length==0)
+    {
+      this.typeFilter.push("0");
+    }
+    console.log(this.typeFilter)
+
+    if(this.typeFilter.includes("0") && this.relFilters.includes("0") && this.catFilters.includes("0") )
+    {
+      this.ressourceService.getAllPosts().then(
+        (ress : Ressource[])=>
+        {
+          this.ressources = ress;
+          this.isLoading = false;
+        }
+      )
+    }
+    else
+    {
+      this.ressourcesSub = this.ressourceService.post$.subscribe(
+        (ress) =>
+        {
+          if(ress.length>0)
+          {
+            this.ressources = ress;
+            this.isLoading = false;
+          }
+          else
+          {
+            this.isLoading = false;
+            this.error = true;
+            this.errorMessage ="Pas de ressource à charger pour ce type de filtres"
+          }
+          
+        }
+      )
+      this.ressourceService.getAllPostsByFilters(this.catFilters, this.relFilters, this.typeFilter)
+
+    }
+
+    
+  }
+
+
+    
+
+
+    // setAll(completed: boolean) {
+    //   if (this.categories == null) {
+    //     return;
+    //   }
+    //   this.categories.forEach(t => t.title = completed);
+    // }
+
 
 }

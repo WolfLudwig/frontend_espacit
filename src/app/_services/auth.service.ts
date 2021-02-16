@@ -33,6 +33,7 @@ AuthService {
 
   login(email: string, password: string)  
   {
+    console.log(" avant d'aller au back " + email + " " + password)
     return new Promise<any>(
       (resolve, reject) => 
       {
@@ -44,9 +45,10 @@ AuthService {
         ( 
           (response : any) =>
             {
+              console.log(response);
               resolve(response)
               let user = response
-              console.log(response);
+              
               //this.user$ = response;
               this.user$.next(user);
               //this.user$.next(response);
