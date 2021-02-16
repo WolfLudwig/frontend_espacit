@@ -3,7 +3,7 @@ import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTT
 import { Observable, of, throwError } from 'rxjs';
 import { delay, materialize, dematerialize } from 'rxjs/operators';
 
-import { AlertService } from './../_services';
+import { AlertService } from '../_services';
 import { Role } from './../models';
 
 // array in local storage for accounts

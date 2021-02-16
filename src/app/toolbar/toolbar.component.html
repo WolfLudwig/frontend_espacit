@@ -30,40 +30,50 @@
           <mat-icon><a routerLink="/actu">home</a></mat-icon>
         <mat-icon>person</mat-icon>
         <div uk-dropdown="pos: bottom-right;mode:click ">
-            <mat-list>
-              <mat-list-item>
+        <mat-list *ngIf="!account">
+            <mat-list-item>
+                <p *ngIf="!account">Vous n'êtes pas connecté !</p>
+            </mat-list-item>
+            <mat-list-item>
                 <mat-icon [ngStyle]="{'color': 'red'}"><a routerLink="/account/register">assignment_ind</a></mat-icon>
                 <span><a routerLink="/account/register">&nbsp; S'inscrire</a></span>
-              </mat-list-item>
-              <mat-list-item>
+            </mat-list-item>
+            <mat-list-item>
                 <mat-icon [ngStyle]="{'color': 'green'}"><a routerLink="/account/login">login</a></mat-icon>
                 <span><a routerLink="/account/login">&nbsp; Se connecter</a></span>
-              </mat-list-item>
-              <a routerLink="/profile" routerLinkActive="active" class="nav-item nav-link">Profile</a>
-              <a *ngIf="account.role === Role.Admin" routerLink="/admin" routerLinkActive="active" class="nav-item nav-link">Admin</a>
-            </mat-list>
-            <a *ngIf="account.role === Role.SuperAdmin" routerLink="/superadmin" routerLinkActive="active" class="nav-item nav-link">Administration</a>
+            </mat-list-item>
+        </mat-list>
+            <mat-list *ngIf="account">
+                <mat-list-item>
+                    <p *ngIf="account">Bonjour {{account.role}}</p>
+                </mat-list-item>
             <mat-list>
-                <mat-list-item>
-                    <mat-icon [ngStyle]="{'color': 'purple'}">campaign</mat-icon>
-                    <span>&nbsp; Mes ressources</span>
-                </mat-list-item>
-                <mat-list-item>
-                    <mat-icon [ngStyle]="{'color': 'green'}">event_available</mat-icon>
-                    <span>&nbsp; Mes groupes</span>
-                </mat-list-item>
-                <mat-list-item>
-                    <mat-icon [ngStyle]="{'color': 'blue'}">groups</mat-icon>
-                    <span>&nbsp; Mes amis</span>
-                </mat-list-item>
-                <mat-list-item>
-                    <mat-icon [ngStyle]="{'color': 'black'}">settings</mat-icon>
-                    <span>&nbsp; Mes paramètres</span>
-                </mat-list-item>
-                <mat-list-item  (click)="logout()">
-                    <mat-icon [ngStyle]="{'color': 'red'}">person_off</mat-icon>
-                    <span >&nbsp; Se déconnecter</span>
-                </mat-list-item>
+                  <a routerLink="/profile" routerLinkActive="active" class="nav-item nav-link">Profile</a>
+                  <a *ngIf="account.role === Role.Admin" routerLink="/admin" routerLinkActive="active" class="nav-item nav-link">Admin</a>
+                </mat-list>
+                <a *ngIf="account.role === Role.SuperAdmin" routerLink="/superadmin" routerLinkActive="active" class="nav-item nav-link">Administration</a>
+                <mat-list>
+                    <mat-list-item>
+                        <mat-icon [ngStyle]="{'color': 'purple'}">campaign</mat-icon>
+                        <span>&nbsp; Mes ressources</span>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon [ngStyle]="{'color': 'green'}">event_available</mat-icon>
+                        <span>&nbsp; Mes groupes</span>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon [ngStyle]="{'color': 'blue'}">groups</mat-icon>
+                        <span>&nbsp; Mes amis</span>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon [ngStyle]="{'color': 'black'}">settings</mat-icon>
+                        <span>&nbsp; Mes paramètres</span>
+                    </mat-list-item>
+                    <mat-list-item  (click)="logout()">
+                        <mat-icon [ngStyle]="{'color': 'red'}">person_off</mat-icon>
+                        <span >&nbsp; Se déconnecter</span>
+                    </mat-list-item>
+                </mat-list>
             </mat-list>
         </div>
 

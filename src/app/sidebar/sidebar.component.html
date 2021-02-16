@@ -2,13 +2,29 @@
 <div id="logo">
     <a href="/"> <img src="assets/images/logo-light.png" alt=""></a>
 </div>
-<mat-list fxLayout="column">
-    <a *ngFor="let item of menu" class="itemMenu" [routerLink]="item.lien">
+<mat-list fxLayout="column" *ngIf="!account">
+    <a *ngFor="let item of menu | slice:0:2" class="itemMenu" [routerLink]="item.lien">
         <mat-list-item>
             <mat-icon class="blanc">{{item.icone}}</mat-icon>
             <span class="blanc">&nbsp;{{item.nom}}</span>
         </mat-list-item>
     </a>
+</mat-list>
 
+<mat-list fxLayout="column" *ngIf="account">
+    <a *ngFor="let item of menu | slice:2:8" class="itemMenu" [routerLink]="item.lien">
+        <mat-list-item>
+            <mat-icon class="blanc">{{item.icone}}</mat-icon>
+            <span class="blanc">&nbsp;{{item.nom}}</span>
+        </mat-list-item>
+    </a>
+    <mat-list *ngIf="">
+    <a *ngFor="let item of menu | slice:8:10" class="itemMenu" [routerLink]="item.lien">
+        <mat-list-item>
+            <mat-icon class="blanc">{{item.icone}}</mat-icon>
+            <span class="blanc">&nbsp;{{item.nom}}</span>
+        </mat-list-item>
+    </a>
+    </mat-list>
 </mat-list>
 <p class="foot">© 2020 <strong>The Boys</strong>. All Rights Reserved. </p>

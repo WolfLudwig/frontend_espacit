@@ -12,4 +12,10 @@ export class Account {
     email: string;
     role: Role;
     jwtToken?: string;
+
+    password: number;
+    picture: String;
+    bio:  String;
+    friend: [String];
+    likes:  [String];
 }

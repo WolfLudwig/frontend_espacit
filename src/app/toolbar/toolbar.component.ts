@@ -1,4 +1,4 @@
-import { AccountService } from './../_services';
+import { AccountService } from '../_services';
 import { Account } from './../models';
 import { Role } from './../models/role';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
