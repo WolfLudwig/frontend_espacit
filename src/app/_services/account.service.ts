@@ -8,7 +8,7 @@ import { map, finalize } from 'rxjs/operators';
 import { environment } from './../../environments/environment';
 
 
-const baseUrl = `${environment.apiUrl}/accounts`;
+const baseUrl = `http://localhost:4000/accounts`;
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
