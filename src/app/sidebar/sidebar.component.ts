@@ -1,4 +1,5 @@
 import { TokenStorageService } from './../_services/token-storage.service';
+import { AccountService } from '../_services';
 import { Account, Role } from './../models';
 import { Component, OnInit } from '@angular/core';
 
@@ -17,7 +18,7 @@ export class SidebarComponent implements OnInit {
   showModeratorBoard = false;
   username?: string;
 
-  constructor(private tokenStorageService: TokenStorageService) { }
+  constructor(private accountService: AccountService) { this.accountService.account.subscribe(x => this.account = x);}
   public menu = [
     //Part non connectée
     { icone: 'login', nom: 'Se connecter', lien: '/account/login' },

@@ -1,7 +1,7 @@
 //TODO Voir ce que GetCurrentUser fait
 
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+//import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Ressource, Account, Comment, Category, Relation, RessourceType, Answer, Thread } from './../models';
@@ -27,10 +27,10 @@ export class RessourceComponent implements OnInit {
 
 
   public ressourcesSub : Subscription;
-  commentForm : FormGroup;
+ /* commentForm : FormGroup;
   answerForm : FormGroup;
   answersForm : FormGroup;
-  threadForm : FormGroup;
+  threadForm : FormGroup; */
   public user: Account;
 
   public relFilters : String[] = [];
@@ -56,31 +56,25 @@ export class RessourceComponent implements OnInit {
   
     private router: Router,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
+   // private formBuilder: FormBuilder,
     private data: RessourceService,
     private tokenStorage: TokenStorageService,
     private accountService: AccountService,
-    private authService : AuthService,
-    private authInterceptor : AuthInterceptor,
+    //private authService : AuthService,
+    //private authInterceptor : AuthInterceptor,
     private commentService : CommentService,
     private categoriesService : CategoryService,
     private relationService: RelationService,
     private ressourceTypeService : RessourceTypeService
     ) {
-      this.accountService.getCurrentUser().then(
-        (resp : Account) =>
-        {
-          this.user = resp;
-          console.log(this.user)
-        }
-      );
+        this.user = this.accountService.accountValue
      }
 
     ngOnInit()
     {
       this.isLoading = true;
       this.ressourcesSub = new Subscription();
-
+/*
        this.commentForm = this.formBuilder.group({
          userComm: [null],
        });
@@ -94,7 +88,7 @@ export class RessourceComponent implements OnInit {
       this.threadForm = this.formBuilder.group({
         answer : [null]
       });
-
+*/
       this.categoriesService.getAllCategories().then(
         (cat : Category[]) =>
         {
@@ -129,7 +123,7 @@ export class RessourceComponent implements OnInit {
 
  
     }
-
+    /*
     like(idRess : String)
     {  
       console.log(" dans le like :" + idRess);
@@ -176,7 +170,7 @@ export class RessourceComponent implements OnInit {
 
         })   
 
-    }
+    }*/
 
     addComment(idRess : string, commId : string, pseudo : string)
     {
@@ -186,11 +180,11 @@ export class RessourceComponent implements OnInit {
       // comm : Comment = new Comment({
 
       // })
-      
+  /*    
       const infos = {idress : idRess, 
                     message : this.commentForm.get('userComm').value
                   };
-
+*/
         // this.ressourcesSub = this.ressourceService.post$.subscribe(
         //   (ress) =>
         //   {
@@ -205,6 +199,7 @@ export class RessourceComponent implements OnInit {
         //   }
         // )   
 
+/*
           this.ressourceService.createNewComm(infos)
           .then(
           () =>
@@ -213,6 +208,7 @@ export class RessourceComponent implements OnInit {
           }
         )  
 
+*/
       //  this.ressourceService.post$.createNewComm(infos)
       //  .then(
       //    (ress : Ressource[]) =>
@@ -224,7 +220,7 @@ export class RessourceComponent implements OnInit {
       
 
     }
-
+/*
     askComment(commId : String, posterId : String, pseudo : String,  idRess : String)
     {
       console.log(idRess + " identifiant du post");
@@ -264,7 +260,7 @@ export class RessourceComponent implements OnInit {
         }
       ));
     }
-
+*/
     askThread( threadId : String, threadPseudo : String, idRess : String)
     {
       console.log(threadId)
@@ -277,9 +273,10 @@ export class RessourceComponent implements OnInit {
     checkLikes()
     {
       let find = false;
-      this.ressources.forEach(liker =>
+      this.ressources?.forEach(liker =>
         {
-          this.user.likes.forEach(like =>
+          console.log('Ce message est à but non publicitaire ' , this.user );
+          this.user?.likes?.forEach(like =>
             { 
               if(liker._id == like)
               {
