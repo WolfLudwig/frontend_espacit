@@ -32,6 +32,7 @@ export class AccountService {
             .pipe(map(account => {
                 this.accountSubject.next(account);
                 if (account.status === false){
+                    this.logout();
                     return alert('Votre compte a été désactiver');
                 }
                 else {

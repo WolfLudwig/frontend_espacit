@@ -28,3 +28,40 @@ html body {-webkit-font-smoothing: antialiased;overflow-x: hidden;padding: .75re
   padding: 0 22px 2.5rem;
 }
 
+/* Paysage de téléphone et plus grand */
+@media (min-width: 640px) {
+
+  .container-expand-left.container-xsmall,
+  .container-expand-right.container-xsmall {
+    max-width: calc(50% + (750px / 2) - 30px);
+  }
+
+  .container-expand-left.container-small,
+  .container-expand-right.container-small {
+    max-width: calc(50% + (900px / 2) - 30px);
+  }
+}
+
+.main_sidebar .side-overlay {
+  z-index: 1;
+  position: fixed;
+  width: 100%;
+  margin-left: 270px;
+  height: 100%;
+  background: hsla(0, 0%, 0%, 0.42);
+  visibility: hidden;
+}
+
+.mobile-visible .main_sidebar .side-overlay {
+  visibility: visible;
+}
+
+.main_sidebar .side-overlay {
+  z-index: 1;
+  position: fixed;
+  width: 100%;
+  margin-left: 270px;
+  height: 100%;
+  background: hsl(0deg 0% 0% / 18%);
+  visibility: hidden;
+}

@@ -8,6 +8,7 @@ export class Account {
     lastName: string;
     adress: string;
     city: string;
+    status : Boolean;
     zipCode: string;
     email: string;
     role: Role;
