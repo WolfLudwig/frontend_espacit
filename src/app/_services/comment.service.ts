@@ -30,7 +30,7 @@ constructor(private http: HttpClient) {}
   createNewComm(infosComm : any) {
     console.log(infosComm);
     return new Promise((resolve, reject) => {
-      this.http.patch('http://localhost:3000/api/post/comment-post/', infosComm).subscribe(
+      this.http.patch('http://localhost:4000/api/post/comment-post/', infosComm).subscribe(
         (response : Comment[]) => {
           this.comm = response;
           this.emitComms();
@@ -49,7 +49,7 @@ constructor(private http: HttpClient) {}
    getAllCommentsById(id : String)
    {
      return new Promise((resolve, reject) => {
-       this.http.get('http://localhost:3000/api/comment/all/' + id).subscribe(
+       this.http.get('http://localhost:4000/api/comment/all/' + id).subscribe(
          (com : Comment) => {
            if (com) {
              
@@ -75,7 +75,7 @@ constructor(private http: HttpClient) {}
    getAllComments()
    {
     return new Promise((resolve, reject) => {
-      this.http.get('http://localhost:3000/api/comment').subscribe(
+      this.http.get('http://localhost:4000/api/comment').subscribe(
         (com : Comment[]) => {
           if (com) {
             console.log(com);

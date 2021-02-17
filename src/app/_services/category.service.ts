@@ -41,7 +41,7 @@ constructor(private http: HttpClient) {}
 
    getCategoryById(id: string) {
      return new Promise((resolve, reject) => {
-       this.http.get('http://localhost:3000/api/category/' + id).subscribe(
+       this.http.get('http://localhost:4000/api/category/' + id).subscribe(
          (response) => {
            resolve(response);
          },
@@ -56,7 +56,7 @@ constructor(private http: HttpClient) {}
   {
     console.log("dans le getAll cat");
     return new Promise((resolve, reject) => {
-      this.http.get('http://localhost:3000/api/category').subscribe(
+      this.http.get('http://localhost:4000/api/category').subscribe(
         (cate : Category[]) => {
           if (cate) {
             this.cat = cate;

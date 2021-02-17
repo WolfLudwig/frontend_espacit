@@ -67,7 +67,7 @@ constructor(private http: HttpClient) {}
 
    getPostById(id: string) {
      return new Promise((resolve, reject) => {
-       this.http.get('http://localhost:3000/api/post/' + id).subscribe(
+       this.http.get('http://localhost:4000/api/post/' + id).subscribe(
          (response) => {
            resolve(response);
          },
@@ -79,7 +79,7 @@ constructor(private http: HttpClient) {}
    }
 
   createNewPost(ress: Ressource) {
-      return this.http.post('http://localhost:3000/api/post', ress).subscribe(
+      return this.http.post('http://localhost:4000/api/post', ress).subscribe(
         (ress : Ressource) => {
           if (ress) {
             console.log(ress)
@@ -97,7 +97,7 @@ constructor(private http: HttpClient) {}
   getAllPostsByFilters(cat : any[], rel : any[], type : any[]) {
     console.log("dans le getAllPostByFilters");
      return new Promise((resolve, reject) => {
-      this.http.get('http://localhost:3000/api/post/filters/' + cat + '/'+ rel +'/'+ type).subscribe(
+      this.http.get('http://localhost:4000/api/post/filters/' + cat + '/'+ rel +'/'+ type).subscribe(
         (ress: Ressource[]) => {
           if(ress)
           {
@@ -121,7 +121,7 @@ constructor(private http: HttpClient) {}
 
     console.log("dans le getAllPostByFilters");
     return new Promise((resolve, reject) => {
-     this.http.get('http://localhost:3000/api/post/filterCat/' + idFilter).subscribe(
+     this.http.get('http://localhost:4000/api/post/filterCat/' + idFilter).subscribe(
        (ress: Ressource[]) => {
          if (ress) {
            console.log(ress);
@@ -141,7 +141,7 @@ constructor(private http: HttpClient) {}
   getAllPosts() {
     console.log("dans le getAllPost");
      return new Promise((resolve, reject) => {
-      this.http.get('http://localhost:3000/api/post').subscribe(
+      this.http.get('http://localhost:4000/api/post').subscribe(
         (ress: Ressource[]) => {
           if (ress) {
             console.log(ress);
@@ -172,7 +172,7 @@ constructor(private http: HttpClient) {}
   {
     
     return new Promise((resolve, reject) => {
-      this.http.patch('http://localhost:3000/api/post/like', {idRess}).subscribe(
+      this.http.patch('http://localhost:4000/api/post/like', {idRess}).subscribe(
         (res: Ressource) => {
           console.log(res);
           this.ress.forEach(element =>
@@ -202,7 +202,7 @@ constructor(private http: HttpClient) {}
   unLike(idRess : any )
   {
     return new Promise((resolve, reject) => {
-      this.http.patch('http://localhost:3000/api/post/unlike-post', {idRess}).subscribe(
+      this.http.patch('http://localhost:4000/api/post/unlike-post', {idRess}).subscribe(
         (response: Ressource) => {
           console.log(response + " ressource après unlike");
           this.ress.forEach(element =>
@@ -228,7 +228,7 @@ constructor(private http: HttpClient) {}
 
   createNewComm(infosComm: any) {
     return new Promise((resolve, reject) => {
-      this.http.patch('http://localhost:3000/api/post/comment-post', infosComm).subscribe(
+      this.http.patch('http://localhost:4000/api/post/comment-post', infosComm).subscribe(
         (response : Ressource) => {
 
           console.log(response);
@@ -256,7 +256,7 @@ constructor(private http: HttpClient) {}
 
   askComm(infosComm: any) {
     return new Promise((resolve, reject) => {
-      this.http.patch('http://localhost:3000/api/post/answer-post', infosComm).subscribe(
+      this.http.patch('http://localhost:4000/api/post/answer-post', infosComm).subscribe(
         (response : Ressource) => {
           console.log(response);
           this.ress.forEach(element =>
@@ -282,7 +282,7 @@ constructor(private http: HttpClient) {}
 
   askAnswer(infosComm: any) {
     return new Promise((resolve, reject) => {
-      this.http.patch('http://localhost:3000/api/post/askAnswer', infosComm).subscribe(
+      this.http.patch('http://localhost:4000/api/post/askAnswer', infosComm).subscribe(
         (response : Ressource) => {
           console.log(response);
           this.ress.forEach(element =>
@@ -309,7 +309,7 @@ constructor(private http: HttpClient) {}
   {
     console.log(id + " id a traiter pour likes ");
     return new Promise((resolve, reject) => {
-      this.http.get('http://localhost:3000/api/post/liked-post/'+ id).subscribe(
+      this.http.get('http://localhost:4000/api/post/liked-post/'+ id).subscribe(
         (response : Ressource[]) => {
           if(response)
           {

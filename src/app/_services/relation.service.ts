@@ -24,7 +24,7 @@ constructor(private http: HttpClient) {}
 
    getRelationById(id: String) {
      return new Promise<Relation>((resolve, reject) => {
-       this.http.get('http://localhost:3000/api/relation/' + id).subscribe(
+       this.http.get('http://localhost:4000/api/relation/' + id).subscribe(
          (relation : Relation[]) => {
           if (relation) {
             this.rel = relation;
@@ -46,7 +46,7 @@ constructor(private http: HttpClient) {}
 
    getRelationByTitle(title: string) {
     return new Promise((resolve, reject) => {
-      this.http.get('http://localhost:3000/api/relation/' + title).subscribe(
+      this.http.get('http://localhost:4000/api/relation/' + title).subscribe(
         (response) => {
           resolve(response);
         },
@@ -59,7 +59,7 @@ constructor(private http: HttpClient) {}
    getAllRelations()
   {
     return new Promise((resolve, reject) => {
-      this.http.get('http://localhost:3000/api/relation').subscribe(
+      this.http.get('http://localhost:4000/api/relation').subscribe(
         (rela : Relation[]) => {
           if (rela) {
             this.rel = rela;
