@@ -22,6 +22,7 @@ constructor(private http: HttpClient) {}
         message: "String",
         picture:  "assets/images/logo-light-icon.png",
         video:  "",
+        description : "",
         likers: [{ _id: "5ff2f561f3831a54b42fce83",
             pseudo: "la crème",
             email: "lacreme@gmail.com"}],
@@ -66,6 +67,26 @@ constructor(private http: HttpClient) {}
   comm$ = new Subject<Comment[]>();
   
 
+  updatePost(ress : Ressource)
+  {
+    return new Promise((resolve, reject) => {
+      this.http.patch('http://localhost:3000/api/post/update', ress).subscribe(
+        (ress : Ressource[]) => {
+          if (ress) {
+            console.log(ress)
+            this.ress = ress
+            this.emitPosts();
+            resolve(ress)
+            
+          } 
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    })
+
+  }
    getPostById(id: string) {
      return new Promise((resolve, reject) => {
        this.http.get('http://localhost:3000/api/post/' + id).subscribe(
@@ -80,12 +101,15 @@ constructor(private http: HttpClient) {}
    }
 
   createNewPost(ress: Ressource) {
-      return this.http.post('http://localhost:3000/api/post', ress).subscribe(
-        (ress : Ressource) => {
+    console.log(ress)
+    return new Promise((resolve, reject) => {
+      this.http.post('http://localhost:3000/api/post', ress).subscribe(
+        (ress : Ressource[]) => {
           if (ress) {
             console.log(ress)
-            this.ress.push(ress)
+            this.ress = ress
             this.emitPosts();
+            resolve(ress)
             
           } 
         },
@@ -93,16 +117,15 @@ constructor(private http: HttpClient) {}
           console.log(error);
         }
       );
+    })
   }
 
   getAllPostsByFilters(cat : any[], rel : any[], type : any[]) {
-    console.log("dans le getAllPostByFilters");
      return new Promise((resolve, reject) => {
       this.http.get('http://localhost:3000/api/post/filters/' + cat + '/'+ rel +'/'+ type).subscribe(
         (ress: Ressource[]) => {
           if(ress)
           {
-            console.log(ress);
             this.ress = ress;
             resolve(ress);
             this.emitPosts();
@@ -140,15 +163,13 @@ constructor(private http: HttpClient) {}
   }
 
   getAllPosts() {
-    console.log("dans le getAllPost");
      return new Promise((resolve, reject) => {
       this.http.get('http://localhost:3000/api/post').subscribe(
         (ress: Ressource[]) => {
           if (ress) {
-            console.log(ress);
+            console.log(ress)
             this.ress = ress;
              resolve(ress);
-            //this.emitPosts();
 
           }
         },
@@ -175,7 +196,6 @@ constructor(private http: HttpClient) {}
     return new Promise((resolve, reject) => {
       this.http.patch('http://localhost:3000/api/post/like', {idRess}).subscribe(
         (res: Ressource) => {
-          console.log(res);
           this.ress.forEach(element =>
             {
               
@@ -183,8 +203,6 @@ constructor(private http: HttpClient) {}
               {
 
                 element.likers =  res.likers;
-                console.log(element.likers + " ressources");
-                console.log(res.likers + "reponse");
               }
             })
             
@@ -205,7 +223,6 @@ constructor(private http: HttpClient) {}
     return new Promise((resolve, reject) => {
       this.http.patch('http://localhost:3000/api/post/unlike-post', {idRess}).subscribe(
         (response: Ressource) => {
-          console.log(response + " ressource après unlike");
           this.ress.forEach(element =>
             {
               
@@ -231,9 +248,6 @@ constructor(private http: HttpClient) {}
     return new Promise((resolve, reject) => {
       this.http.patch('http://localhost:3000/api/post/comment-post', infosComm).subscribe(
         (response : Ressource) => {
-
-          console.log(response);
-
           this.ress.forEach(element =>
             {
               
@@ -244,8 +258,6 @@ constructor(private http: HttpClient) {}
               }
             })
             this.emitPosts();
-          
-          //this.getAllPosts();
           resolve(response);
         },
         (error) => {
@@ -320,6 +332,43 @@ constructor(private http: HttpClient) {}
 
           
           resolve(response);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+
+  }
+
+  delepost(id : String)
+  {
+    return new Promise((resolve, reject) => {
+      this.http.delete('http://localhost:3000/api/post/'+ id).subscribe(
+        (response : Ressource) => {
+          if(response)
+          {
+            var id;
+            var count = 0
+
+            this.ress.forEach(element =>
+              {
+                
+                
+                if(element._id == response._id)
+                {
+  
+                  id = count
+                }
+                count ++
+              })
+          }
+
+          this.ress.splice(id, 1);
+
+          resolve(response)
+          this.emitPosts();
+
         },
         (error) => {
           reject(error);

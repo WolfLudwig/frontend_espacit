@@ -24,10 +24,11 @@ constructor(private http: HttpClient) {}
 
 
 
-   getRessourceTypeById(id: string) {
+   getRessourceTypeById(idType : String) {
      return new Promise((resolve, reject) => {
-       this.http.get('http://localhost:3000/api/ressourceType/' + id).subscribe(
-         (response) => {
+       this.http.get('http://localhost:3000/api/ressourceType/' + idType).subscribe(
+         (response : RessourceType) => {
+           console.log(response)
            resolve(response);
          },
          (error) => {
@@ -44,7 +45,6 @@ constructor(private http: HttpClient) {}
         (ress : RessourceType[]) => {
           if (ress) {
             this.typeRess = ress;
-            console.log(this.typeRess);
             resolve(ress);
             this.emitRessourceType();
           } 

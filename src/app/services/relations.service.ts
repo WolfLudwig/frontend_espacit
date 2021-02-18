@@ -22,14 +22,16 @@ constructor(private http: HttpClient) {}
   
   public rel$ = new Subject<Relation[]>();
 
-   getRelationById(id: String) {
-     return new Promise<Relation>((resolve, reject) => {
-       this.http.get('http://localhost:3000/api/relation/' + id).subscribe(
-         (relation : Relation[]) => {
-          if (relation) {
-            this.rel = relation;
+   getRelationById(idRel: String) {
+     console.log(idRel + " avant d'envoyer l'id relation au back")
+     return new Promise((resolve, reject) => {
+       this.http.get('http://localhost:3000/api/relation/' + idRel).subscribe(
+         (response : Relation[]) => {
+            console.log(response)
+            resolve(response)
+            this.rel = response;
             this.emitRelation();
-          } 
+
          },
          (error) => {
            reject(error);
@@ -63,7 +65,6 @@ constructor(private http: HttpClient) {}
         (rela : Relation[]) => {
           if (rela) {
             this.rel = rela;
-            console.log(rela);
             resolve(rela);
             this.emitRelations();
           } 

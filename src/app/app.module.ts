@@ -44,6 +44,8 @@ import { BoardModeratorComponent } from './board-moderator/board-moderator.compo
 import { BoardUserComponent } from './board-user/board-user.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { CommentComponent } from './comment/comment.component';
+import { ModifyRessourceComponent } from './modify-ressource/modify-ressource.component';
+import { RessourceDetailsComponent } from './ressource-details/ressource-details.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +71,9 @@ import { CommentComponent } from './comment/comment.component';
     FriendsComponent,
     MyFriendsComponent,
     AddRessourceComponent,
-    CommentComponent
+    CommentComponent,
+    ModifyRessourceComponent,
+    RessourceDetailsComponent
   ],
   imports: [
     BrowserModule,

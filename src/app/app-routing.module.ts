@@ -18,6 +18,8 @@ import { MyFriendsComponent } from './myFriends/myFriends.component';
 import { AddRessourceComponent } from './add-ressource/add-ressource.component';
 import { BoardUserComponent } from './board-user/board-user.component';
 import { CommentComponent } from './comment/comment.component';
+import { ModifyRessourceComponent } from './modify-ressource/modify-ressource.component';
+import { RessourceDetailsComponent } from './ressource-details/ressource-details.component';
 
 const routes: Routes = [
 
@@ -37,7 +39,11 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'addRessource', component: AddRessourceComponent},
   { path: 'comments', component: CommentComponent},
+  { path: 'modifyRessource/:ressource', component: ModifyRessourceComponent},
+  { path: 'ressourceDetails/:id', component: RessourceDetailsComponent},
   { path: '**', component: LoginComponent},
+  { path: 'ressourceDetails', component: RessourceDetailsComponent},
+
     //{ path: 'incription', component: RessourceComponent},
 
 

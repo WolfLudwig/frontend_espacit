@@ -30,10 +30,12 @@ import { RessourceType } from '../models/ressourceType.model';
 export class RessourceComponent implements OnInit {
   
   @Input() errorMessage : String;
+  @Output() likes = new EventEmitter<boolean>();
   public ressources : Ressource[] = [];
+  public count = 0;
 
   public isLoading = false;
-
+  public isChecked = false;
 
   public ressourcesSub : Subscription;
   commentForm : FormGroup;
@@ -41,6 +43,8 @@ export class RessourceComponent implements OnInit {
   answersForm : FormGroup;
   threadForm : FormGroup;
   public user: Users;
+
+  public users : Users[] = [];
 
   public relFilters : String[] = [];
   public catFilters : String[] = [];
@@ -64,23 +68,17 @@ export class RessourceComponent implements OnInit {
   constructor(private ressourceService : RessourceService,
   
     private router: Router,
-    private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private data: RessourceService,
-    private tokenStorage: TokenStorageService,
     private userService: UserService,
-    private authService : AuthService,
-    private authInterceptor : AuthInterceptor,
-    private commentService : CommentService,
     private categoriesService : CategoryService,
     private relationService: RelationService,
     private ressourceTypeService : RessourceTypeService
     ) {
+      
       this.userService.getCurrentUser().then(
         (resp : Users) =>
         {
           this.user = resp;
-          console.log(this.user)
         }
       );
      }
@@ -107,7 +105,6 @@ export class RessourceComponent implements OnInit {
       this.categoriesService.getAllCategories().then(
         (cat : Category[]) =>
         {
-          console.log(cat);
           this.categories = cat;
         }
       )
@@ -129,9 +126,16 @@ export class RessourceComponent implements OnInit {
        this.ressourceService.getAllPosts().then(
         (ress : Ressource[]) =>
         {
-            this.ressources = ress;
+          this.ressources = ress;       
 
-            this.checkLikes();
+            if(this.user)
+            {
+              if(this.user.likes)
+              {
+                this.checkLikes();
+              }
+              
+            }
             this.isLoading= false;
 
         });
@@ -139,10 +143,13 @@ export class RessourceComponent implements OnInit {
  
     }
 
+    ressourceDetails(id : String)
+    {
+      this.router.navigateByUrl('/ressourceDetails/' + id)
+    }
+
     like(idRess : String)
     {  
-      console.log(" dans le like :" + idRess);
-
       this.ressourceService.addLike(idRess).then(
         () =>
         {
@@ -150,12 +157,9 @@ export class RessourceComponent implements OnInit {
             (resp : Users) =>
             {
               this.user = resp;
-              console.log(this.user)
+              this.checkLikes();
             }
           );
-
-          this.checkLikes();
-
         }
       )
       
@@ -163,8 +167,6 @@ export class RessourceComponent implements OnInit {
 
     unLike(idRess : String)
     {
-      console.log(this.ressources + " ressource avant unlike");
-
       this.ressourceService.unLike(idRess).then(
         () =>
         {
@@ -172,47 +174,19 @@ export class RessourceComponent implements OnInit {
             (resp : Users) =>
             {
               this.user = resp;
-              console.log(this.user)
+              this.checkLikes();
             }
-          );
-
-          if(this.user.likes)
-          {
-            this.checkLikes();
-          }
-          
-
-
+          );     
         })   
 
     }
 
+
     addComment(idRess : string, commId : string, pseudo : string)
-    {
-
-      
-      console.log(this.user + " comment ");
-      // comm : Comment = new Comment({
-
-      // })
-      
+    {    
       const infos = {idress : idRess, 
                     message : this.commentForm.get('userComm').value
                   };
-
-        // this.ressourcesSub = this.ressourceService.post$.subscribe(
-        //   (ress) =>
-        //   {
-        //     //console.log(ress);
-
-        //   });
-        //   this.ressourceService.createNewComm(infos)
-        //   .then(
-        //   () =>
-        //   {
-        //     this.commentForm.get('userComm').reset();
-        //   }
-        // )   
 
           this.ressourceService.createNewComm(infos)
           .then(
@@ -221,48 +195,24 @@ export class RessourceComponent implements OnInit {
             this.commentForm.get('userComm').reset();
           }
         )  
-
-      //  this.ressourceService.post$.createNewComm(infos)
-      //  .then(
-      //    (ress : Ressource[]) =>
-      //    {
-      //      this.ressources = ress
-      //      this.commentForm.get('userComm').reset();
-      //    }
-      //  )
-      
-
     }
 
     askComment(commId : String, posterId : String, pseudo : String,  idRess : String)
     {
-      console.log(idRess + " identifiant du post");
-      console.log(commId + " l'identifiant commentaire")
-      console.log(posterId + " a qui je répond");
-      console.log(pseudo + " pseudo a qui je répond");
+
       let message = this.answerForm.get('answer').value;
-  
-      console.log("message à envoyer : " + message);
       const resp = {idPost : idRess, commId : commId, answId : null, pseudo : pseudo, commenterId :posterId, message :  message }
 
       this.ressourceService.askComm(resp).then((
         resp =>
         {
           this.answerForm.get('answer').reset();
-          console.log(resp);
         }
       ));
-
-      
-
     }
 
     askAnswer(answId : String, posterId : String, pseudo : String,  idRess : String)
     {
-      console.log(idRess + " identifiant du post");
-      console.log(answId + " identifiant reponse");
-      console.log(posterId + " a qui je répond");
-      console.log(pseudo + " pseudo a qui je répond");
       let message = this.answersForm.get('answer').value;
       const resp = {idPost : idRess, commId : answId, pseudo : pseudo, commenterId :posterId, message :  message }
 
@@ -274,27 +224,24 @@ export class RessourceComponent implements OnInit {
       ));
     }
 
-    askThread( threadId : String, threadPseudo : String, idRess : String)
-    {
-      console.log(threadId)
-      console.log(threadPseudo)
-      console.log(idRess)
-
-    }
-
 
     checkLikes()
     {
       let find = false;
+      this.liked = []
+
       this.ressources.forEach(liker =>
         {
-          this.user.likes.forEach(like =>
-            { 
-              if(liker._id == like)
-              {
-                find = true;
-              }
-            })
+          if(this.user.likes)
+          {
+            this.user.likes.forEach(like =>
+              { 
+                if(liker._id == like)
+                {
+                  find = true;
+                }
+              })
+          }
             if(find == true)
             {
               this.liked.push(1)
@@ -305,8 +252,8 @@ export class RessourceComponent implements OnInit {
               this.liked.push(0)
             }
         })
-    }
 
+    }
 
     checkTypesFilters(event)
     {
@@ -334,7 +281,6 @@ export class RessourceComponent implements OnInit {
         }
           this.typeFilter.push(event.target.value);
       }
-      console.log(this.typeFilter)
     }
 
 
@@ -363,7 +309,6 @@ export class RessourceComponent implements OnInit {
         }
           this.relFilters.push(event.target.value);
       }
-      console.log(this.relFilters)
     }
 
     checkCatFilters(event)
@@ -392,7 +337,6 @@ export class RessourceComponent implements OnInit {
         this.catFilters.push(event.target.value);
 
     }
-    console.log(this.catFilters)
   }
 
   validFilters()
@@ -412,7 +356,6 @@ export class RessourceComponent implements OnInit {
     {
       this.typeFilter.push("0");
     }
-    console.log(this.typeFilter)
 
     if(this.typeFilter.includes("0") && this.relFilters.includes("0") && this.catFilters.includes("0") )
     {
@@ -450,16 +393,19 @@ export class RessourceComponent implements OnInit {
     
   }
 
+  modifyRessource(ressource : Ressource)
+  {
+    this.router.navigateByUrl('/modifyRessource/' + ressource);
+  }
 
-    
-
-
-    // setAll(completed: boolean) {
-    //   if (this.categories == null) {
-    //     return;
-    //   }
-    //   this.categories.forEach(t => t.title = completed);
-    // }
+  deletePost(id : String)
+  {
+    this.ressourceService.delepost(id).then(
+      () => {
+        console.log(this.ressources)
+      }
+    )
+  }
 
 
 }

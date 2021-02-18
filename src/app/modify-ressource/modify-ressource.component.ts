@@ -1,6 +1,6 @@
-import { JsonpClientBackend } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Category } from '../models/category.model';
 import { Relation } from '../models/relation.model';
@@ -16,30 +16,35 @@ import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 
 @Component({
-  selector: 'app-add-ressource',
-  templateUrl: './add-ressource.component.html',
-  styleUrls: ['./add-ressource.component.css']
+  selector: 'app-modify-ressource',
+  templateUrl: './modify-ressource.component.html',
+  styleUrls: ['./modify-ressource.component.css']
 })
-export class AddRessourceComponent implements OnInit {
+export class ModifyRessourceComponent implements OnInit {
 ressourceForm : FormGroup;
-public ress :  Ressource;
 public categories : Category[] = [];
 public relations : Relation[] =[];
 public ressourceType : RessourceType[] = [];
 public user : Users;
-public toStr = JSON.stringify;
-
 public error = false;
 public errorMessage : String;
+
+public ressource : Ressource;
+
+public relationsCheck : Relation[] = [];
+public typesCheck : RessourceType[] = [];
 
 public categorie : String;
 public relation : String;
 public type : String;
 
-private authSub : Subscription;
+public toStr = JSON.stringify;
 
-public relationsCheck : Relation[] = [];
-public typesCheck : RessourceType[] = [];
+
+private categoriesSub: Subscription;
+private relationsSub : Subscription;
+private ressourceTypeSub : Subscription;
+private authSub : Subscription;
 
 
   constructor(private formBuilder: FormBuilder,
@@ -49,7 +54,22 @@ public typesCheck : RessourceType[] = [];
     private ressourceTypeService : RessourceTypeService,
     private tokenStorage: TokenStorageService,
     private userService : UserService,
-    private authService : AuthService) { }
+    private authService : AuthService,
+    private route  : ActivatedRoute,
+    private router : Router
+    ) { 
+      this.route.params.subscribe(
+        (params: Params) => {
+  
+          this.ressourceService.getPostById(params.ressource).then(
+            (ress : Ressource)=>
+            {
+              this.ressource = ress;
+              console.log(ress);
+            }
+          )
+        })
+    }
 
   ngOnInit(): void {
 
@@ -64,23 +84,22 @@ public typesCheck : RessourceType[] = [];
     this.categoriesService.getAllCategories().then(
       (cats : Category[]) => {
         this.categories = cats;
-        console.log(this.categories)
-      }
-    );
-
-    this.relationService.getAllRelations().then(
-      (rels : Relation[]) => {
-        this.relations = rels;
-        console.log(this.relations)
+        
       }
     );
 
     this.ressourceTypeService.getAllRessourceTypes().then(
       (ress : RessourceType[]) => {
         this.ressourceType = ress;
-        console.log(this.ressourceType)
       }
     );
+
+    this.relationService.getAllRelations().then(
+      (rela : Relation[]) =>
+      {
+        this.relations = rela;
+      }
+    )
     
 
     this.ressourceForm = this.formBuilder.group({
@@ -145,55 +164,48 @@ checkTypes(event)
   console.log(this.typesCheck);
 }
 
-  onSubmit()
-  {
-    if(this.relationsCheck && this.typesCheck && this.ressourceForm.get('category').value
-    && this.ressourceForm.get('description').value)
-    {
-      this.ress = new Ressource();
+   onSubmit()
+   {
+
+     if(this.relationsCheck && this.typesCheck && this.ressourceForm.get('category').value)
+     {
+      const ress = new Ressource();
       const obj = JSON.parse(this.ressourceForm.get('category').value);
 
 
-      this.ress.relation = this.relationsCheck;
+      ress.relation = this.relationsCheck;
 
-      console.log(this.ress.relation)
+      console.log(ress.relation)
 
+      ress.ressourceType = this.typesCheck;
 
+      console.log(ress.ressourceType)
 
-      this.ress.ressourceType = this.typesCheck;
-
-      console.log(this.ress.ressourceType)
-
-      console.log(this.ress.ressourceType + " type" );
-      this.ress.category = obj
-      this.ress.posterPseudo = "";
-      this.ress.message = this.ressourceForm.get('postTitle').value;
-      if(this.ressourceForm.get('imageUrl').value)
-      {
-        this.ress.picture = this.ressourceForm.get('imageUrl').value;
-      }
-      else
-      {
-        this.ress.picture = "assets/images/post/img-1.jpg"
-      }
-      
-      this.ress.description= this.ressourceForm.get('description').value;
-      this.ress.likers = [null];
-      this.ress.comments = [null];
-      this.ressourceService.createNewPost(this.ress);
+      console.log(ress.ressourceType + " type" );
+      ress.category = obj
+        
+      ress._id = this.ressource._id;
+      ress.posterPseudo = this.ressource.posterPseudo;
+      ress.message = (this.ressourceForm.get('postTitle').value);
+      ress.picture = this.ressource.picture;
+      ress.likers = this.ressource.likers;
+      ress.comments = this.ressource.comments;
+      console.log(ress);
+      this.ressourceService.updatePost(ress).then(
+         ()=>
+         {
+           this.router.navigateByUrl('/actu');
+         }
+       )
+    
     }
-    else
-    {
-      this.error = true;
-      this.errorMessage = " Veuillez remplir tous les champs"
-    }
+     else
+     {
+       this.error = true;
+       this.errorMessage = " veuillez remplir tous les champs"
 
-     
-
-     
-      //Le posterId sera à récupérer d'une méthode static pour le fair véhiculer dans toute l'application
-
-  }
+     }
+   }
 
   getValueCat(event)
   {

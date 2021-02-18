@@ -689,6 +689,8 @@
   .post .post-heading {
     padding: 17px 15px;
     padding-bottom: 0;
+    border-radius :1%;
+    border-color: #3e416d;
   }
 
   .post-heading .post-avature img {

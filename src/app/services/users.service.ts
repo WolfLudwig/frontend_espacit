@@ -42,6 +42,30 @@ export class  UserService {
   public frd$ = new Subject<Users[]>();
   public oneUser$ = new Subject<Users>();
 
+  // checkLikesOnPost(id : String) 
+  // {
+  //   console.log( " checkLikes avant envoie au back : " + id)
+  //   return new Promise<any>((resolve, reject) =>
+  //   {
+  //    this.http.get('http://localhost:3000/api/users/likes/'+ id).subscribe(
+  //      (response) => 
+  //      {
+  //        console.log(response);
+  //        resolve(response);
+           
+  //      },
+  //      (error) =>
+  //      {
+  //        console.log(error);
+  //        reject(error);
+  //      }
+       
+  //    );
+      
+  //   }) 
+
+  // }
+
    getUser(_id : String) {
      console.log(_id + " id a traiter pour getUser");
      return new Promise<any>((resolve, reject) =>
@@ -70,13 +94,11 @@ export class  UserService {
      this.http.get('http://localhost:3000/api/users/infos').subscribe(
        (response) => 
        {
-         console.log(response);
          resolve(response);
            
        },
        (error) =>
        {
-         console.log(error);
          reject(error);
        }
        
@@ -150,8 +172,8 @@ export class  UserService {
         (friends : Users[]) => {
           if (friends) {
             this.usr = friends;
-            console.log(friends);
             this.emitFriends();
+            resolve(friends)
           } 
         },
         (error) => {

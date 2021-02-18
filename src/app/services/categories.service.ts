@@ -39,10 +39,10 @@ constructor(private http: HttpClient) {}
 
 
 
-   getCategoryById(id: string) {
+   getCategoryById(id: String) {
      return new Promise((resolve, reject) => {
        this.http.get('http://localhost:3000/api/category/' + id).subscribe(
-         (response) => {
+         (response : Category) => {
            resolve(response);
          },
          (error) => {
@@ -54,13 +54,11 @@ constructor(private http: HttpClient) {}
 
    getAllCategories()
   {
-    console.log("dans le getAll cat");
     return new Promise((resolve, reject) => {
       this.http.get('http://localhost:3000/api/category').subscribe(
         (cate : Category[]) => {
           if (cate) {
             this.cat = cate;
-            console.log(this.cat);
             resolve(cate);
             this.emitCategories();
           } 
