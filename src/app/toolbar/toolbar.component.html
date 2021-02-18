@@ -1,7 +1,6 @@
 <mat-toolbar fxLayout="row" fxLayoutAlign.gt-sm="space-around center" fxLayoutGap.gt-sm="15vw" [ngClass]="{ 'bg-light': account }">
     <div fxHide.gt-sm fxLayout="row" fxLayoutAlign="space-around center" fxFlex.lt-md="30">
-        <mat-icon fxHide.gt-sm>menu_open</mat-icon>
-        <a fxHide.gt-sm href="/"> <img src="assets/images/logo.png" class="logo-inverse" alt=""></a>
+        <mat-icon fxHide.gt-sm class="header-btn-traiger is-hidden" uk-toggle="target: #wrapper ; cls: collapse-sidebar mobile-visible">menu_open</mat-icon>&nbsp; &nbsp;
     </div>
     <mat-form-field  fxFlex.lt-md="45" fxFlex.gt-sm="60">
         <mat-icon matPrefix>search</mat-icon>

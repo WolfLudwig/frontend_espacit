@@ -13,7 +13,7 @@ export class JwtInterceptor implements HttpInterceptor {
         // ajouter un en-tête d'authentification avec jwt si le compte est connecté et que la demande est adressée à l'URL de l'API
         const account = this.accountService.accountValue;
         const isLoggedIn = account && account.jwtToken;
-        const isApiUrl = request.url.startsWith(environment.apiUrl);
+        const isApiUrl = request.url.startsWith('http://localhost:4000');
         if (isLoggedIn && isApiUrl) {
             request = request.clone({
                 setHeaders: { Authorization: `Bearer ${account.jwtToken}` }

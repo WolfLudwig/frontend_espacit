@@ -26,6 +26,20 @@
     bottom: 0;
 }
 
+@media (max-width: 600px) 
+{
+  .miniLogo{
+    display: none !important;
+  }
+}
+
+@media (min-width: 610px) 
+{
+  .mainLogo{
+    display: none !important;
+  }
+}
+
 /*   main sidebar
 
 .sidebar {
