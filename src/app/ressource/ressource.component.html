@@ -4,7 +4,7 @@
     <div *ngIf="error">
         <H3>{{errorMessage}}</H3>
     </div>
-<!--
+
     <mat-toolbar fxLayout="row" fxLayoutAlign.gt-sm="space-around center" fxLayoutGap.gt-sm="15vw">
         <div fxHide.gt-sm fxLayout="row" fxLayoutAlign="space-around center" fxFlex.lt-md="30">
             <mat-icon fxHide.gt-sm>menu_open</mat-icon>
@@ -32,8 +32,10 @@
                 <button (click)="validFilters()" style="position: relative; ">Valider la séléction</button>
             </div>
         </div>
-    </mat-toolbar> -->
-            <!-- <mat-icon><b>sort</b> </mat-icon>&nbsp; <b>Filter votre contenu</b>
+    </mat-toolbar>
+
+    <!-- Filtrage Ressource -->
+   <!--      <mat-icon><b>sort</b> </mat-icon>&nbsp; <b>Filter votre contenu</b>
         <div fxLayout="row" fxLayoutAlign="left" uk-dropdown="pos: bottom-right;mode:click ">
             
             <mat-icon  [ngStyle]="{'color': 'purple'}">category</mat-icon>&nbsp;Par catégories
@@ -60,7 +62,9 @@
                         </mat-list-item>
                     </mat-nav-list>
                 </div>
-        </div> -->
+        </div>
+-->
+        <!-- Affichage des ressources -->
         <mat-spinner *ngIf="isLoading" diameter="70" style="position: relative;" ></mat-spinner>
             <div class="post">
                 <div  *ngFor="let ress of ressources; let i = index" class="sl_group_list">
@@ -69,7 +73,7 @@
                             <img src="assets/images/post/img-1.jpg" alt="">
                         </div>
                         <div class="post-title">
-                            <h4> Ici le pseudo</h4>
+                            <h4 > {{ress.posterPseudo}} </h4>
                             <p> {{ress.createdAt}} <span> h</span> <i class="uil-users-alt"></i> </p>
                             <p>{{ ress.message}}</p>
                             <div *ngFor="let cat of ress.category">
@@ -82,7 +86,7 @@
                                 <p>{{type.title}}</p>
                             </div>
                         </div>
-                      <!--  <div class="post-btn-action">
+                       <div class="post-btn-action">
                             <span class="icon-more uil-ellipsis-h"></span>
                             <div class="mt-0 p-2" uk-dropdown="pos: top-right;mode:hover ">
                                 <ul class="uk-nav uk-dropdown-nav">
@@ -142,14 +146,14 @@
                         <i class="uil-bookmark"></i> 13 <span> Enregistré(e) </span>
                         </div>
                     </div>
-                -->
+
                     <!-- post comments -->
-                  <!--  <div class="post-comments" *ngFor="let comm of ress.comments;let j= index;">
-                        <div class="post-comments-single" *ngIf="comm != null"> -->
+                    <div class="post-comments" *ngFor="let comm of ress.comments;let j= index;">
+                        <div class="post-comments-single" *ngIf="comm != null">
                             <!-- <div class="post-comment-avatar">
                                 <img src="assets/images/avatars/avatar-5.jpg" alt="">
                             </div> -->
-                          <!--  <div class="post-comment-text">
+                            <div class="post-comment-text">
                                 <div class="post-comment-text-inner" >
                                     <div class="uk-slider-container">                            
                                         <div >
@@ -240,7 +244,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div> -->
+                                </div>
                                 <!-- <div class="uk-text-small">
                                     <a href="#" class="text-danger mr-1"> <i class="uil-heart"></i> J'aime
                                     </a>
