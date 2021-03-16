@@ -1,9 +1,11 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Observable, Subject, BehaviorSubject, interval, observable, from } from 'rxjs';
-import { Ressource, Account } from '../models';
+import { Ressource } from '../models';
 import { HttpClient } from '@angular/common/http';
 import { DataSource } from '@angular/cdk/table';
 import { map, switchMap, tap  } from 'rxjs/operators';
+import { Account } from '../models/account';
+
 
 
 @Injectable({
@@ -13,48 +15,50 @@ export class RessourceService {
 
 constructor(private http: HttpClient) {}
 
-  private ress: Ressource[] = [
-    {
-        _id : "1234",
-        posterId: "1234",
-        posterPseudo : "LaCrème",
-        message: "String",
-        picture:  "assets/images/logo-light-icon.png",
-        video:  "",
-        likers: [{ _id: "5ff2f561f3831a54b42fce83",
-            pseudo: "la crème",
-            email: "lacreme@gmail.com"}],
-        comments: [
-          {
-          commenterId : "1234",
-          commenterPseudo : "1234",
-           text :"un comm"},
-          ],
-          answers : {
-            commId: "1234",
-            answId :"1234",
-            commenterIdent :"identifiant ce celui qui a mit le comm",
-            commPseudo: "pseudoCommenter",
-            answerId: "idReponse",
-            answerPseudo: "pseudo du repondeux",
-            answertext: "reponse",
-          },
-          thread :
-          {
-            threadPostId: "String",
-            threadAsnwId: "String",
-            threadPseudo: "String",
-            threadMyId: "String",
-            threadMyPseudo: "String",
-            threadText: "String",
+private ress: Ressource[] = [
+  {
+      _id : "1234",
+      posterId: "1234",
+      posterPseudo : "LaCrème",
+      message: "String",
+      picture:  "assets/images/logo-light-icon.png",
+      video:  "",
+      description : "",
+      likers: [{ _id: "5ff2f561f3831a54b42fce83",
+          pseudo: "la crème",
+          email: "lacreme@gmail.com"}],
+      comments: [
+        {
+        commenterId : "1234",
+        commenterPseudo : "1234",
+         text :"un comm"},
+        ],
+        answers : {
+          commId: "1234",
+          answId :"1234",
+          commenterIdent :"identifiant ce celui qui a mit le comm",
+          commPseudo: "pseudoCommenter",
+          answerId: "idReponse",
+          answerPseudo: "pseudo du repondeux",
+          answertext: "reponse",
+        },
+        thread :
+        {
+          threadPostId: "String",
+          threadAsnwId: "String",
+          threadPseudo: "String",
+          threadMyId: "String",
+          threadMyPseudo: "String",
+          threadText: "String",
 
-          },
-        relation : [{_id :"1234", title :"1 relation", description :"une description de rel "}],       
-        category : {_id : "1234", title :"1 catégorie", description :"une description de cat"},
-        ressourceType : [{_id :"1234", title :"1 type de ressource", description :"une description de ress "}]
-      
-    }
-  ];
+        },
+      relation : [{_id :"1234", title :"1 relation", description :"une description de rel "}],       
+      category : {_id : "1234", title :"1 catégorie", description :"une description de cat"},
+      ressourceType : [{_id :"1234", title :"1 type de ressource", description :"une description de ress "}]
+    
+  }
+];
+
 
 
   private user: Account[] = [];
@@ -78,13 +82,16 @@ constructor(private http: HttpClient) {}
      });
    }
 
-  createNewPost(ress: Ressource) {
-      return this.http.post('http://localhost:4000/api/post', ress).subscribe(
+  createNewPost(ress: Ressource, account : Account) {
+    return new Promise((resolve, reject) => {
+      this.http.post('http://localhost:4000/api/post', {ress, account}).subscribe(
         (ress : Ressource) => {
           if (ress) {
             console.log(ress)
             this.ress.push(ress)
+            
             this.emitPosts();
+            resolve(ress);
             
           } 
         },
@@ -92,6 +99,9 @@ constructor(private http: HttpClient) {}
           console.log(error);
         }
       );
+
+    })
+      
   }
 
   getAllPostsByFilters(cat : any[], rel : any[], type : any[]) {
@@ -144,10 +154,9 @@ constructor(private http: HttpClient) {}
       this.http.get('http://localhost:4000/api/post').subscribe(
         (ress: Ressource[]) => {
           if (ress) {
-            console.log(ress);
             this.ress = ress;
              resolve(ress);
-            //this.emitPosts();
+            this.emitPosts();
 
           }
         },
@@ -168,20 +177,18 @@ constructor(private http: HttpClient) {}
      }
 
 
-  addLike(idRess : any )
+  addLike(idRess : String, idUser : String )
   {
     
     return new Promise((resolve, reject) => {
-      this.http.patch('http://localhost:4000/api/post/like', {idRess}).subscribe(
+      this.http.patch('http://localhost:4000/api/post/like', {idRess, idUser}).subscribe(
         (res: Ressource) => {
           console.log(res);
           this.ress.forEach(element =>
-            {
-              
+            {  
               if(element._id == res._id)
               {
-
-                element.likers =  res.likers;
+                element.likers = res.likers;
                 console.log(element.likers + " ressources");
                 console.log(res.likers + "reponse");
               }
@@ -199,10 +206,10 @@ constructor(private http: HttpClient) {}
 
   }
 
-  unLike(idRess : any )
+  unLike(idRess : String, idUser : String )
   {
     return new Promise((resolve, reject) => {
-      this.http.patch('http://localhost:4000/api/post/unlike-post', {idRess}).subscribe(
+      this.http.patch('http://localhost:4000/api/post/unlike-post', {idRess, idUser}).subscribe(
         (response: Ressource) => {
           console.log(response + " ressource après unlike");
           this.ress.forEach(element =>

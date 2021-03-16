@@ -12,16 +12,30 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class ToolbarComponent implements OnInit {
   Role = Role;
   account: Account;
+  public isLoggedIn = false;
 
   @Output() openChat = new EventEmitter<boolean>();
 
   constructor(private accountService: AccountService) {
-    this.accountService.account.subscribe(x => this.account = x);
+    this.accountService.account.subscribe(x => 
+      {
+        if(x != null)
+        {
+          this.account = x;
+          this.isLoggedIn = true;
+        }
+        else
+        {
+          this.isLoggedIn = false;
+        }
+
+      });
    }
 
   ngOnInit(): void {}
 
   logout() {
+    this.isLoggedIn = false;
     this.accountService.logout();
   }
 

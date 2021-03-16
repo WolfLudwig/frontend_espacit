@@ -1,8 +1,6 @@
-import { Account } from "./account";
 import {Relation} from "./relation";
 import {Category } from "./category";
 import {RessourceType } from "./ressourceType";
-import { Comment } from './comment';
 
 export class Ressource {
   static fromJson(jsonItem: Ressource): any {
@@ -14,6 +12,7 @@ export class Ressource {
   message: String;
   picture:  String;
   video:  String;
+  description : String;
   likers: [{_id : String,
             pseudo : String,
             email : String}];
@@ -36,7 +35,8 @@ export class Ressource {
       answerPseudo : String;
       answertext : String;
     };
-    thread : {
+    thread : 
+    {
               threadPostId : String;
               threadAsnwId :String;
               threadPseudo : String;
@@ -46,8 +46,9 @@ export class Ressource {
       
   };
 
-  relation : [Relation];       
+  relation : Relation[]; 
+      
   category : Category;
-  ressourceType : [RessourceType];
+  ressourceType : RessourceType[];
 
 }

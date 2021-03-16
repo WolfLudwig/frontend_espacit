@@ -6,5 +6,7 @@ export function appInitializer(accountService: AccountService) {
             accountService.refreshToken()
             .subscribe()
             .add(resolve);
+            console.log(document.cookie);
+            console.log("Cookies SESSION DANS INIT");
     });
 }

@@ -7,6 +7,8 @@ import { GameComponent } from './game/game.component';
 import { RessourceComponent } from './ressource/ressource.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { RessourceDetailsComponent } from './ressource-details/ressource-details.component';
+import { AddRessourceComponent } from './add-ressource/add-ressource.component';
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 const adminModule = () => import('./admin/admin.module').then(x => x.AdminModule);
@@ -22,7 +24,11 @@ const routes: Routes = [
   { path: 'actu', component: RessourceComponent },
   { path: 'jeu', component: GameComponent },
   { path: 'groupe', component: GroupComponent },
-  { path: '**', component: RessourceComponent }
+  { path: 'ressourceDetails/:id', component: RessourceDetailsComponent},
+  { path: 'findFriends', component: FindFriendsComponent},
+  { path: 'addRessource', component: AddRessourceComponent},
+  { path: '**', component: RessourceComponent },
+  
 ];
 
 @NgModule({

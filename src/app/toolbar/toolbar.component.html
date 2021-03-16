@@ -7,12 +7,12 @@
         <input  matInput type="text" placeholder="Recherchez des amis, des vidéos et plus encore..." />
     </mat-form-field>
     <div fxLayout="row" fxLayoutAlign="space-around center" fxFlex="15">
-        <mat-icon >create</mat-icon>
-        <div uk-dropdown="pos: bottom-right;mode:click ">
+        <mat-icon *ngIf ="isLoggedIn" >create</mat-icon>
+        <div *ngIf ="isLoggedIn" uk-dropdown="pos: bottom-right;mode:click " >
             <mat-list>
                 <mat-list-item>
                     <mat-icon [ngStyle]="{'color': 'purple'}">campaign</mat-icon>
-                    &nbsp;Créer une ressource
+                    &nbsp;<a routerLink="/addRessource">Créer une ressource</a>
                 </mat-list-item>
                 <mat-list-item>
                     <mat-icon [ngStyle]="{'color': 'green'}">event_available</mat-icon>

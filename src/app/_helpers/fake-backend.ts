@@ -370,6 +370,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
         function generateRefreshToken() {
             const token = new Date().getTime().toString();
+            console.log(" DANS GENERATEREFRESHTOKEN !!! ")
 
             // add token cookie that expires in 7 days
             const expires = new Date(Date.now() + 7*24*60*60*1000).toUTCString();
@@ -380,7 +381,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
         function getRefreshToken() {
             // get refresh token from cookie
+            console.log((document.cookie.split(';').find(x => x.includes('fakeRefreshToken')) || '=').split('=')[1])
+            console.log("REFRESH TOKEN !!!!!!!")
             return (document.cookie.split(';').find(x => x.includes('fakeRefreshToken')) || '=').split('=')[1];
+            
         }
     }
 }

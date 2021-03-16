@@ -7,7 +7,6 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, finalize } from 'rxjs/operators';
 
-import { environment } from './../../environments/environment';
 
 
 const baseUrl = 'http://localhost:4000/accounts';
@@ -34,6 +33,7 @@ export class AccountService {
             .pipe(map(account => {
                 this.accountSubject.next(account);
                 if (account.status === false){
+                    this.logout();
                     return alert('Votre compte a été désactiver');
                 }
                 else {
@@ -51,6 +51,7 @@ export class AccountService {
     }
 
     refreshToken() {
+        console.log("Dans REFRESHTOKEN");
         return this.http.post<any>(`${baseUrl}/refresh-token`, {}, { withCredentials: true })
             .pipe(map((account) => {
                 this.accountSubject.next(account);
@@ -78,6 +79,25 @@ export class AccountService {
     resetPassword(token: string, password: string, confirmPassword: string) {
         return this.http.post(`${baseUrl}/reset-password`, { token, password, confirmPassword });
     }
+
+    getCurrentUser(id : string) {
+        return new Promise<any>((resolve, reject) =>
+        {
+         this.http.get('http://localhost:4000/accounts/infos/' + id).subscribe(
+           (account) => 
+           {
+             resolve(account);
+               
+           },
+           (error) =>
+           {
+             reject(error);
+           }
+           
+         );
+          
+        }) 
+      }
 
     getAll() {
         return this.http.get<Account[]>(baseUrl);

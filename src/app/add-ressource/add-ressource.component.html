@@ -1,0 +1,74 @@
+ <!-- Content
+    ================================================== -->
+<div class="default">
+    <br/>
+    <br/>
+    <div *ngIf="error" class="uk-alert-danger">
+        {{errorMessage}}
+    </div>
+        <form [formGroup] = " ressourceForm " class="uk-child-width-1-1 uk-grid-small" uk-grid >
+            <div>
+                <div class="uk-form-group">
+                    <label class="uk-form-label"> Titre de l'article </label>
+
+                    <div class="uk-position-relative w-100">
+                        <span class="uk-form-icon">
+                            <i class="icon-feather-user"></i>
+                        </span>
+                        <input formControlName="postTitle" class="uk-input" type="text" placeholder="Titre">
+                    </div>
+
+                </div>
+            </div>
+            <div class="uk-width-auto@s">
+                <label class="uk-form-label" for="category">  Catégories</label>
+                <div class="uk-position-relative w-100">
+                    <select name="category" formControlName="category" (change) ="getValueCat($event)">
+                        <option *ngFor="let cat of categories" [value]="toStr(cat)">{{cat.title}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <!-- <label class="uk-form-label" for="ressourceType" >Type de ressource</label>
+                <div class="uk-position-relative w-100">
+                    <select name="ressourceType"  formControlName="ressourceType" (change) ="getValueType($event)">
+                        <option  *ngFor="let ress of ressourceType" [value]="ress._id">{{ress.title}}</option>
+                    </select>
+                </div> -->
+                <div>
+                    
+                    <mat-list class="uk-width-auto@s">
+                        <label class="uk-form-label" for="ressourceType" >Types de ressource</label>
+                    <mat-list-item *ngFor = "let ress of ressourceType" (change) = "checkTypes($event)">
+                        <input type="checkbox" [checked]="false" [value]="toStr(ress)"> {{ress.title}}
+                    </mat-list-item>
+                </mat-list>
+                </div>
+            </div>
+            <div>
+                <mat-list class="uk-width-auto@s">
+                    <label class="uk-form-label" for="relation" >Relations : </label>
+                    <mat-list-item *ngFor = "let rel of relations" (change) = "checkRelations($event)">
+                        <input type="checkbox" [checked]="false" [value]="toStr(rel)"> {{rel.title}}
+                    </mat-list-item>
+                </mat-list>
+            </div>
+            <div class="uk-form-group">
+                <label class="uk-form-label" for="imageUrl">URL de l'image : </label>
+                <input type="text" placeholder="http://..." id="imageUrl" formControlName="imageUrl" class="form-control">
+            </div>
+            <div class="uk-form-group">
+                <label class="uk-form-label" for="description">Description : </label>
+                <input type="text" placeholder="Ajouter une description" id="description" formControlName="description" 
+                style="width: 400px; height: 200px;">
+            </div>
+            <div class="uk-width-auto@s position : center; text-align:center">
+                <button type="button" class="btn button small primary">
+                    <input type="submit" class="button primary" value="Ajouter" (click)="onSubmit()">
+                </button>
+            </div>
+
+        </form>
+</div>
+  
+  

@@ -40,7 +40,7 @@ constructor(private http: HttpClient) {}
    getAllRessourceTypes()
   {
     return new Promise((resolve, reject) => {
-      this.http.get('http://localhost:4000/ressourceType').subscribe(
+      this.http.get('http://localhost:4000/api/ressourceType').subscribe(
         (ress : RessourceType[]) => {
           if (ress) {
             this.typeRess = ress;
