@@ -29,9 +29,9 @@
           <mat-icon><a routerLink="/actu">home</a></mat-icon>
         <mat-icon>person</mat-icon>
         <div uk-dropdown="pos: bottom-right;mode:click ">
-        <mat-list *ngIf="!account">
+        <mat-list *ngIf="!isLoggedIn">
             <mat-list-item>
-                <p *ngIf="!account">Vous n'êtes pas connecté !</p>
+                <p>Vous n'êtes pas connecté !</p>
             </mat-list-item>
             <mat-list-item>
                 <mat-icon [ngStyle]="{'color': 'red'}"><a routerLink="/account/register">assignment_ind</a></mat-icon>
@@ -42,15 +42,26 @@
                 <span><a routerLink="/account/login">&nbsp; Se connecter</a></span>
             </mat-list-item>
         </mat-list>
-            <mat-list *ngIf="account">
-                <mat-list-item>
-                    <p *ngIf="account">Bonjour {{account.role}}</p>
-                </mat-list-item>
-            <mat-list>
-                  <a routerLink="/profile" routerLinkActive="active" class="nav-item nav-link">Profile</a>
-                  <a *ngIf="account.role === Role.Admin" routerLink="/admin" routerLinkActive="active" class="nav-item nav-link">Admin</a>
+            <mat-list *ngIf="isLoggedIn">
+                <mat-list>
+                    <mat-list-item>
+                        <p style="text-align: center;"><b>Rôle : {{account.role}} </b></p>
+                    </mat-list-item>
+                    <mat-list>
+                        <mat-list-item>
+                            <mat-icon [ngStyle]="{'color': 'black'}">account_circle</mat-icon>
+                            <a routerLink="/profile" routerLinkActive="active" style="text-align: center; " class="nav-item nav-link"><span>&nbsp; Mon profil</span></a>
+                        </mat-list-item>
+                        <mat-list-item *ngIf="account.role === Role.Admin">
+                            <mat-icon [ngStyle]="{'color': 'blue'}">account_circle</mat-icon>
+                            <a  routerLink="/admin" routerLinkActive="active" class="nav-item nav-link"><span>&nbsp; Gestion Admin</span></a>
+                        </mat-list-item>
+                        <mat-list-item *ngIf="account.role === Role.SuperAdmin">
+                            <mat-icon [ngStyle]="{'color': 'yellow'}">account_circle</mat-icon>
+                                <a  routerLink="/superadmin" routerLinkActive="active" class="nav-item nav-link">Gestion Administration</a>
+                        </mat-list-item>
+                    </mat-list>
                 </mat-list>
-                <a *ngIf="account.role === Role.SuperAdmin" routerLink="/superadmin" routerLinkActive="active" class="nav-item nav-link">Administration</a>
                 <mat-list>
                     <mat-list-item>
                         <mat-icon [ngStyle]="{'color': 'purple'}">campaign</mat-icon>

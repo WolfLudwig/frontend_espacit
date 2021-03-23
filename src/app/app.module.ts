@@ -31,6 +31,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { RessourceDetailsComponent } from './ressource-details/ressource-details.component';
 import { AddRessourceComponent } from './add-ressource/add-ressource.component';
+import { MyFriendsComponent } from './myFriends/myFriends.component';
+import { ModifyRessourceComponent } from './modify-ressource/modify-ressource.component';
 
 
 @NgModule({
@@ -45,7 +47,10 @@ import { AddRessourceComponent } from './add-ressource/add-ressource.component';
     FindFriendsComponent,
     RessourceDetailsComponent,
     AddRessourceComponent,
-    FindFriendsComponent
+    FindFriendsComponent,
+    MyFriendsComponent,
+    ModifyRessourceComponent
+
   ],
   imports: [
     BrowserModule,

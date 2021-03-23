@@ -82,6 +82,64 @@ private ress: Ressource[] = [
      });
    }
 
+   updatePost(ress : Ressource)
+  {
+    return new Promise((resolve, reject) => {
+      this.http.patch('http://localhost:4000/api/post/update', ress).subscribe(
+        (ress : Ressource[]) => {
+          if (ress) {
+            console.log(ress)
+            this.ress = ress
+            this.emitPosts();
+            resolve(ress)
+            
+          } 
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    })
+
+  }
+
+   delepost(id : String)
+   {
+     return new Promise((resolve, reject) => {
+       this.http.delete('http://localhost:4000/api/post/'+ id).subscribe(
+         (response : Ressource) => {
+           if(response)
+           {
+             var id;
+             var count = 0
+ 
+             this.ress.forEach(element =>
+               {
+                 
+                 
+                 if(element._id == response._id)
+                 {
+   
+                   id = count
+                 }
+                 count ++
+               })
+           }
+ 
+           this.ress.splice(id, 1);
+ 
+           resolve(response)
+           this.emitPosts();
+ 
+         },
+         (error) => {
+           reject(error);
+         }
+       );
+     });
+ 
+   }
+
   createNewPost(ress: Ressource, account : Account) {
     return new Promise((resolve, reject) => {
       this.http.post('http://localhost:4000/api/post', {ress, account}).subscribe(

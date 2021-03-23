@@ -69,13 +69,17 @@
                             </div>
 
 
-                        <div class="post-btn-action" *ngIf="user">
+                        <div class="post-btn-action" *ngIf="account">
                             <span class="icon-more uil-ellipsis-h"></span>
                             <div class="mt-0 p-2" uk-dropdown="pos: bottom-left;mode:click ">
                                 <ul class="uk-nav uk-dropdown-nav" style="text-align: center; margin:auto; padding : auto;">
                                     <li><a href="#"> <b> Signaler</b></a> </li>
-                                    <li *ngIf="ress.posterId == user._id"><a (click) ="modifyRessource(ress._id)"> <b> Modifier</b></a> </li>
-                                    <li *ngIf="ress.posterId == user._id"><a (click) ="deletePost(ress._id)"><b> Supprimer</b></a> </li>
+                                    <li *ngIf="ress.posterId == account._id">
+                                            <a (click) ="modifyRessource(ress._id)"> <b> Modifier</b></a> 
+                                    </li>
+                                    <li *ngIf="ress.posterId == account._id">
+                                            <a (click) ="deletePost(ress._id)"><b> Supprimer</b></a> 
+                                    </li>
                                 </ul>
                             </div>
                         </div>

@@ -71,6 +71,8 @@ export class RessourceComponent implements OnInit {
       userComm: [null],
     });
 
+    
+
     this.ressourceService.getAllPosts().then(
       (ress : Ressource[]) =>
       {
@@ -113,6 +115,8 @@ export class RessourceComponent implements OnInit {
 
 
   }
+
+  
 
   like(idRess : String)
   {  
@@ -340,5 +344,19 @@ export class RessourceComponent implements OnInit {
       this.catFilters.push(event.target.value);
 
   }
+}
+
+modifyRessource(ressource : Ressource)
+{
+  this.router.navigateByUrl('/modifyRessource/' + ressource);
+}
+
+deletePost(id : String)
+{
+  this.ressourceService.delepost(id).then(
+    () => {
+      console.log(this.ressources)
+    }
+  )
 }
 }
