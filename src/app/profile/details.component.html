@@ -1,8 +1,79 @@
-﻿<h1>Mon profil</h1>
+﻿<br/>
+<h1> Mon profil </h1>
+<br/>
+<br/>
+<div class="default">
+    <div >
+      <div >
+        <div class="sl_find_frns_user">
+            <div class="sl_find_frns_user_cover">
+                <img src="assets/images/group/group-cover.jpg" alt="">
+            </div>
+            <div class="sl_find_frns_user_info">
+                <div class="sl_find_frns_user_avatar">
+                    <a href="timeline.html">
+                        <img src="assets/images/avatars/avatar-4.jpg" alt="">
+                    </a>
+                </div>
+                <h4> <a href="timeline.html">{{user.pseudo}} </a> </h4>
+            </div>
+            <div class="sl_find_frns_user_btns">
+                <span>
+                    <button type="button" class="btn button small primary" >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="8.5" cy="7" r="4"></circle>
+                            <line x1="20" y1="8" x2="20" y2="14"></line>
+                            <line x1="23" y1="11" x2="17" y2="11"></line>
+                        </svg>
+                        <div *ngIf="!paramId">
+                            <button > <a routerLink="update"> Modifier </a>  </button>
+                        </div>
+                        <div *ngIf="paramId">
+                            <button  ><a routerlink = "/profil(paramId)">  Supprimer  </a></button>
+                        </div>
+                    </button>
+                </span>
+            </div>
+        </div>
+        <div class="default ress">
+            <div class="post" >
+                <mat-accordion multi ="true" class = "uk-position-relative" uk-slider="finite: false" class = "chat"> 
+                    <mat-expansion-panel >
+                      <mat-expansion-panel-header>
+                        <mat-panel-title> <h3>Mes ressource aimées </h3></mat-panel-title>
+                      </mat-expansion-panel-header>
+                      <mat-list *ngFor =" let likes of ressource">
+                            <div class="sl_group_list">
+                                <div *ngIf="likes? likes.posterPseudo : Un utilisateur">
+                                    <mat-list-item><span>Publié par : </span>&nbsp;<b>{{likes.posterPseudo}}</b>&nbsp;</mat-list-item>
+                                    <mat-list-item *ngIf="likes.picture"><a (click) ="ressourceDetails(likes._id)"> <p ><img  src="{{likes.picture}}" alt=""  height="50px" width="100px">&nbsp;<span>Titre : </span>&nbsp;{{likes.message}}</p></a></mat-list-item>
+                                    <mat-list-item *ngIf="!likes.picture"><a (click) ="ressourceDetails(likes._id)"><p ><img src="assets/images/post/img-1.jpg" alt=""  height="50px" width="100px">&nbsp;<span>Titre : </span>&nbsp;{{likes.message}}</p></a></mat-list-item>
+                                    <mat-list-item *ngIf="!paramId"><button (click)="unLike(likes._id)" value="likes._id">Ne plus aimer</button></mat-list-item>
+                                </div>
+                            </div>
+                        </mat-list>   
+                    </mat-expansion-panel>
+                    <mat-expansion-panel >
+                      <mat-expansion-panel-header>
+                        <mat-panel-title><h3> Ressources partagées </h3></mat-panel-title>
+                      </mat-expansion-panel-header>
+                      <p>Liste de toutes les ressources partagées</p>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </div>
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+</div>
+<!-- <h1>Mon profil</h1>
 <p>
     <strong>Nom d'utilisateur: </strong> {{account.pseudo}}<br/>
     <strong>Nom: </strong> {{account.title}} {{account.firstName}} {{account.lastName}}<br />
     <strong>Adresse mail: </strong> {{account.email}}<br/>
     <strong>Adresse: </strong> {{account.adress}} {{account.city}} {{account.zipCode}}<br />
-</p>
-<p><a routerLink="update">Mettre à jour le profil</a></p>
+</p> -->
+
+  

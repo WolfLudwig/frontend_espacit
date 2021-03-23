@@ -33,6 +33,7 @@ import { RessourceDetailsComponent } from './ressource-details/ressource-details
 import { AddRessourceComponent } from './add-ressource/add-ressource.component';
 import { MyFriendsComponent } from './myFriends/myFriends.component';
 import { ModifyRessourceComponent } from './modify-ressource/modify-ressource.component';
+import { ProfileModule } from './profile/profile.module';
 
 
 @NgModule({
@@ -49,7 +50,7 @@ import { ModifyRessourceComponent } from './modify-ressource/modify-ressource.co
     AddRessourceComponent,
     FindFriendsComponent,
     MyFriendsComponent,
-    ModifyRessourceComponent
+    ModifyRessourceComponent,
 
   ],
   imports: [
@@ -81,7 +82,8 @@ import { ModifyRessourceComponent } from './modify-ressource/modify-ressource.co
   exports: [
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatExpansionModule
   ],
   bootstrap: [AppComponent]
 })

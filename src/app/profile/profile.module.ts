@@ -6,12 +6,15 @@ import { ProfileRoutingModule } from './profile-routing.module';
 import { LayoutComponent } from './layout.component';
 import { DetailsComponent } from './details.component';
 import { UpdateComponent } from './update.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
     imports: [
         CommonModule,
         ReactiveFormsModule,
-        ProfileRoutingModule
+        ProfileRoutingModule,
+        MatExpansionModule
+        
     ],
     declarations: [
         LayoutComponent,

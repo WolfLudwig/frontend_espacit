@@ -92,7 +92,7 @@
                             <p style="text-align:center"><img  [src]="ress.picture" alt=""  ></p>
                         </ng-template>
                         <ng-template #noIMG >
-                            <p style="text-align:center"><img src="assets/images/post/img-1.jpg" alt=""></p>
+                            <p style="text-align:center; size: 1ch;"><img src="assets/images/post/img-1.jpg" alt=""></p>
                         </ng-template>
                     </div>
                     </a>
@@ -102,11 +102,11 @@
                             </ng-container>                    
                                 <ng-template #likes>
                                     <button  [value]="ress._id" class ="uil-heart" style="color: blue; position: relative; text-align: center;"  
-                                    (click)="unLike(ress._id)" > {{ress.likers.length-1}}<span > Aimé(e) </span></button>
+                                    (click)="unLike(ress._id)" > {{ress.likers.length}}<span > Aimé(e) </span></button>
                                 </ng-template>
                                 <ng-template #unlikes >
                                         <button [value]="ress._id" class ="uil-heart" style="color: grey; ; position: relative; text-align: center;" 
-                                        (click)="like(ress._id)"> {{ress.likers.length-1}}<span > Aimé(e) </span></button>
+                                        (click)="like(ress._id)"> {{ress.likers.length}}<span > Aimé(e) </span></button>
                                 </ng-template>            
                             <button class="uil-share-alt" style="color: grey; ; position: relative; text-align: center;"> 193 <span> Partagé
                             </span></button>

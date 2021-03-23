@@ -1,8 +1,9 @@
 ﻿<div class="uk-grid-collapse bg-gradient-primary" uk-grid>
   <div class="uk-card-default px-5 py-8">
-    <div class="mb-4 uk-text-center">
-        <h1 class="mb-0">Mettre à jour le profil</h1>
-          <form class="uk-child-width-1-1 uk-grid-small" uk-grid [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="mb-4;">
+      <div>
+        <h1 class="mb-0" style="text-align: left;">Mettre à jour le profil</h1>
+          <form class="uk-child-width-1-1 uk-grid-small" uk-grid [formGroup]="form" (ngSubmit)="onSubmit()" >
             <br/>
             <br/>
             <div class="uk-form-group uk-width-1-2@s">
@@ -105,8 +106,11 @@
                 </div>
               </div>
             </div>
+            <br/>
+            <div class="uk-divider-icon"></div>
+            <br/>
             <div class="mb-4 uk-text-center">
-              <h2 class="mb-0">Changer le mot de passe</h2>
+              <h2 class="mb-0" style="text-align: left;">Changer le mot de passe</h2>
               <p>Laisser vide pour conserver le même mot de passe</p>
             </div>
             <div class="uk-width-1-2@s">
