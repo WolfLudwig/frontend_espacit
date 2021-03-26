@@ -176,7 +176,8 @@ checkTypes(event)
       {
         this.ress.picture = "assets/images/post/img-1.jpg"
       }
-      
+      console.log("ACCOUNT")
+      console.log(this.account)
 
       this.ress.description= this.ressourceForm.get('description').value;
       this.ressourceService.createNewPost(this.ress, this.account).then(

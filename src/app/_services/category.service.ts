@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Category } from '../models';
 import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +20,11 @@ constructor(private http: HttpClient) {}
     },
   ];
 
+  private category : Category;
+
   
   public cat$ = new Subject<Category[]>();
+  public category$ = new Subject<Category>();
 
 //   getUser() {
 //     this.http.get('http://localhost:3000/api/post').subscribe(
@@ -37,12 +41,63 @@ constructor(private http: HttpClient) {}
 //     );
 //   }
 
+  deleteCategory(id : String)
+  {
+    console.log("Avant d'envoyer au back")
+    return new Promise((resolve, reject) => {
+      this.http.delete('http://localhost:4000/api/category/' + id).subscribe(
+        (response) => {
+          console.log("RETOUR DU BACK")
+          console.log(response)
+          resolve(response);
+          this.getAllCategories();
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+
+  }
+
+  createCategory(cat : Category)
+  {
+    console.log("CREATE")
+    console.log(cat);
+    return this.http.post('http://localhost:4000/api/category/', {cat})
+            .pipe(map((cat: any) => 
+            {
+              console.log("SORTIE DE CREATE CAT")
+              console.log(cat)
+                  this.category = { ...cat };
+                  this.category$.next(this.category);
+
+                return cat;
+            }));
+  }
+  
+  updateCategory(cat : Category)
+  {
+    console.log("UPDATE")
+    console.log(cat)
+
+    return this.http.patch('http://localhost:4000/api/category/', {cat})
+            .pipe(map((cat: any) => 
+            {
+              console.log("SORTIE DE UPDATE CAT")
+              console.log(cat)
+              this.category = { ...cat };
+              this.category$.next(this.category);
+            }));
+  }
+
 
 
    getCategoryById(id: string) {
      return new Promise((resolve, reject) => {
-       this.http.get('http://localhost:4000/api/category/' + id).subscribe(
+       return this.http.get('http://localhost:4000/api/category/' + id).subscribe(
          (response) => {
+           console.log(response)
            resolve(response);
          },
          (error) => {

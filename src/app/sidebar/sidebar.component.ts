@@ -18,24 +18,41 @@ export class SidebarComponent implements OnInit {
   showModeratorBoard = false;
   username?: string;
 
-  constructor(private accountService: AccountService) { this.accountService.account.subscribe(x => this.account = x);}
-  public menu = [
-    //Part non connectée
-    { icone: 'login', nom: 'Se connecter', lien: '/account/login' },
-    { icone: 'assignment_ind', nom: 'S\'inscrire', lien: '/account/register' },
+  constructor(private accountService: AccountService) { this.accountService.account.subscribe(x => this.account = x);
+  console.log(this.account)}
+
+  public unSignMenu =
+  [
+        //Part non connectée
+      { icone: 'login', nom: 'Se connecter', lien: '/account/login' },
+      { icone: 'assignment_ind', nom: 'S\'inscrire', lien: '/account/register' },
+  ]
+  public userMenu = [
     //Part connectée
     { icone: 'home', nom: 'Fil d\'actualité', lien: '/actu' },
-    { icone: 'article', nom: 'Mon fil', lien: '/actu' },
     { icone: 'gamepad', nom: 'Jeux', lien: '/jeu' },
-    { icone: 'explore', nom: 'Explorer', lien: '/groupe' },
     { icone: 'groups', nom: 'Groupes', lien: 'groupe' },
     { icone: 'person_add', nom: 'Retrouver des amis', lien: '/findFriends'},
-    //Part admin
-    { icone: 'supervised_user_circle', nom: 'Créer un admin', lien: '/createUser'},
-    { icone: 'people_outline', nom: 'Liste des utilisateurs', lien: '/userList'}
-
-
   ];
+  public moderatorMenu = 
+  [
+    { icone: 'home', nom: 'Fil d\'actualité', lien: '/actu' },
+    { icone: 'gamepad', nom: 'Jeux', lien: '/jeu' },
+    { icone: 'groups', nom: 'Groupes', lien: 'groupe' },
+    { icone: 'person_add', nom: 'Retrouver des amis', lien: '/findFriends'},
+    { icone: 'supervised_user_circle', nom: 'Signalements', lien: '/reports'},
+
+  ]
+  public adminMenu =
+  [
+    { icone: 'home', nom: 'Fil d\'actualité', lien: '/actu' },
+    { icone: 'gamepad', nom: 'Jeux', lien: '/jeu' },
+    { icone: 'groups', nom: 'Groupes', lien: 'groupe' },
+    { icone: 'person_add', nom: 'Retrouver des amis', lien: '/findFriends'},
+    { icone: 'supervised_user_circle', nom: 'Créer un utilisateur', lien: '/createUser'},
+  ]
+
+      
 
   ngOnInit(): void {
 

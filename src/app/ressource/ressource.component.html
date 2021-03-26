@@ -12,6 +12,7 @@
             <a fxHide.gt-sm href="/"> <img src="assets/images/logo.png" class="logo-inverse" alt=""></a>
         </div>
         <div fxLayout="column" fxLayoutAlign="space-around center" fxFlex="15">
+            <span><b>Filtrer le contenu</b></span>
             <mat-icon >sort</mat-icon>
             <div uk-dropdown="pos: bottom-center;mode:click ">
                 <mat-list fxLayout="column">
@@ -34,6 +35,7 @@
             </div>
         </div>
     </mat-toolbar>
+    <br/>
         <mat-spinner *ngIf="isLoading" diameter="70" style="position: relative;" ></mat-spinner>
             <div *ngFor="let ress of ressources; let i = index" class="sl_group_list"> 
                 <div>

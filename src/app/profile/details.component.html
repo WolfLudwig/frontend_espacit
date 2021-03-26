@@ -16,6 +16,11 @@
                     </a>
                 </div>
                 <h4> <a href="timeline.html">{{user.pseudo}} </a> </h4>
+                <p>
+                    <strong>Nom: </strong> {{user.title}} {{user.firstName}} {{user.lastName}}<br />
+                    <strong>Email: </strong> {{user.email}}<br/>
+                    <strong>Adresse: </strong> {{user.adress}} {{user.city}} {{user.zipCode}}<br />
+                </p>
             </div>
             <div class="sl_find_frns_user_btns">
                 <span>
@@ -42,7 +47,7 @@
                 <mat-accordion multi ="true" class = "uk-position-relative" uk-slider="finite: false" class = "chat"> 
                     <mat-expansion-panel >
                       <mat-expansion-panel-header>
-                        <mat-panel-title> <h3>Mes ressource aimées </h3></mat-panel-title>
+                        <mat-panel-title> <h3>Les ressources aimées </h3></mat-panel-title>
                       </mat-expansion-panel-header>
                       <mat-list *ngFor =" let likes of ressource">
                             <div class="sl_group_list">
@@ -68,12 +73,6 @@
     </div>
     <router-outlet></router-outlet>
 </div>
-<!-- <h1>Mon profil</h1>
-<p>
-    <strong>Nom d'utilisateur: </strong> {{account.pseudo}}<br/>
-    <strong>Nom: </strong> {{account.title}} {{account.firstName}} {{account.lastName}}<br />
-    <strong>Adresse mail: </strong> {{account.email}}<br/>
-    <strong>Adresse: </strong> {{account.adress}} {{account.city}} {{account.zipCode}}<br />
-</p> -->
+
 
   

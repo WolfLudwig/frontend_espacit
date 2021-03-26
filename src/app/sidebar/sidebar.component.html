@@ -8,7 +8,7 @@
             <span class="btn-close" uk-toggle="target: #wrapper ; cls: collapse-sidebar mobile-visible"></span>
     </div>    
         <mat-list fxLayout="column" *ngIf="!account">
-            <a *ngFor="let item of menu | slice:0:2" class="itemMenu" [routerLink]="item.lien">
+            <a *ngFor="let item of unSignMenu" class="itemMenu" [routerLink]="item.lien">
                 <mat-list-item>
                     <mat-icon class="blanc">{{item.icone}}</mat-icon>
                     <span class="blanc">&nbsp;{{item.nom}}</span>
@@ -16,21 +16,29 @@
             </a>
         </mat-list>
 
-        <mat-list fxLayout="column" *ngIf="account">
-            <a *ngFor="let item of menu | slice:2:8" class="itemMenu" [routerLink]="item.lien">
+        <mat-list fxLayout="column" *ngIf="account && account.role =='User'">
+            <a *ngFor="let item of userMenu" class="itemMenu" [routerLink]="item.lien">
                 <mat-list-item>
                     <mat-icon class="blanc">{{item.icone}}</mat-icon>
                     <span class="blanc">&nbsp;{{item.nom}}</span>
                 </mat-list-item>
             </a>
-            <mat-list *ngIf="">
-            <a *ngFor="let item of menu | slice:8:10" class="itemMenu" [routerLink]="item.lien">
+        </mat-list>
+        <mat-list fxLayout="column" *ngIf="account && account.role =='Moderator'">
+            <a *ngFor="let item of moderatorMenu" class="itemMenu" [routerLink]="item.lien">
                 <mat-list-item>
                     <mat-icon class="blanc">{{item.icone}}</mat-icon>
                     <span class="blanc">&nbsp;{{item.nom}}</span>
                 </mat-list-item>
             </a>
-            </mat-list>
+        </mat-list>
+        <mat-list fxLayout="column" *ngIf="account && account.role == 'SuperAdmin' || account && account.role == 'Admin'">
+            <a *ngFor="let item of adminMenu " class="itemMenu" [routerLink]="item.lien">
+                <mat-list-item>
+                    <mat-icon class="blanc">{{item.icone}}</mat-icon>
+                    <span class="blanc">&nbsp;{{item.nom}}</span>
+                </mat-list-item>
+            </a>
         </mat-list>
         <p class="foot">© 2020 <strong>The Boys</strong>. All Rights Reserved. </p>
 </div>

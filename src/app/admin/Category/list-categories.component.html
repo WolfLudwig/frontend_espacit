@@ -1,0 +1,35 @@
+<!-- <div class ="default">
+    <div *ngFor="let cat of categories">
+        <p>{{cat.title}}</p>
+        <p>{{cat.description}}</p>
+
+    </div>
+
+</div> -->
+<h1>Categories</h1>
+<p>All categories from secure (admin only) api end point:</p>
+<div class="default">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th style="width: auto; text-align: left;">Id</th>
+                <th style="width:30%; text-align: center;">Title</th>
+                <th style="width:50%; text-align: center;">Description</th>
+                <th style="width:10%"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let cat of categories; let i = index">
+                <td>{{i}}</td>
+                <td>{{cat.title}} </td>
+                <td>{{cat.description}}</td>
+                <td style="white-space: nowrap">
+                    <a routerLink="edit/{{cat._id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
+                    <button (click)="deleteCategory(cat._id)" class="btn btn-sm btn-danger btn-delete-account">Delete
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button><a routerLink="add">Ajouter une catégorie</a></button>
+</div>

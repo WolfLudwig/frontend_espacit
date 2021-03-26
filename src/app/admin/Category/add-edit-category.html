@@ -1,0 +1,31 @@
+<h1>Categories</h1>
+<div class="default">
+    <form [formGroup] = " form " class="uk-child-width-1-1 uk-grid-small" uk-grid (ngSubmit)="onSubmit()">
+        <div>
+            <div class="uk-form-group">
+                <label class="uk-form-label"> Titre :  </label>
+
+                <div class="uk-position-relative w-100">
+
+                    <input formControlName="title" class="uk-input" type="text" placeholder="Titre">
+                </div>
+                <br/>
+                <label class="uk-form-label"> Description :  </label>
+                <div class="uk-position-relative w-100">
+
+                    <input formControlName="description" class="uk-input" type="text" placeholder="Description">
+
+                </div>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <div *ngIf="isAddMode">
+                <button> Ajouter </button>
+            </div>
+            <div *ngIf="!isAddMode">
+                <button> Modifier </button>
+            </div>
+        </div>
+    </form>
+</div>
