@@ -6,8 +6,7 @@ import { LayoutComponent } from './layout.component';
 import { OverviewComponent } from './overview.component';
 
 const accountsModule = () => import('./accounts/accounts.module').then(x => x.AccountsModule);
-const categoriesModule = () => import('./category/categories.module').then(x => x.CategoriesModule);
-const postsModule = () => import('./posts/posts.module').then(x => x.PostsModule);
+const reportsModule = () => import('./reports/reports.module').then(x => x.ReportsModule);
 
 const routes: Routes = [
     { path: '', component: SubNavComponent, outlet: 'subnav' },
@@ -15,9 +14,8 @@ const routes: Routes = [
         path: '', component: LayoutComponent,
         children: [
             { path: '', component: OverviewComponent },
-            { path: 'accounts', loadChildren: accountsModule },
-            { path: 'categories', loadChildren : categoriesModule },
-            { path: 'posts', loadChildren : postsModule }
+            { path: 'comments', loadChildren: accountsModule },
+            { path: 'reports', loadChildren : reportsModule }
 
         ]
     }
@@ -27,4 +25,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class AdminRoutingModule { }
+export class ModeratorRoutingModule { }

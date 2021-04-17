@@ -50,5 +50,7 @@ export class Ressource {
       
   category : Category;
   ressourceType : RessourceType[];
+  isSuspend : boolean;
+  isRestricted : boolean;
 
 }

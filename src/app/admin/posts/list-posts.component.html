@@ -1,0 +1,39 @@
+<!-- <div class ="default">
+    <div *ngFor="let cat of categories">
+        <p>{{cat.title}}</p>
+        <p>{{cat.description}}</p>
+
+    </div>
+
+</div> -->
+<h1>Categories</h1>
+<p>All cposts from secure (admin only) api end point:</p>
+<div class="default">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th style="width: 10%; text-align: left;">Id</th>
+                <th style="width:50%; text-align: center;">Title</th>
+                <th style="width:20%; text-align: center;">Poster</th>
+                <th style="width:30%; text-align: center;">Create At</th>
+                <th style="width:30%; text-align: center;">Is suspend</th>
+                <th style="width: auto"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let ress of posts; let i = index">
+                <td>{{i}}</td>
+                <td><a (click)="GoDetails(ress._id)">{{ress.message.substring(0,30) + "..."}} </a></td>
+                <td>{{ress.posterPseudo}}</td>
+                <td>{{ress.createdAt.replace('T', ' | ').substring(0,21)}}</td>
+                <td>{{ress.isSuspend}}</td>
+                <td style="white-space: nowrap">
+                    <a routerLink="edit/{{ress._id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
+                    <button (click)="deletePost(ress._id)" class="btn btn-sm btn-danger btn-delete-account">Delete
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button><a routerLink="add">Ajouter une ressource</a></button>
+</div>

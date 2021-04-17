@@ -47,6 +47,10 @@
                                     <h5 class="uk-active">Catégorie : </h5>
                                     <h7>{{cat.title}}</h7>
                                 </div>
+                                <div>
+                                    <h5 class="uk-active">Publié le : </h5>
+                                    <h7>{{ress.createdAt.replace('T', ' à ').substring(0,21)}}</h7>
+                                </div>
                             </div>
                             <!-- <div class="uk-card uk-card-default uk-card-body">
                                 
@@ -75,7 +79,7 @@
                             <span class="icon-more uil-ellipsis-h"></span>
                             <div class="mt-0 p-2" uk-dropdown="pos: bottom-left;mode:click ">
                                 <ul class="uk-nav uk-dropdown-nav" style="text-align: center; margin:auto; padding : auto;">
-                                    <li><a href="#"> <b> Signaler</b></a> </li>
+                                    <li><a (click)="reportPost(ress)"> <b> Signaler</b></a> </li>
                                     <li *ngIf="ress.posterId == account._id">
                                             <a (click) ="modifyRessource(ress._id)"> <b> Modifier</b></a> 
                                     </li>

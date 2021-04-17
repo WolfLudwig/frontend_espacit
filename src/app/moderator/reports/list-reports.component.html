@@ -1,0 +1,75 @@
+<!-- <div class ="default">
+    <div *ngFor="let cat of categories">
+        <p>{{cat.title}}</p>
+        <p>{{cat.description}}</p>
+
+    </div>
+
+</div> -->
+<h1>Reports on Posts</h1>
+<p>All reports on posts from secure (moderator only) api end point:</p>
+<div class="default">
+    <div>
+        <h4>Posts suspendus</h4>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th style="width: 10%; text-align: left;">Id</th>
+                    <th style="width:30%; text-align: center;">Title</th>
+                    <th style="width:15%; text-align: center;">Reported</th>
+                    <th style="width:30%; text-align: center;">Reporter</th>
+                    <th style="width:15%; text-align: center;">is Suspend</th>
+                    <th style="width: auto"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let report of reportsSuspend; let i = index">
+                    <td style="text-align: center;">{{i}}</td>
+                    <td style="text-align: center;"><a (click)="GoDetails(report.post._id)">{{report.post.message}}</a> </td>
+                    <td style="text-align: center;">{{report.post.posterPseudo}}</td>
+                    <td style="text-align: center;">{{report.account.pseudo}}</td>
+                    <td style="text-align: center;">{{report.post.isSuspend}}</td>
+                    <td style="white-space: nowrap">
+                        <button (click)="cancelReportPost(report.post._id, report._id)" class="btn btn-sm btn-danger btn-delete-account">Cancel
+                        </button>
+                        <button (click)="deleteReportPost(report._id)" class="btn btn-sm btn-danger btn-delete-account">Delete
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br/>
+    <mat-divider></mat-divider>
+    <br/>
+    <div>
+        <h4>Posts non suspendus</h4>
+        <table class="table table-striped"> 
+            <thead>
+                <tr>
+                    <th style="width: 10%; text-align: left;">Id</th>
+                    <th style="width:30%; text-align: center;">Title</th>
+                    <th style="width:15%; text-align: center;">Reported</th>
+                    <th style="width:30%; text-align: center;">Reporter</th>
+                    <th style="width:15%; text-align: center;">is Suspend</th>
+                    <th style="width: auto"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let report of reportsUnSuspend; let i = index">
+                    <td style="text-align: center;">{{i}}</td>
+                    <td style="text-align: center;"><a (click)="GoDetails(report.post._id)">{{report.post.message}} </a></td>
+                    <td style="text-align: center;">{{report.post.posterPseudo}}</td>
+                    <td style="text-align: center;">{{report.account.pseudo}}</td>
+                    <td style="text-align: center;">{{report.post.isSuspend}}</td>
+                    <td style="white-space: nowrap">
+                        <button (click)="confirmReportPost(report.post._id, report._id)" class="btn btn-sm btn-danger btn-delete-account">Suspend
+                        </button>
+                        <button (click)="deleteReportPost(report._id)" class="btn btn-sm btn-danger btn-delete-account">Delete
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

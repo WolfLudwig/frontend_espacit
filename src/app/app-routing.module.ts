@@ -16,6 +16,7 @@ const accountModule = () => import('./account/account.module').then(x => x.Accou
 const adminModule = () => import('./admin/admin.module').then(x => x.AdminModule);
 const superAdminModule = () => import('./superadmin/superadmin.module').then(x => x.SuperAdminModule);
 const profileModule = () => import('./profile/profile.module').then(x => x.ProfileModule);
+const moderatorModule = () => import('./moderator/moderator.module').then(x => x.ModeratorModule);
 
 const routes: Routes = [
   { path: '', component: RessourceComponent },
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'myFriends', component: MyFriendsComponent},
   { path: 'addRessource', component: AddRessourceComponent},
   { path: 'modifyRessource/:id', component: ModifyRessourceComponent},
+  { path: 'reports', loadChildren: moderatorModule},
   { path: '**', component: RessourceComponent },
   
 ];

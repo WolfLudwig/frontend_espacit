@@ -5,7 +5,7 @@
     <mat-icon style="height: 25px; width: 25px; padding-left :5cm; color: darkblue;"><a routerLink="/actu">home</a></mat-icon>
     <mat-form-field  fxFlex.lt-md="45" fxFlex.gt-sm="60">
         <form [formGroup] ="searchForm">
-            <input matInput formControlName="userSearch" type="text" placeholder="Recherchez des amis, des vidéos et plus encore..." />
+            <input matInput formControlName="userSearch" type="text" />
             <mat-icon  style="color: azure;" (click)="search()">search</mat-icon>
         </form>
     </mat-form-field>
@@ -52,7 +52,7 @@
                     <mat-list>
                         <mat-list-item>
                             <mat-icon [ngStyle]="{'color': 'black'}">account_circle</mat-icon>
-                            <a routerLink="/profile" routerLinkActive="active" style="text-align: center; " class="nav-item nav-link"><span>&nbsp; Mon profil</span></a>
+                            <a routerLink="/profile" routerLinkActive="active" style="text-align: center; " class="nav-item nav-link"><span>&nbsp; {{account.pseudo}}</span></a>
                         </mat-list-item>
                         <mat-list-item *ngIf="account.role === Role.Admin">
                             <mat-icon [ngStyle]="{'color': 'blue'}">account_circle</mat-icon>

@@ -1,154 +1,143 @@
 
 <div class="default">
-    <br/>
-    <br/>
     <div *ngIf="error">
         <H3>{{errorMessage}}</H3>
     </div>
     <div *ngIf="infos" class="uk-alert-danger">
         {{infosMessage}}
     </div>
-
-            <div>
-                <div class="sl_group_list">
-                    <div class="post-heading">
-                        <div class=" uk-grid-small uk-child-width-expand@s" uk-grid>
-                            <div class="uk-card uk-card-body uk-card-body" >
-                                <h3> {{ressources.posterPseudo}} </h3>
-                                <div  *ngFor="let cat of ressources.category">
-                                    <h5 class="uk-active">Catégorie : </h5>
-                                    <h7>{{cat.title}}</h7>
-                                </div>
-                            </div>
-                            <!-- <div class="uk-card uk-card-default uk-card-body">
-                                
-                            </div> -->
-                            <div class="uk-card uk-card-default uk-card-body">
-                                <h5 class="uk-active">Relations : </h5>
-
-                                <div *ngFor=" let rel of ressources.relation">
-                                    
-                                    <h7>{{rel.title}}</h7>
-                                </div>
-                                <hr class="uk-divider-icon">
-                                <h5 class="uk-active">Types de ressource : </h5>
-                                <div *ngFor=" let type of ressources.ressourceType"> 
-                                    <h7>{{type.title}}</h7>
-                                </div>
-
-                                </div>
-                            </div>
-                            <div >
-                                <h4>{{ressources.message}}</h4>
-                            </div>
+        <div class="sl_group_list">
+            <div class="post-heading">
+                <div class=" uk-grid-small uk-child-width-expand@s" uk-grid>
+                    <div class="uk-card-default uk-card-body" >
+                        <h3> {{ressources.posterPseudo}} </h3>
+                        <div  *ngFor="let cat of ressources.category">
+                            <h5 class="uk-active">Catégorie : </h5>
+                            <h7>{{cat.title}}</h7>
+                        </div>
                     </div>
-                    <div>
-                        <ng-container *ngIf="ressources.picture;then IMG; else noIMG">
-                        </ng-container>
-                        <ng-template #IMG >
-                            <p style="text-align:center"><img  [src]="ressources.picture" alt=""  ></p>
-                        </ng-template>
-                        <ng-template #noIMG >
-                            <p style="text-align:center"><img src="assets/images/post/img-1.jpg" alt=""></p>
-                        </ng-template>
-                    </div>
-                    <br/>
-                    <!-- <div class="post-state-details" >
-                        <p *ngIf="ressources.comments && ressources.answers && ressources.thread "> {{ressources.comments.count -1 + ressources.answers.count + ressources.thread.count}} commentaire(s)</p>
-                        <p  *ngIf="ressources.answers && !ressources.thread "> {{ressources.comments + ressources.answers.count}} commentaire(s)</p>
-                        <p *ngIf="ressources.comments && !ressources.answers && !ressources.thread "> {{ressources.comments.count-1}} commentaire(s)</p>
+                    <!-- <div class="uk-card uk-card-default uk-card-body">
+                        
                     </div> -->
-                    <hr class="uk-divider-icon">
-                    <div class="uk-animation-scale-up">
-                        <p *ngIf="ressources.description" style="text-align: center;position: relative; text-justify: auto;">{{ressources.description}}</p>
-                    </div>
-                
-                    <!-- post comments -->
-                    <div  class="post-comments" *ngFor="let comm of ressources.comments;let j= index;">
-                        <div class="post-comments-single" *ngIf="comm != null">
-                            <div class="post-comment-text">
-                                <div class="post-comment-text-inner" >
-                                    <div class="uk-slider-container">                            
-                                        <div >
-                                            <div >
-                                                <span class="icon-more uil-ellipsis-h" ></span>
-                                                <div uk-dropdown="pos: right-center;mode:click ;uk-animation-scale-up uk-inline">
-                                                    <form [formGroup] = "answerForm">
-                                                        <ul class="uk-nav uk-dropdown-nav " >
-                                                                <li class="uk-nav-header" >Répondre à <b>{{comm.commenterPseudo}}</b></li>
-                                                                <li class="uk-nav-divider"></li>
-                                                                <li>
-                                                                    <input formControlName="answer" type="text"  class="uk-input uk-active" >
-                                                                </li>
-                                                                <li><button class="uil-comment mr-1" (click) = "askComment(comm._id, comm.commenterId, comm.commenterPseudo, ressources._id)"> </button></li>
-                                                        </ul>
-                                                    </form>
-                                                </div>
-                                                <div class ="uk-animation-scale-up" style="text-align: left; margin:auto; padding : auto;">
-                                                    <h6> {{comm.commenterPseudo}}</h6>
-                                                    <p> {{comm.text}}</p>
-                                                </div>
-                                            </div>
-                                            <div *ngFor="let answ of ressources.answers; let k = index" >
-                                                <div class ="uk-animation-scale-up" *ngIf="ressources.answers">
-                                                    <div  >
-                                                        <div *ngIf="answ.commenterIdent == comm._id" >
-                                                            <div style="text-align: center; margin:auto; padding : auto;">
-                                                                <span class="icon-more uil-ellipsis-h position : right-center" ></span>
-                                                                <div uk-dropdown="pos: right-center;mode:click ; uk-animation-scale-up uk-inline">
-                                                                    <form [formGroup] = "answersForm">
-                                                                        <ul class="uk-nav uk-dropdown-nav " >
-                                                                                <li class="uk-nav-header" >Répondre à <b>{{answ.answerPseudo}}</b></li>
-                                                                                <li class="uk-nav-divider"></li>
-                                                                                <li>
-                                                                                    <input formControlName="answer" type="text"  class="uk-input uk-active" >
-                                                                                </li>
-                                                                                <li><button class="uil-comment mr-1" (click) = "askAnswer(answ._id, answ.answerId, answ.answerPseudo, ressources._id)"> </button></li>
-                                                                        </ul>
-                                                                    </form>
-                                                                </div>
-    
-                                                                <div>
-                                                                    <div>
-                                                                        <h6>{{answ.answerPseudo}}</h6>
-                                                                        <p>{{answ.answertext}}</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div>
-                                                                <div  *ngIf="ressources.thread">
-                                                                    <div class ="uk-animation-scale-up">
-                                                                        <div style="text-align: right; margin:auto; padding : auto;">
-                                                                            <mat-accordion multi ="true" class = "uk-position-relative" uk-slider="finite: true" class = "chat"> 
-                                                                                <mat-expansion-panel >
-                                                                                  <mat-expansion-panel-header >
-                                                                                    <mat-panel-title  fxLayoutAlign="end">
-                                                                                      Voir le fil de discussion
-                                                                                    </mat-panel-title>
-                                                                                  </mat-expansion-panel-header>
-                                                                                  <mat-list *ngFor="let thread of ressources.thread; let l = index">
-                                                                                        <div *ngIf="thread.threadAsnwId == answ._id">
-                                                                                                <div class=".sl_group_list_thread"> 
-                                                                                                    <mat-list-item fxLayoutAlign="end" ><b>{{thread.threadPseudo}}</b></mat-list-item>
-                                                                                                    <mat-list-item fxLayoutAlign="end">{{thread.threadText}}</mat-list-item>
-                                                                                                </div>
-                                                                                        </div>
-                                                                                        <div *ngIf=" l >= ressources.thread?.length" class=".sl_group_list_thread">
-                                                                                            <form [formGroup] = "answersForm">
-                                                                                                <ul>
-                                                                                                    <input formControlName="answer" type="text" style="text-align: end;" 
-                                                                                                        class="uk-input uk-active" placeholder="Répondre à {{answ.answerPseudo}} ">
-                                                                                                        <button class="uil-comment mr-1" (click) = "askAnswer(answ._id, answ.answerId, answ.answerPseudo, ressources._id)"> </button>
-                                                                                                    
-                                                                                                </ul>
-                                                                                            </form>
+                    <div class="uk-card-default uk-card-body">
+                        <h5 class="uk-active">Relations : </h5>
 
+                        <div *ngFor=" let rel of ressources.relation">
+                            
+                            <h7>{{rel.title}}</h7>
+                        </div>
+                        <hr class="uk-divider-icon">
+                        <h5 class="uk-active">Types de ressource : </h5>
+                        <div *ngFor=" let type of ressources.ressourceType"> 
+                            <h7>{{type.title}}</h7>
+                        </div>
+
+                        </div>
+                    </div>
+                    <div >
+                        <h4>{{ressources.message}}</h4>
+                    </div>
+            </div>
+            <div>
+                <ng-container *ngIf="ressources.picture;then IMG; else noIMG">
+                </ng-container>
+                <ng-template #IMG >
+                    <p style="text-align:center"><img  [src]="ressources.picture" alt=""  ></p>
+                </ng-template>
+                <ng-template #noIMG >
+                    <p style="text-align:center"><img src="assets/images/post/img-1.jpg" alt=""></p>
+                </ng-template>
+            </div>
+            <br/>
+            <hr class="uk-divider-icon">
+            <div class="uk-animation-scale-up">
+                <p *ngIf="ressources.description" style="text-align: center;position: relative; text-justify: auto;">{{ressources.description}}</p>
+            </div>
+        
+            <!-- post comments -->
+            <div  class="post-comments" *ngFor="let comm of ressources.comments;let j= index;">
+                <div class="post-comments-single" *ngIf="comm != null">
+                    <div class="post-comment-text">
+                        <div class="post-comment-text-inner" >
+                            <div class="uk-slider-container">                            
+                                <div >
+                                    <div >
+                                        <span class="icon-more uil-ellipsis-h" ></span>
+                                        <div uk-dropdown="pos: right-center;mode:click ;uk-animation-scale-up uk-inline">
+                                            <form [formGroup] = "answerForm">
+                                                <ul class="uk-nav uk-dropdown-nav " >
+                                                        <li class="uk-nav-header" >Répondre à <b>{{comm.commenterPseudo}}</b></li>
+                                                        <li class="uk-nav-divider"></li>
+                                                        <li>
+                                                            <input formControlName="answer" type="text"  class="uk-input uk-active" >
+                                                        </li>
+                                                        <li><button class="uil-comment mr-1" (click) = "askComment(comm._id, comm.commenterId, comm.commenterPseudo, ressources._id)"> </button></li>
+                                                </ul>
+                                            </form>
+                                        </div>
+                                        <div class ="uk-animation-scale-up" style="text-align: left; margin:auto; padding : auto;">
+                                            <h6> {{comm.commenterPseudo}}</h6>
+                                            <p> {{comm.text}}</p>
+                                        </div>
+                                    </div>
+                                    <div *ngFor="let answ of ressources.answers; let k = index" >
+                                        <div class ="uk-animation-scale-up" *ngIf="ressources.answers">
+                                            <div  >
+                                                <div *ngIf="answ.commenterIdent == comm._id" >
+                                                    <div style="text-align: center; margin:auto; padding : auto;">
+                                                        <span class="icon-more uil-ellipsis-h position : right-center" ></span>
+                                                        <div uk-dropdown="pos: right-center;mode:click ; uk-animation-scale-up uk-inline">
+                                                            <form [formGroup] = "answersForm">
+                                                                <ul class="uk-nav uk-dropdown-nav " >
+                                                                        <li class="uk-nav-header" >Répondre à <b>{{answ.answerPseudo}}</b></li>
+                                                                        <li class="uk-nav-divider"></li>
+                                                                        <li>
+                                                                            <input formControlName="answer" type="text"  class="uk-input uk-active" >
+                                                                        </li>
+                                                                        <li><button class="uil-comment mr-1" (click) = "askAnswer(answ._id, answ.answerId, answ.answerPseudo, ressources._id)"> </button></li>
+                                                                </ul>
+                                                            </form>
+                                                        </div>
+
+                                                        <div>
+                                                            <div>
+                                                                <h6>{{answ.answerPseudo}}</h6>
+                                                                <p>{{answ.answertext}}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <div  *ngIf="ressources.thread">
+                                                            <div class ="uk-animation-scale-up">
+                                                                <div style="text-align: right; margin:auto; padding : auto;">
+                                                                    <mat-accordion multi ="true" class = "uk-position-relative" uk-slider="finite: true" class = "chat"> 
+                                                                        <mat-expansion-panel >
+                                                                            <mat-expansion-panel-header >
+                                                                            <mat-panel-title  fxLayoutAlign="end">
+                                                                                Voir le fil de discussion
+                                                                            </mat-panel-title>
+                                                                            </mat-expansion-panel-header>
+                                                                            <mat-list *ngFor="let thread of ressources.thread; let l = index">
+                                                                                <div *ngIf="thread.threadAsnwId == answ._id">
+                                                                                        <div class=".sl_group_list_thread"> 
+                                                                                            <mat-list-item fxLayoutAlign="end" ><b>{{thread.threadMyPseudo}}</b></mat-list-item>
+                                                                                            <mat-list-item fxLayoutAlign="end">{{thread.threadText}}</mat-list-item>
                                                                                         </div>
-                                                                                   </mat-list>
-                                                                                </mat-expansion-panel>
-                                                                            </mat-accordion>
-                                                                        </div>
-                                                                    </div>
+                                                                                </div>
+                                                                                <div *ngIf=" l >= ressources.thread?.length" class=".sl_group_list_thread">
+                                                                                    <form [formGroup] = "answersForm">
+                                                                                        <ul>
+                                                                                            <input formControlName="answer" type="text" style="text-align: end;" 
+                                                                                                class="uk-input uk-active" placeholder="Répondre à {{answ.answerPseudo}} ">
+                                                                                                <button class="uil-comment mr-1" (click) = "askAnswer(answ._id, answ.answerId, answ.answerPseudo, ressources._id)"> </button>
+                                                                                            
+                                                                                        </ul>
+                                                                                    </form>
+
+                                                                                </div>
+                                                                            </mat-list>
+                                                                        </mat-expansion-panel>
+                                                                    </mat-accordion>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -158,31 +147,30 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="uk-text-small">
-                                    <a href="#" class="text-danger mr-1"> <i class="uil-heart"></i> J'aime
-                                    </a>
-                
-                                    <span> {{comm.createdAt}}</span>
-                                </div> -->
                             </div>
-                            <a href="#" class="post-comment-opt"></a>
                         </div>
+                        <!-- <div class="uk-text-small">
+                            <a href="#" class="text-danger mr-1"> <i class="uil-heart"></i> J'aime
+                            </a>
+        
+                            <span> {{comm.createdAt}}</span>
+                        </div> -->
                     </div>
-                    <div class="post-new-media">
-                        <form [formGroup] = "commentForm">
-                            <div class="post-new-media-input">
-                                <input formControlName="userComm" type="text" class="uk-input" placeholder="Répondre aux commentaires" >
-                                <button type="button" class="btn button small primary" (click)="addComment(ressources._id)" class="post-state-btns">
-                                    <span> Envoyer</span>
-                                </button>
-    
-                            </div>
-                        </form>
-                    </div>
+                    <a href="#" class="post-comment-opt"></a>
                 </div>
-    
-                
             </div>
+            <div class="post-new-media">
+                <form [formGroup] = "commentForm">
+                    <div class="post-new-media-input">
+                        <input formControlName="userComm" type="text" class="uk-input" placeholder="Répondre aux commentaires" >
+                        <button type="button" class="btn button small primary" (click)="addComment(ressources._id)" class="post-state-btns">
+                            <span> Envoyer</span>
+                        </button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
     
     </div>
     

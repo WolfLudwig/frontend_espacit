@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { DataSource } from '@angular/cdk/table';
 import { map, switchMap, tap  } from 'rxjs/operators';
 import { Account } from '../models/account';
+import { Reports } from '../models/reports';
 
 
 
@@ -54,7 +55,9 @@ private ress: Ressource[] = [
         },
       relation : [{_id :"1234", title :"1 relation", description :"une description de rel "}],       
       category : {_id : "1234", title :"1 catégorie", description :"une description de cat"},
-      ressourceType : [{_id :"1234", title :"1 type de ressource", description :"une description de ress "}]
+      ressourceType : [{_id :"1234", title :"1 type de ressource", description :"une description de ress "}],
+      isSuspend : false,
+      isRestricted : false
     
   }
 ];
@@ -69,6 +72,19 @@ private ress: Ressource[] = [
   comm$ = new Subject<Comment[]>();
   
 
+  reportPost(report : Reports)
+  {
+    return new Promise((resolve, reject) => {
+      this.http.patch('http://localhost:4000/api/post/report/', report).subscribe(
+        (response) => {
+          resolve(response);
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+  }
    getPostById(id: string) {
      return new Promise((resolve, reject) => {
        this.http.get('http://localhost:4000/api/post/' + id).subscribe(
@@ -210,6 +226,26 @@ private ress: Ressource[] = [
     console.log("dans le getAllPost");
      return new Promise((resolve, reject) => {
       this.http.get('http://localhost:4000/api/post').subscribe(
+        (ress: Ressource[]) => {
+          if (ress) {
+            this.ress = ress;
+             resolve(ress);
+            this.emitPosts();
+
+          }
+        },
+        (error) => {
+          reject(error);
+        }
+      );
+    });
+
+  }
+
+  getAllPostsAdmin() {
+    console.log("dans le getAllPostAdmin");
+     return new Promise((resolve, reject) => {
+      this.http.get('http://localhost:4000/api/post/admin').subscribe(
         (ress: Ressource[]) => {
           if (ress) {
             this.ress = ress;

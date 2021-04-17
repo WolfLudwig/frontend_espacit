@@ -32,8 +32,16 @@
                 </mat-list-item>
             </a>
         </mat-list>
-        <mat-list fxLayout="column" *ngIf="account && account.role == 'SuperAdmin' || account && account.role == 'Admin'">
+        <mat-list fxLayout="column" *ngIf="account && account.role == 'Admin'">
             <a *ngFor="let item of adminMenu " class="itemMenu" [routerLink]="item.lien">
+                <mat-list-item>
+                    <mat-icon class="blanc">{{item.icone}}</mat-icon>
+                    <span class="blanc">&nbsp;{{item.nom}}</span>
+                </mat-list-item>
+            </a>
+        </mat-list>
+        <mat-list fxLayout="column" *ngIf="account && account.role == 'SuperAdmin'">
+            <a *ngFor="let item of superAdminMenu " class="itemMenu" [routerLink]="item.lien">
                 <mat-list-item>
                     <mat-icon class="blanc">{{item.icone}}</mat-icon>
                     <span class="blanc">&nbsp;{{item.nom}}</span>

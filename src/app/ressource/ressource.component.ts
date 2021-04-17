@@ -16,6 +16,7 @@ import { TokenStorageService } from '../_services/token-storage.service';
 import { Router } from '@angular/router';
 import { AccountService } from '../_services';
 import { Account } from '../models';
+import { Reports } from '../models/reports';
 
 @Component({
   selector: 'app-ressource',
@@ -344,6 +345,26 @@ export class RessourceComponent implements OnInit {
       this.catFilters.push(event.target.value);
 
   }
+}
+
+reportPost(ress : Ressource)
+{
+  let report = new Reports()
+  report.account = this.account;
+  report.post = ress;
+  console.log(report)
+  this.ressourceService.reportPost(report).then(
+    (resp) =>
+    {
+      alert("Merci pour votre contribution")
+    }
+  )
+  .catch(
+    (err) =>
+    {
+      alert("Publication déjà signalée, merci pour votre contribution")
+    }
+  )
 }
 
 modifyRessource(ressource : Ressource)

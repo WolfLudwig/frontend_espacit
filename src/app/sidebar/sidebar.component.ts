@@ -49,7 +49,15 @@ export class SidebarComponent implements OnInit {
     { icone: 'gamepad', nom: 'Jeux', lien: '/jeu' },
     { icone: 'groups', nom: 'Groupes', lien: 'groupe' },
     { icone: 'person_add', nom: 'Retrouver des amis', lien: '/findFriends'},
-    { icone: 'supervised_user_circle', nom: 'Créer un utilisateur', lien: '/createUser'},
+  ]
+
+  public superAdminMenu =
+  [
+    { icone: 'home', nom: 'Fil d\'actualité', lien: '/actu' },
+    { icone: 'gamepad', nom: 'Jeux', lien: '/jeu' },
+    { icone: 'groups', nom: 'Groupes', lien: 'groupe' },
+    { icone: 'person_add', nom: 'Retrouver des amis', lien: '/findFriends'},
+    { icone: 'supervised_user_circle', nom: 'Créer un utilisateur', lien: '/superadmin/accounts/add'},
   ]
 
       
